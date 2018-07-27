@@ -1,0 +1,167 @@
+﻿@model web_ese.Models_Act.Ese.EseManagerModels
+
+
+<div id="content">
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_EseManager_EseManagerAdmin </h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:5%;">@comm_global.Language.Resources.ESE_Comm_Num</th>
+											<th style="width:8%;"></th>
+											<th>@comm_global.Language.Resources.ESE_Comm_Id</th>
+											<th>@comm_global.Language.Resources.ESE_Comm_UserName</th>
+											<th>@comm_global.Language.Resources.ESE_Comm_UserTelNo</th>
+											<th>@comm_global.Language.Resources.ESE_EseGrade_GroupName</th>
+											<th>@comm_global.Language.Resources.ESE_Comm_CreateTime</th>
+											<th style="width:8%;">@comm_global.Language.Resources.ESE_Comm_STATUS</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										@foreach (var item in Model.Items)
+										{
+											<tr>
+												<td>@item.SEQNO</td> <!--번호-->
+												<td>
+													<a onclick="javascript:callEdit('@item.SEQNO');" href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_add">
+														<i class="fa fa-edit"></i>
+													</a>
+													@if (item.GROUP_ID != 0)
+													{
+														<a onclick="javascript:callDelete('@item.SEQNO');" href="#" class="btn btn-default btn-xs">
+															<i class="fa fa-trash-o"></i>
+														</a>
+													}
+												</td>
+												<td>@item.EMAIL</td><!--계정-->
+												<td>@item.USERNAME</td><!--사용자 명-->
+												<td>@item.TELNO</td><!--사용자 전화번호-->
+												<td>@item.GROUP_NAME</td><!--그룹명-->
+												<td>@item.CREATETIME</td><!--생성일자-->
+												<td>@item.STATUS_TEXT</td><!--상태-->
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				@if (Model.chkCnt >= 9)
+				{
+					<a class="btn btn-default" href="#" onclick="javascript: alert('@comm_global.Language.Resources.Script_RegistrationMaximumTen');"> @comm_global.Language.Resources.ESE_Comm_NewRegistration</a>
+				}
+				else if (Model.chkGRADE == 0)
+				{
+					<a class="btn btn-default" href="#" onclick="javascript: alert('@comm_global.Language.Resources.Script_NoGrade');"> @comm_global.Language.Resources.ESE_Comm_NewRegistration</a>
+				}
+				else
+				{
+					<a class="btn btn-default" href="#" onclick="javascript:callAdd();" data-toggle="modal" data-target="#myModal_add">@comm_global.Language.Resources.ESE_Comm_NewRegistration</a>
+				}
+
+			</article>
+		</div>
+	</section>
+</div>
+<!-- END MAIN CONTENT -->
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+{
+	@Html.HiddenFor(model => model.act_type)
+	@Html.HiddenFor(model => model.act_key)
+}
+
+<div class="modal fade in" id="myModal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">@comm_global.Language.Resources.ESE_EseGradeView_UserRegistration</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<iframe width="100%" height="555px;" scrolling="no" frameborder="0" id="viewIframe" src=""></iframe>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					@comm_global.Language.Resources.Button_Close
+				</button>
+				<button onclick="javascript:act_ifarame();" type="button" id="modal_act" class="btn btn-primary">
+					@comm_global.Language.Resources.ESE_Comm_Enrollment
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+@section pagespecific {
+
+
+	<script type="text/javascript">
+
+		//등록 팝업창 호출
+		function callAdd() {
+			$("#modal_act").html('@comm_global.Language.Resources.ESE_Comm_Enrollment');
+			$("#myModalLabel").html('@comm_global.Language.Resources.Script_EseManagerAdd');
+			$('#viewIframe').attr('src', '/Ese/EseManagerView');
+		}
+
+		//수정 팝업창 호출
+		function callEdit(seqno) {
+			$("#modal_act").html('@comm_global.Language.Resources.Button_UPDATE');
+			$("#myModalLabel").html('@comm_global.Language.Resources.Script_EseManagerUpdate');
+			$('#viewIframe').attr('src', '/Ese/EseManagerView?seqNo=' + seqno);
+		}
+
+		// 등록/수정
+		function act_ifarame() {
+			var ifra = document.getElementById('viewIframe').contentWindow;
+			ifra.formSubmit();
+		}
+
+
+		//삭제
+		function callDelete(seqno) {
+			var msg = "@comm_global.Language.Resources.Script_WhetherDelete";
+			if (confirm(msg)) {
+				$('#act_type').val('del');
+				$('#act_key').val(seqno);
+				$('#listForm').submit();
+			}
+		}
+
+		//페이징 공통 함수
+		function movPage(page) {
+			$('#Paging_page').val(page);
+			$('#listForm').submit();
+		}
+	</script>
+
+
+}

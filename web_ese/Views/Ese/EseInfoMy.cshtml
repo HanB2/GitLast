@@ -1,0 +1,182 @@
+﻿@model web_ese.Models_Act.Ese.EseInfoMyModels
+
+<div id="content">
+	<section id="widget-grid" class="" >
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_EseInfoMy_EseUserInfo </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.email)
+								@Html.AntiForgeryToken()
+
+								<fieldset>
+									<div class="row">
+										<label class="label col col-12">@comm_global.Language.Resources.ESE_EseInfoMy_EseUserID : @Model.email</label>
+									</div>
+								</fieldset>
+								<fieldset>
+									<!--현재 비밀번호-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfoMy_UserCurrentPassword</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.PasswordFor(model => model.passwd,"passwd")
+												@Html.ValidationMessageFor(model => model.passwd)
+											</label>
+										</section>
+									</div>
+									<!--새 비밀번호-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfoMy_UserNewPassword</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.PasswordFor(model => model.passwd_new,"passwd_new")
+												@Html.ValidationMessageFor(model => model.passwd_new)
+											</label>
+										</section>
+									</div>
+									<!--비밀번호 확인-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfoMy_UserPasswordCheck</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.PasswordFor(model => model.passwd_check,"passwd_check")
+												@Html.ValidationMessageFor(model => model.passwd_check)
+											</label>
+										</section>
+									</div>
+
+								</fieldset>
+								<!--SUBMIT-->
+								<footer>
+									<button type="button" class="btn btn-primary"onclick="javascript: callSubmit();">
+										@comm_global.Language.Resources.Button_UPDATE
+									</button>
+								</footer>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+	
+	<script type="text/javascript">
+
+		var settingForm = [];
+
+		$(document).ready(function () {
+			formSettingValue();
+			formSetting();
+		});
+
+		function formSettingValue() {
+			//id		클래스		길이		콤보박스
+
+			settingForm.push(['passwd', 'no', '100', '0']); //현재 비밀번호
+			settingForm.push(['passwd_new', 'no', '100', '0']); // 새 비밀번호
+			settingForm.push(['passwd_check', 'no', '50', '0']); // 비밀번호 확인
+
+		}
+
+
+		function formSetting() {
+
+			for (i = 0; i < settingForm.length; i++) {
+				tmp_id = settingForm[i][0];	//id
+				tmp_class = settingForm[i][1];	//class
+				tmp_maxLeng = settingForm[i][2]; //길이제한 max
+
+
+				if (tmp_class != 'no')
+					$('#' + tmp_id).addClass(tmp_class);
+
+				if (tmp_maxLeng != 'no')
+					$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+
+
+			}
+
+			$(".etoINt").attr("onkeyup", "if(this.value == ''){ this.value='0'; }else{  this.value=this.value.replace(/[^0-9]/g,'') * 1}");
+
+		}
+
+
+		function callSubmit() {
+
+			var passwd = '';
+			var passwd_new = '';
+			var passwd_check = '';
+
+			var goodsLst = "";
+
+			var chkGoos = true;
+
+
+			if ($("#passwd_new").val().length < 8) {
+				alert("@comm_global.Language.Resources.Script_PasswordAtleastEight");
+				$("#passwd_new").focus();
+				return false;
+			}
+
+			if (!$("#passwd_new").val().match(/([a-zA-Z0-9])|([a-zA-Z0-9])|[!,#,$,%,^,&,*,?,_,~]/)) {
+				alert("@comm_global.Language.Resources.Script_PasswordRegExp");
+				$("#passwd_new").focus();
+				return false;
+			}
+
+			if ($("#passwd").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_CurrentPassword" + "]");
+				$("#passwd").focus();
+				return false;
+			}
+
+
+			if ($("#passwd_new").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_NewPassword" + "]");
+				$("#passwd_new").focus();
+				return false;
+			}
+
+			if ($("#passwd_check").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_ConfirmPassword" + "]");
+				$("#passwd_check").focus();
+				return false;
+			}
+
+
+			if ($("#passwd_check").val() != $("#passwd_new").val()) {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_passwordComparison" + "]");
+				$("#passwd_check").focus();
+				return false;
+			}
+
+
+
+			$('#view_form').submit();
+
+		}
+
+
+
+    </script>
+
+	}
+
+
+

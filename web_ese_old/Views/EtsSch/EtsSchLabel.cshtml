@@ -1,0 +1,474 @@
+﻿
+<div id="content">
+
+
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>조회 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<fieldset>
+
+									<div class="row">
+										<label class="label col col-1">출발국가</label>
+										<section class="col col-3">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">대한민국</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<label class="label col col-1">STATION</label>
+										<section class="col col-3">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">서울지점</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<label class="label col col-4"></label>
+									</div>
+
+
+									<div class="row">
+										<label class="label col col-1">도착국가</label>
+										<section class="col col-3">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">중국</option>
+												</select> <i></i>
+											</label>
+										</section>
+
+										<label class="label col col-3"></label>
+										<label class="label col col-1">등록일자</label>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												<input type="text" name="startdate" id="startdate" placeholder="Expected start date" class="hasDatepicker">
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												<input type="text" name="startdate" id="startdate" placeholder="Expected start date" class="hasDatepicker">
+											</label>
+										</section>
+
+									</div>
+
+									<div class="row">
+										<label class="label col col-1">검색조건</label>
+										<section class="col col-2">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">상품명</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<section class="col col-9">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="검색어">
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer>
+									<button type="submit" class="btn btn-primary">
+										전체 조회
+									</button>
+
+									<button type="submit" class="btn btn-primary">
+										조회
+									</button>
+								</footer>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<div class="row">
+		<article class="col-sm-12">
+
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-pencil"></i> 선택 삭제</a>
+
+
+			<label class="select">
+				<select name="country" style="height:32px; margin-left: 25px;">
+					<option value="0" selected="" disabled="">EOMARS 송장</option>
+				</select> <i></i>
+			</label>
+
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-file-text"></i> 라벨 출력</a>
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-file-text"></i> 엑셀 출력</a>
+
+
+			<label style="float:right;" class="select">
+				<select name="country" style="height:32px;">
+					<option value="0" selected="" disabled="">100개보기</option>
+				</select> <i></i>
+			</label>
+			<label style="float:right;" class="select">
+				<select name="country" style="height:32px;">
+					<option value="0" selected="" disabled="">대표상품명</option>
+				</select> <i></i>
+			</label>
+			<label style="float:right;">정렬</label>
+
+		</article>
+	</div>
+
+
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>상품조회 결과</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+
+
+							<div class="table-responsive">
+
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:2%;"></th>
+											<th style="width:4%;">번호</th>
+											<th style="width:6%;"></th>
+											<th style="width:7%;">ETS NO</th>
+											<th style="width:7%;">출발국가</th>
+											<th style="width:7%;">도착국가</th>
+											<th style="width:9%;">주문번호</th>
+											<th style="width:9%;">현지택배번호</th>
+											<th style="width:8%;">배송비</th>
+											<th style="width:8%;">상태</th>
+											<th style="width:12%;">등록일자</th>
+											<th style="width:auto;">메모</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i> 
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i> 
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1000</td>
+											<td>
+												<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" class="btn btn-default btn-xs">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+													<i class="fa fa-pencil"></i>
+												</a>
+											</td>
+
+											<td>00000001</td>
+											<td>대한민국</td>
+											<td>중국</td>
+											<td>ETS-0382891</td>
+											<td>ETS-0382132</td>
+											<td>10,000</td>
+											<td>배송중</td>
+											<td>2018-03-01 00:00:00</td>
+											<td>취급주의 상품을 다수 포...</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<ul class="pagination pagination-lg">
+						<li>
+							<a href="javascript:void(0);"><i class="fa fa-chevron-left"></i></a>
+						</li>
+						<li class="active">
+							<a href="javascript:void(0);">1</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">2</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">3</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">4</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">5</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);"><i class="fa fa-chevron-right"></i></a>
+						</li>
+					</ul>
+				</div>
+
+			</article>
+		</div>
+	</section>
+
+
+
+</div>
+
+
+
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+
+			@*
+	@Html.Partial("StcProdInfo")
+			*@
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade in" id="myModal_memo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+
+				@Html.Partial("EtsSchMemo")
+
+
+		</div>
+	</div>
+</div>

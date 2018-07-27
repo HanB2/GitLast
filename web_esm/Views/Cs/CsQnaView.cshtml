@@ -1,0 +1,109 @@
+﻿@model web_esm.Models_Act.Cs.CsQnaModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+		<article class="col-sm-12 col-md-12 col-lg-12 " style="height:400px; padding:0px;">
+			<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+				<header role="heading">
+					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+					<h2> 기타 정보 </h2>
+				</header>
+				<div role="content">
+					<div class="widget-body no-padding">
+						@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+						{
+							@Html.HiddenFor(model => model.act_type)
+							@Html.HiddenFor(model => model.act_key)
+							@Html.HiddenFor(model => model.Item.QNA_TYPE)
+							@Html.HiddenFor(model => model.Item.SEQNO)
+
+							@Html.AntiForgeryToken()
+							<fieldset>
+								<div class="row">
+									<label class="label col col-2">문의유형</label>
+									<section class="col col-4">						
+										<label class="label col col-4">@Model.Item.QNA_TYPE</label>
+											@Html.ValidationMessageFor(model => model.Item.QNA_TYPE)								
+									</section>
+									<label class="label col col-2">작성자_ID :</label>
+									<label class="label col col-4">@Model.Item.WRITER_NAME</label>
+									@Html.ValidationMessageFor(model => model.Item.WRITER_NAME)	
+								</div>
+								<div class="row">
+									<label class="label col col-2">제목</label>
+									<section class="col col-10">										
+											<label class="label col col-4">@Model.Item.QUESTION</label>	
+											@Html.ValidationMessageFor(model => model.Item.TITLE)									
+									</section>
+									</div>
+								   <div class="row">
+									<label class="label col col-6" name="REGDATE">문의일자 :  @Model.Item.REGDATE</label>
+									<label class="label col col-6" name="ANSWER_DATE">답변일자 :  @Model.Item.ANSWER_DATE </label>
+								  </div>										     
+  									<div class="row">
+										<label class="label col col-2">문의내용</label>		
+									  </div>
+								<div class="row">
+									<label class="label col col-4">@Model.Item.QUESTION</label>
+									@Html.ValidationMessageFor(model => model.Item.QUESTION)
+								</div>
+
+
+</fieldset>
+
+							<fieldset>
+								<section>
+									<div id="collapseOne-1" class="panel-collapse collapse in">
+										<p>답변</p>
+										@Html.TextAreaFor(model => model.Item.ANSWER, new { @class = "custom-scroll", @cols = "100", @ROWS = "8" })
+										@Html.ValidationMessageFor(model => model.Item.ANSWER)
+
+									</div>
+								</section>
+								
+
+							
+								
+							</fieldset>
+
+						}
+					</div>
+				</div>
+			</div>
+		</article>
+
+
+
+
+
+
+
+
+
+	@section pagespecific {
+		<script type="text/javascript">
+			function formSubmit() {
+				$('#view_form').submit();
+			}
+
+			//데이터 피커 생성자
+			$(function () {
+				$("#schSdt, #schEdt").datepicker({
+					dateFormat: 'yy-mm-dd'
+				});
+			});
+
+
+			// 등록/수정
+			function act_ifarame() {
+				var ifra = document.getElementById('viewIframe').contentWindow;
+				ifra.formSubmit();
+			}
+
+
+
+		</script>
+	}

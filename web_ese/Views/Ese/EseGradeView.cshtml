@@ -1,0 +1,111 @@
+﻿@model web_ese.Models_Act.Ese.EseGradeViewModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+<article class="col-sm-12 col-md-12 col-lg-6" style="height:400px; padding:0px;">
+	<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+			<h2> @comm_global.Language.Resources.ESE_EseGradeView_UserGradeViewInfo </h2>
+		</header>
+
+		<div role="content">
+			<!-- widget content -->
+			<div class="widget-body no-padding">
+
+				@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+				{
+					@Html.HiddenFor(model => model.act_type)
+					@Html.HiddenFor(model => model.act_key)
+					@Html.HiddenFor(model => model.schTxt2)
+					@Html.HiddenFor(model => model.Item.GROUP_ID)
+					@Html.HiddenFor(model => model.Item.ESE_CODE)
+
+					@Html.AntiForgeryToken()
+
+					<fieldset>
+						<div class="row">
+							<label class="label col col-2">@comm_global.Language.Resources.ESE_EseGrade_GroupName</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.GROUP_NAME)
+									@Html.ValidationMessageFor(model => model.Item.GROUP_NAME)
+								</label>
+							</section>
+						</div>
+					</fieldset>
+
+					<fieldset>
+
+
+						@for (int i = 0; i < Model.Items.Count; i++)
+						{
+							<div class="row">
+								<label class="label col col-4">
+									@Model.Items[i].MENU_NAME
+									@Html.HiddenFor(model => model.Items[i].MENU_ID)
+								</label>
+								<section class="col col-2">
+									<label class="checkbox">
+										@Html.CheckBoxFor(model => model.Items[i].CHK_PER_SELECT)
+										<i></i>@comm_global.Language.Resources.Button_SearchAct
+									</label>
+								</section>
+								<section class="col col-2">
+									<label class="checkbox">
+										@Html.CheckBoxFor(model => model.Items[i].CHK_PER_INSERT)
+										<i></i>@comm_global.Language.Resources.ESE_Comm_Enrollment
+									</label>
+								</section>
+								<section class="col col-2">
+									<label class="checkbox">
+										@Html.CheckBoxFor(model => model.Items[i].CHK_PER_UPDATE)
+										<i></i>@comm_global.Language.Resources.Button_UPDATE
+									</label>
+								</section>
+								<section class="col col-2">
+									<label class="checkbox">
+										@Html.CheckBoxFor(model => model.Items[i].CHK_PER_DELETE)
+										<i></i>@comm_global.Language.Resources.ESE_Comm_DELETE
+									</label>
+								</section>
+							</div>
+						}
+
+
+					</fieldset>
+				}
+			</div>
+		</div>
+	</div>
+</article>
+
+
+@section pagespecific {
+	<script type="text/javascript">
+		function formSubmit() {
+
+			if ($("#Item_GROUP_NAME").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseGrade_GroupName" + "]");
+				$("#Item_GROUP_NAME").focus();
+				return false;
+			}
+
+			$('#view_form').submit();
+		}
+
+		// 등록/수정
+		function act_ifarame() {
+			var ifra = document.getElementById('viewIframe').contentWindow;
+			ifra.formSubmit();
+		}
+	</script>
+}
+
+
+
+

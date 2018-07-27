@@ -1,0 +1,1430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Button_AllDelete" xml:space="preserve">
+    <value>전체 삭제</value>
+  </data>
+  <data name="Button_Choose" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="Button_ChooseDelete" xml:space="preserve">
+    <value>선택 삭제</value>
+  </data>
+  <data name="Button_Close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="Button_CsQnaEnrollment" xml:space="preserve">
+    <value>문의등록</value>
+  </data>
+  <data name="Button_EtsReq" xml:space="preserve">
+    <value>배송신청</value>
+  </data>
+  <data name="Button_ExcelPrint" xml:space="preserve">
+    <value>엑셀 출력</value>
+    <comment>공통</comment>
+  </data>
+  <data name="Button_LIST" xml:space="preserve">
+    <value>목록</value>
+  </data>
+  <data name="Button_ProdAdd" xml:space="preserve">
+    <value>상품 등록</value>
+  </data>
+  <data name="Button_Register_SubmitRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Button_SearchAct" xml:space="preserve">
+    <value>조회</value>
+    <comment>공통</comment>
+  </data>
+  <data name="Button_SearchAll" xml:space="preserve">
+    <value>전체 조회</value>
+    <comment>공통</comment>
+  </data>
+  <data name="Button_SELECTCANCEL" xml:space="preserve">
+    <value>선택 취소</value>
+  </data>
+  <data name="Button_StocReq" xml:space="preserve">
+    <value>보관신청</value>
+  </data>
+  <data name="Button_SubmitSignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="Button_UPDATE" xml:space="preserve">
+    <value>수정</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESEMENU_CostIndex" xml:space="preserve">
+    <value>배송요금</value>
+  </data>
+  <data name="ESEMENU_Cs" xml:space="preserve">
+    <value>고객센터</value>
+  </data>
+  <data name="ESEMENU_CsEsmNotice" xml:space="preserve">
+    <value>ETOMARS 공지</value>
+  </data>
+  <data name="ESEMENU_CsEstNotice" xml:space="preserve">
+    <value>STATION 공지</value>
+  </data>
+  <data name="ESEMENU_CsQna" xml:space="preserve">
+    <value>1:1 문의</value>
+  </data>
+  <data name="ESEMENU_Ese" xml:space="preserve">
+    <value>계정관리</value>
+  </data>
+  <data name="ESEMENU_EseAccount" xml:space="preserve">
+    <value>계좌 관리</value>
+  </data>
+  <data name="ESEMENU_EseGrade" xml:space="preserve">
+    <value>계정 등급 관리</value>
+  </data>
+  <data name="ESEMENU_EseInfo" xml:space="preserve">
+    <value>기본 정보</value>
+  </data>
+  <data name="ESEMENU_EseInfoMy" xml:space="preserve">
+    <value>내 계정관리</value>
+  </data>
+  <data name="ESEMENU_EseManager" xml:space="preserve">
+    <value>계정 관리</value>
+  </data>
+  <data name="ESEMENU_Ets" xml:space="preserve">
+    <value>배송</value>
+  </data>
+  <data name="ESEMENU_EtsLabel" xml:space="preserve">
+    <value>배송 라벨 출력</value>
+  </data>
+  <data name="ESEMENU_EtsList" xml:space="preserve">
+    <value>배송 상태 조회</value>
+  </data>
+  <data name="ESEMENU_EtsReq" xml:space="preserve">
+    <value>배송 신청</value>
+  </data>
+  <data name="ESEMENU_EtsReqExcel" xml:space="preserve">
+    <value>대량 배송 신청</value>
+  </data>
+  <data name="ESEMENU_Mar" xml:space="preserve">
+    <value>MAR</value>
+  </data>
+  <data name="ESEMENU_MarInOut" xml:space="preserve">
+    <value>MAR 충전/사용 이력</value>
+  </data>
+  <data name="ESEMENU_MarOutReq" xml:space="preserve">
+    <value>MAR 환불 신청</value>
+  </data>
+  <data name="ESEMENU_MarReq" xml:space="preserve">
+    <value>MAR 충전(이체)</value>
+  </data>
+  <data name="ESEMENU_MarReqPg" xml:space="preserve">
+    <value>MAR 충전(PG)</value>
+  </data>
+  <data name="ESEMENU_Pick" xml:space="preserve">
+    <value>픽업 관리</value>
+  </data>
+  <data name="ESEMENU_PickList" xml:space="preserve">
+    <value>픽업 신청 조회</value>
+  </data>
+  <data name="ESEMENU_PickReq" xml:space="preserve">
+    <value>픽업 신청</value>
+  </data>
+  <data name="ESEMENU_Prod" xml:space="preserve">
+    <value>상품 관리</value>
+  </data>
+  <data name="ESEMENU_ProdAdd" xml:space="preserve">
+    <value>상품 등록</value>
+  </data>
+  <data name="ESEMENU_ProdList" xml:space="preserve">
+    <value>등록 상품 조회</value>
+  </data>
+  <data name="ESEMENU_Stoc" xml:space="preserve">
+    <value>보관 관리</value>
+  </data>
+  <data name="ESEMENU_StocInOut" xml:space="preserve">
+    <value>입출고 내역 조회</value>
+  </data>
+  <data name="ESEMENU_StocList" xml:space="preserve">
+    <value>재고 조회</value>
+  </data>
+  <data name="ESEMENU_StocReq" xml:space="preserve">
+    <value>보관 신청</value>
+  </data>
+  <data name="ESEMENU_StocReqList" xml:space="preserve">
+    <value>보관 신청 현황 조회</value>
+  </data>
+  <data name="ESE_Comm_AddDate" xml:space="preserve">
+    <value>등록일자</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_ALL" xml:space="preserve">
+    <value>전체</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Barcord" xml:space="preserve">
+    <value>바코드</value>
+  </data>
+  <data name="ESE_Comm_Brand" xml:space="preserve">
+    <value>브랜드</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Category" xml:space="preserve">
+    <value>카테고리</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_ChooseInitial" xml:space="preserve">
+    <value>선택</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Close" xml:space="preserve">
+    <value>닫기</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_CreateTime" xml:space="preserve">
+    <value>생성일자</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_DirectInput" xml:space="preserve">
+    <value>수기입력</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Enrollment" xml:space="preserve">
+    <value>등록</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_EtormarsForm" xml:space="preserve">
+    <value>ETOMARS 양식</value>
+  </data>
+  <data name="ESE_Comm_ExpectedEndDate" xml:space="preserve">
+    <value>Expected end date</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_ExpectedStartDate" xml:space="preserve">
+    <value>Expected start date</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_GroupId" xml:space="preserve">
+    <value>그룹 ID</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Id" xml:space="preserve">
+    <value>계정</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_LastInputInfo" xml:space="preserve">
+    <value>최근 입력 정보</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_MarHandlingDate" xml:space="preserve">
+    <value>처리일자</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_MarReqDate" xml:space="preserve">
+    <value>요청일자</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_NATION" xml:space="preserve">
+    <value>국가</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_NewRegistration" xml:space="preserve">
+    <value>신규 등록</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Num" xml:space="preserve">
+    <value>번호</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_PASSWD" xml:space="preserve">
+    <value>비밀번호</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Poor" xml:space="preserve">
+    <value>불량</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_PRODUCT_NAME" xml:space="preserve">
+    <value>대표 상품명</value>
+  </data>
+  <data name="ESE_Comm_Regdate" xml:space="preserve">
+    <value>등록일시</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Search" xml:space="preserve">
+    <value>조회</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_SearchBrandPlaceHolder" xml:space="preserve">
+    <value>브랜드</value>
+  </data>
+  <data name="ESE_Comm_SearchCondition" xml:space="preserve">
+    <value>검색조건</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_SearchREQUESTDATE" xml:space="preserve">
+    <value>요청일자</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_SearchWord" xml:space="preserve">
+    <value>검색어</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_SelectProdNum" xml:space="preserve">
+    <value>수량</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Sort" xml:space="preserve">
+    <value>정렬</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_STATUS" xml:space="preserve">
+    <value>상태</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_StocReqInfoStation" xml:space="preserve">
+    <value>STATION</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_Title" xml:space="preserve">
+    <value>제목</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_UserName" xml:space="preserve">
+    <value>사용자 명</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_UserTelNo" xml:space="preserve">
+    <value>사용자 전화번호</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_Comm_ViewInfo" xml:space="preserve">
+    <value>상세 정보</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_COST_ArriveNation" xml:space="preserve">
+    <value>도착국가</value>
+  </data>
+  <data name="ESE_COST_ReleaseType" xml:space="preserve">
+    <value>출고타입</value>
+  </data>
+  <data name="ESE_COST_SelectRateListByNation" xml:space="preserve">
+    <value>국가별 요율표 조회</value>
+  </data>
+  <data name="ESE_COST_ShippingChargeList" xml:space="preserve">
+    <value>배송 요금표</value>
+  </data>
+  <data name="ESE_COST_ShippingChargeListExplanation" xml:space="preserve">
+    <value>출고타입을 선택해 주세요.</value>
+  </data>
+  <data name="ESE_COST_StandardShippingMar" xml:space="preserve">
+    <value>일반배송 (MAR)</value>
+  </data>
+  <data name="ESE_COST_StocShippingMar" xml:space="preserve">
+    <value>보관배송 (MAR)</value>
+  </data>
+  <data name="ESE_COST_WeightKg" xml:space="preserve">
+    <value>무게(KG)</value>
+  </data>
+  <data name="ESE_CsEsmNotice_NoticeResultList" xml:space="preserve">
+    <value>공지사항 조회 결과</value>
+  </data>
+  <data name="ESE_CsEsmNotice_NoticeType" xml:space="preserve">
+    <value>공지유형</value>
+  </data>
+  <data name="ESE_CsEsmNotice_NoticeView" xml:space="preserve">
+    <value>공지사항 내용</value>
+  </data>
+  <data name="ESE_CsQnaView_AnswerTitle" xml:space="preserve">
+    <value>답변 준비중입니다.</value>
+  </data>
+  <data name="ESE_CsQna_AnswerDate" xml:space="preserve">
+    <value>답변일자</value>
+  </data>
+  <data name="ESE_CsQna_QnaAdd" xml:space="preserve">
+    <value>1:1 문의 등록</value>
+  </data>
+  <data name="ESE_CsQna_QnaDate" xml:space="preserve">
+    <value>문의일자</value>
+  </data>
+  <data name="ESE_CsQna_QnaResultList" xml:space="preserve">
+    <value>1:1 문의 조회 결과</value>
+  </data>
+  <data name="ESE_CsQna_QnaType" xml:space="preserve">
+    <value>문의유형</value>
+  </data>
+  <data name="ESE_CsQna_QnaTypeContent" xml:space="preserve">
+    <value>문의내용</value>
+  </data>
+  <data name="ESE_CsQna_SelectQnaType" xml:space="preserve">
+    <value>문의유형 선택</value>
+  </data>
+  <data name="ESE_CsQna_WriterName" xml:space="preserve">
+    <value>답변자</value>
+  </data>
+  <data name="ESE_Error_CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="ESE_Error_Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ESE_Error_EnterYourPassword" xml:space="preserve">
+    <value>Enter your password</value>
+  </data>
+  <data name="ESE_Error_ForgotPasswd" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="ESE_Error_NeedAnAccount" xml:space="preserve">
+    <value>Need an account?</value>
+  </data>
+  <data name="ESE_Error_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ESE_Error_PleaseEnterEmailAddrOrUsername" xml:space="preserve">
+    <value>Please enter email address/username</value>
+  </data>
+  <data name="ESE_Error_SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="ESE_Error_StaySignedIn" xml:space="preserve">
+    <value>Stay signed in</value>
+  </data>
+  <data name="ESE_EseAccount_AccountNum" xml:space="preserve">
+    <value>당행 계좌번호</value>
+  </data>
+  <data name="ESE_EseAccount_BankAddr" xml:space="preserve">
+    <value>은행 주소</value>
+  </data>
+  <data name="ESE_EseAccount_EseAccountInfo" xml:space="preserve">
+    <value>ESE 계좌 정보</value>
+  </data>
+  <data name="ESE_EseAccount_ReceiverName_en" xml:space="preserve">
+    <value>영문 수취인 명</value>
+  </data>
+  <data name="ESE_EseAccount_setting_Memo" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="ESE_EseAccount_SwiftCode" xml:space="preserve">
+    <value>SWIFT CODE</value>
+  </data>
+  <data name="ESE_Comm_DELETE" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="ESE_EseGradeView_UserGradeAdminAdd" xml:space="preserve">
+    <value>계정 등급 관리 추가</value>
+  </data>
+  <data name="ESE_EseGradeView_UserGradeViewInfo" xml:space="preserve">
+    <value>계정 등급 정보</value>
+  </data>
+  <data name="ESE_EseGradeView_UserRegistration" xml:space="preserve">
+    <value>계정 등록</value>
+  </data>
+  <data name="ESE_EseGrade_EtormarsGradeAdmin" xml:space="preserve">
+    <value>ETOMARS 계정 등급 관리</value>
+  </data>
+  <data name="ESE_EseGrade_GroupName" xml:space="preserve">
+    <value>그룹명</value>
+  </data>
+  <data name="ESE_EseInfoMy_EseUserID" xml:space="preserve">
+    <value>ID(E-MAIL)</value>
+  </data>
+  <data name="ESE_EseInfoMy_EseUserInfo" xml:space="preserve">
+    <value>ESE 계정 정보</value>
+  </data>
+  <data name="ESE_EseInfoMy_UserCurrentPassword" xml:space="preserve">
+    <value>현재 비밀번호</value>
+  </data>
+  <data name="ESE_EseInfoMy_UserNewPassword" xml:space="preserve">
+    <value>새 비밀번호</value>
+  </data>
+  <data name="ESE_EseInfoMy_UserPasswordCheck" xml:space="preserve">
+    <value>비밀번호 확인</value>
+  </data>
+  <data name="ESE_EseInfo_ADDR" xml:space="preserve">
+    <value>주소</value>
+  </data>
+  <data name="ESE_EseInfo_API_KEY" xml:space="preserve">
+    <value>API 연동 KEY</value>
+  </data>
+  <data name="ESE_EseInfo_BIZNO" xml:space="preserve">
+    <value>사업자 번호</value>
+  </data>
+  <data name="ESE_EseInfo_EMAIL_REP" xml:space="preserve">
+    <value>대표자 E-MAIL</value>
+  </data>
+  <data name="ESE_EseInfo_EMAIL_TASK" xml:space="preserve">
+    <value>담당자 E-MAIL</value>
+  </data>
+  <data name="ESE_EseInfo_EseBaseInfo" xml:space="preserve">
+    <value>ESE 기본 정보</value>
+  </data>
+  <data name="ESE_EseInfo_EseTaskInfo" xml:space="preserve">
+    <value>ESE 담당자 정보</value>
+  </data>
+  <data name="ESE_EseInfo_HOMEPAGE" xml:space="preserve">
+    <value>홈페이지 URL</value>
+  </data>
+  <data name="ESE_EseInfo_MAR" xml:space="preserve">
+    <value>현재 보유 MAR</value>
+  </data>
+  <data name="ESE_EseInfo_MEMO" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="ESE_EseInfo_REPRESENTATIVE" xml:space="preserve">
+    <value>대표자이름</value>
+  </data>
+  <data name="ESE_EseInfo_SenderName" xml:space="preserve">
+    <value>SENDER 이름</value>
+  </data>
+  <data name="ESE_EseInfo_TASKMAN" xml:space="preserve">
+    <value>담당자 이름</value>
+  </data>
+  <data name="ESE_EseInfo_TELNO_REP" xml:space="preserve">
+    <value>대표자 전화번호</value>
+  </data>
+  <data name="ESE_EseInfo_TELNO_TASK" xml:space="preserve">
+    <value>담당자 전화번호</value>
+  </data>
+  <data name="ESE_EseInfo_ZipCode" xml:space="preserve">
+    <value>우편번호</value>
+  </data>
+  <data name="ESE_EseManagerView_DEPARTMENT" xml:space="preserve">
+    <value>부서</value>
+  </data>
+  <data name="ESE_EseManagerView_Email" xml:space="preserve">
+    <value>계정 ID</value>
+  </data>
+  <data name="ESE_EseManagerView_POSITION" xml:space="preserve">
+    <value>직급</value>
+  </data>
+  <data name="ESE_EseManager_EseManagerAdmin" xml:space="preserve">
+    <value>ETOMARS 계정 관리</value>
+  </data>
+  <data name="ESE_ForGotPassword_AlreadyRegistered" xml:space="preserve">
+    <value>Already registered?</value>
+  </data>
+  <data name="ESE_ForGotPassword_Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ESE_ForGotPassword_IRememberMyPassword" xml:space="preserve">
+    <value>I remembered my password!</value>
+  </data>
+  <data name="ESE_ForGotPassword_PleaseEnterTheEmailAddr" xml:space="preserve">
+    <value>Please enter the email address the account was registered with</value>
+  </data>
+  <data name="ESE_ForGotPassword_Resetpassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ESE_ForGotPassword_SendEmail" xml:space="preserve">
+    <value>Send email</value>
+  </data>
+  <data name="ESE_ForGotPassword_SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="ESE_Home_AddedProd" xml:space="preserve">
+    <value>등록 상품</value>
+  </data>
+  <data name="ESE_Home_ClearanceProceeding" xml:space="preserve">
+    <value>통관진행</value>
+  </data>
+  <data name="ESE_Home_CsUnansweredQna" xml:space="preserve">
+    <value>미답변 문의</value>
+  </data>
+  <data name="ESE_Home_CsUnansweredQnaNum" xml:space="preserve">
+    <value>건</value>
+  </data>
+  <data name="ESE_Home_ETOMARS" xml:space="preserve">
+    <value>ETOMARS</value>
+  </data>
+  <data name="ESE_Home_EtsFinishedGoods" xml:space="preserve">
+    <value>입고완료</value>
+  </data>
+  <data name="ESE_Home_EtsMainNum" xml:space="preserve">
+    <value>개</value>
+  </data>
+  <data name="ESE_Home_EtsStatus" xml:space="preserve">
+    <value>배송상태</value>
+  </data>
+  <data name="ESE_Home_EtsWaitingGoods" xml:space="preserve">
+    <value>입고대기</value>
+  </data>
+  <data name="ESE_Home_EtsWaitingGoOutGoods" xml:space="preserve">
+    <value>출고대기</value>
+  </data>
+  <data name="ESE_Home_FinishedGoOutGoods" xml:space="preserve">
+    <value>출고완료</value>
+  </data>
+  <data name="ESE_Home_IndexNotice" xml:space="preserve">
+    <value>공지사항</value>
+  </data>
+  <data name="ESE_Home_ProdInfo" xml:space="preserve">
+    <value>상품정보</value>
+  </data>
+  <data name="ESE_Home_STATION" xml:space="preserve">
+    <value>STATION</value>
+  </data>
+  <data name="ESE_Home_STATIONNOTICE" xml:space="preserve">
+    <value>공지사항</value>
+  </data>
+  <data name="ESE_Home_StocProd" xml:space="preserve">
+    <value>보관 상품</value>
+  </data>
+  <data name="ESE_Home_StocStatus" xml:space="preserve">
+    <value>보관상태</value>
+  </data>
+  <data name="ESE_Login_AtagEnglish" xml:space="preserve">
+    <value>English (US)</value>
+  </data>
+  <data name="ESE_Login_CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="ESE_Login_DropdownFlagChinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="ESE_Login_DropdownFlagEnglish" xml:space="preserve">
+    <value>English (US)</value>
+  </data>
+  <data name="ESE_Login_DropdownFlagJapanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="ESE_Login_DropdownFlagKorean" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="ESE_Login_EMAIL" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ESE_Login_EnterYourPasswd" xml:space="preserve">
+    <value>Enter your password</value>
+  </data>
+  <data name="ESE_Login_ForgotPasswd" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="ESE_Login_NeedAnAccount" xml:space="preserve">
+    <value>Need an account?</value>
+  </data>
+  <data name="ESE_Login_OrSignInUsing" xml:space="preserve">
+    <value>Or sign in using</value>
+  </data>
+  <data name="ESE_Login_PASSWD" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ESE_Login_PleaseEnterEmailAddrOrUsername" xml:space="preserve">
+    <value>Please enter email address/username</value>
+  </data>
+  <data name="ESE_Login_SIGNIN" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="ESE_Login_StaySignedIn" xml:space="preserve">
+    <value>Stay signed in</value>
+  </data>
+  <data name="ESE_MarInOut_ChargeMar" xml:space="preserve">
+    <value>충전마르</value>
+  </data>
+  <data name="ESE_MarInOut_CheckBreakDown" xml:space="preserve">
+    <value>내역</value>
+  </data>
+  <data name="ESE_MarInOut_ExchangeAmount" xml:space="preserve">
+    <value>환전 금액</value>
+  </data>
+  <data name="ESE_MarInOut_ExchangeMar" xml:space="preserve">
+    <value>환전 MAR</value>
+  </data>
+  <data name="ESE_MarInOut_Mar" xml:space="preserve">
+    <value>마르</value>
+  </data>
+  <data name="ESE_MarInOut_MarCharge" xml:space="preserve">
+    <value>MAR 충전 (계좌이체)</value>
+  </data>
+  <data name="ESE_MarInOut_MarExchange" xml:space="preserve">
+    <value>MAR 환전</value>
+  </data>
+  <data name="ESE_MarInOut_MarUse" xml:space="preserve">
+    <value>MAR 사용</value>
+  </data>
+  <data name="ESE_MarInOut_PaymentMoney" xml:space="preserve">
+    <value>결제금액</value>
+  </data>
+  <data name="ESE_MarOutReq_Attention" xml:space="preserve">
+    <value>환전 요청 시 주의 사항</value>
+  </data>
+  <data name="ESE_MarOutReq_AttentionFirst" xml:space="preserve">
+    <value>환전 요청일 기준 2 ~ 3 일 처리시간 소요</value>
+  </data>
+  <data name="ESE_MarOutReq_AttentionSecond" xml:space="preserve">
+    <value>환전 금액은 환전 처리 일자 기준 환율에 따라 예상 금액과 다소 차이가 발생할 수 있습니다.</value>
+  </data>
+  <data name="ESE_MarOutReq_AttentionThird" xml:space="preserve">
+    <value>기타 등등...</value>
+  </data>
+  <data name="ESE_MarOutReq_ExchangeReq" xml:space="preserve">
+    <value>환전 요청</value>
+  </data>
+  <data name="ESE_MarOutReq_ExchangeReqMar" xml:space="preserve">
+    <value>환전 신청 MAR</value>
+  </data>
+  <data name="ESE_MarOutReq_ExpectedExchangeAmount" xml:space="preserve">
+    <value>예상 환전 금액</value>
+  </data>
+  <data name="ESE_MarOutReq_Header" xml:space="preserve">
+    <value>MAR 환전 신청</value>
+  </data>
+  <data name="ESE_MarOutReq_OutReqMemo" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="ESE_MarOutReq_OutReqPersonInfo" xml:space="preserve">
+    <value>신청자 정보</value>
+  </data>
+  <data name="ESE_MarOutReq_PossessionMar" xml:space="preserve">
+    <value>보유 MAR</value>
+  </data>
+  <data name="ESE_MarReq_AccountNum" xml:space="preserve">
+    <value>계좌번호</value>
+  </data>
+  <data name="ESE_MarReq_Attention" xml:space="preserve">
+    <value>충전 요청 시 주의 사항</value>
+  </data>
+  <data name="ESE_MarReq_AttentionFirst" xml:space="preserve">
+    <value>한국 시간 12시 6시 기준으로 확인되어 처리 됩니다.</value>
+  </data>
+  <data name="ESE_MarReq_AttentionSecond" xml:space="preserve">
+    <value>주말 / 공휴일 요청 시 다음 주 월요일에 처리 됩니다.</value>
+  </data>
+  <data name="ESE_MarReq_AttentionThird" xml:space="preserve">
+    <value>공휴일의 경우 충전이 지연될수 있습니다.</value>
+  </data>
+  <data name="ESE_MarReq_DepositBankName" xml:space="preserve">
+    <value>입금은행명</value>
+  </data>
+  <data name="ESE_MarReq_DepositAmount" xml:space="preserve">
+    <value>입금 금액</value>
+  </data>
+  <data name="ESE_MarReq_DepositCurrency" xml:space="preserve">
+    <value>입금 화폐단위</value>
+  </data>
+  <data name="ESE_MarReq_DepositDateTime" xml:space="preserve">
+    <value>입금 날짜</value>
+  </data>
+  <data name="ESE_MarReq_DepositMemo" xml:space="preserve">
+    <value>입금 메모</value>
+  </data>
+  <data name="ESE_MarReq_DepositPersonName" xml:space="preserve">
+    <value>입금자 명</value>
+  </data>
+  <data name="ESE_MarReq_Header" xml:space="preserve">
+    <value>MAR 충전 (계좌이체)</value>
+  </data>
+  <data name="ESE_MarReq_MarChargeReq" xml:space="preserve">
+    <value>충전 요청</value>
+  </data>
+  <data name="ESE_MarReq_SendMoneyPersonInfo" xml:space="preserve">
+    <value>송금자 정보</value>
+  </data>
+  <data name="ESE_ProdAdd_BRAND" xml:space="preserve">
+    <value>브랜드명</value>
+  </data>
+  <data name="ESE_ProdAdd_ChooseCategory" xml:space="preserve">
+    <value>카테고리 선택</value>
+  </data>
+  <data name="ESE_ProdAdd_ExcelFormDownload" xml:space="preserve">
+    <value>엑셀양식 다운로드</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_ProdAdd_ExcelFormUpload" xml:space="preserve">
+    <value>엑셀양식 업로드</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_ProdAdd_EXPIRATION" xml:space="preserve">
+    <value>유통기한 (일)</value>
+  </data>
+  <data name="ESE_ProdAdd_EXPIRATIONPlaceHolder" xml:space="preserve">
+    <value>365일</value>
+  </data>
+  <data name="ESE_ProdAdd_INGREDIENT" xml:space="preserve">
+    <value>성분</value>
+  </data>
+  <data name="ESE_ProdAdd_INGREDIENTPlaceHolder" xml:space="preserve">
+    <value>면 100% / 나일론100% 등</value>
+  </data>
+  <data name="ESE_ProdAdd_ORIGIN" xml:space="preserve">
+    <value>원산지</value>
+  </data>
+  <data name="ESE_ProdAdd_PRODUCT_IMAGE" xml:space="preserve">
+    <value>Image URL</value>
+  </data>
+  <data name="ESE_ProdAdd_PRODUCT_NAME_CN" xml:space="preserve">
+    <value>상품명 (중국어)</value>
+  </data>
+  <data name="ESE_ProdAdd_PRODUCT_NAME_EN" xml:space="preserve">
+    <value>상품명 (영어)</value>
+  </data>
+  <data name="ESE_ProdAdd_PRODUCT_NAME_KR" xml:space="preserve">
+    <value>상품명 (한국어)</value>
+  </data>
+  <data name="ESE_ProdAdd_RequiredField" xml:space="preserve">
+    <value>필수 입력 항목</value>
+  </data>
+  <data name="ESE_ProdAdd_SALE_SITE_URL" xml:space="preserve">
+    <value>판매사이트 URL</value>
+  </data>
+  <data name="ESE_ProdAdd_SelectInputField" xml:space="preserve">
+    <value>선택 입력 항목</value>
+  </data>
+  <data name="ESE_ProdAdd_SKU" xml:space="preserve">
+    <value>SKU</value>
+    <comment>공통</comment>
+  </data>
+  <data name="ESE_ProdAdd_SPEC" xml:space="preserve">
+    <value>상세스펙</value>
+  </data>
+  <data name="ESE_ProdAdd_STANDARD" xml:space="preserve">
+    <value>규격</value>
+  </data>
+  <data name="ESE_ProdAdd_STANDARDPlaceHolder" xml:space="preserve">
+    <value>병 / 개 / 장 등</value>
+  </data>
+  <data name="ESE_ProdAdd_StocProdIndividualAdd" xml:space="preserve">
+    <value>보관상품 개별 등록</value>
+  </data>
+  <data name="ESE_ProdAdd_StocProdIndividualAddExplanation" xml:space="preserve">
+    <value>중국 배송용 상품은 선택 입력 항목을 입력해 주시기 바랍니다.</value>
+  </data>
+  <data name="ESE_ProdAdd_StocProdMassiveExcelAdd" xml:space="preserve">
+    <value>보관상품 대량 엑셀 등록</value>
+  </data>
+  <data name="ESE_ProdAdd_StocProdMassiveExcelAddBrowse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="ESE_ProdAdd_StocProdMassiveExcelPlaceHolder" xml:space="preserve">
+    <value>Include some files</value>
+  </data>
+  <data name="ESE_ProdAdd_UNIT_WEIGHT" xml:space="preserve">
+    <value>중량/용량</value>
+  </data>
+  <data name="ESE_ProdAdd_viewWEIGHT_UNIT" xml:space="preserve">
+    <value>단위</value>
+  </data>
+  <data name="ESE_ProdList_CurrentStock" xml:space="preserve">
+    <value>현재재고</value>
+  </data>
+  <data name="ESE_ProdList_ProdSearchResultList" xml:space="preserve">
+    <value>상품조회 결과</value>
+  </data>
+  <data name="ESE_ProdList_RealWarehousing" xml:space="preserve">
+    <value>실입고</value>
+  </data>
+  <data name="ESE_ProdList_ReleaseExpected" xml:space="preserve">
+    <value>출고예정</value>
+  </data>
+  <data name="ESE_ProdList_Req" xml:space="preserve">
+    <value>신청</value>
+  </data>
+  <data name="ESE_ProdList_StockAdjustment" xml:space="preserve">
+    <value>재고조정</value>
+  </data>
+  <data name="ESE_ProdList_StockExpected" xml:space="preserve">
+    <value>재고예정</value>
+  </data>
+  <data name="ESE_ProdList_StockInOutInfo" xml:space="preserve">
+    <value>입출고내역 정보</value>
+  </data>
+  <data name="ESE_ProdList_StockProdInfo" xml:space="preserve">
+    <value>상품정보</value>
+  </data>
+  <data name="ESE_Register_AlreadyRegistered" xml:space="preserve">
+    <value>Already registered?</value>
+  </data>
+  <data name="ESE_Register_AtagEnglish" xml:space="preserve">
+    <value>English (US)</value>
+  </data>
+  <data name="ESE_Register_DontForgetYourPassword" xml:space="preserve">
+    <value>8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</value>
+  </data>
+  <data name="ESE_Register_DontForgetYourPasswordConfirm" xml:space="preserve">
+    <value>8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</value>
+  </data>
+  <data name="ESE_Register_DropdownFlagChinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="ESE_Register_DropdownFlagEnglish" xml:space="preserve">
+    <value>English (US)</value>
+  </data>
+  <data name="ESE_Register_DropdownFlagJapanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="ESE_Register_DropdownFlagKorean" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="ESE_Register_IAgreeWithThe" xml:space="preserve">
+    <value>I agree with the</value>
+  </data>
+  <data name="ESE_Register_NeededToEnterTheWebsite" xml:space="preserve">
+    <value>Needed to enter the website</value>
+  </data>
+  <data name="ESE_Register_Registered" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="ESE_Register_SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="ESE_Register_TermsAndConditions" xml:space="preserve">
+    <value>Terms and Conditions</value>
+  </data>
+  <data name="ESE_Register_ThankYouForYourRegistration" xml:space="preserve">
+    <value>Thank you for your registration!</value>
+  </data>
+  <data name="ESE_StocInOut_InOutDate" xml:space="preserve">
+    <value>입/출고 일자</value>
+  </data>
+  <data name="ESE_StocListProdView_EXPIRATION_DATE" xml:space="preserve">
+    <value>유통만료일자</value>
+  </data>
+  <data name="ESE_StocListProdView_Origin" xml:space="preserve">
+    <value>원산지</value>
+  </data>
+  <data name="ESE_StocListProdView_PRICE" xml:space="preserve">
+    <value>가격</value>
+  </data>
+  <data name="ESE_StocList_InOutViewDays" xml:space="preserve">
+    <value>일자</value>
+  </data>
+  <data name="ESE_StocList_Release" xml:space="preserve">
+    <value>출고</value>
+  </data>
+  <data name="ESE_StocList_StockInOutSearchResult" xml:space="preserve">
+    <value>입출고내역 조회 결과</value>
+  </data>
+  <data name="ESE_StocList_STOCSEARCHRESULT" xml:space="preserve">
+    <value>재고 조회 결과</value>
+  </data>
+  <data name="ESE_StocList_Warehousing" xml:space="preserve">
+    <value>입고</value>
+  </data>
+  <data name="ESE_StocReqListView_CargoCheckConfirm" xml:space="preserve">
+    <value>검수 확인</value>
+  </data>
+  <data name="ESE_StocReqListView_StocReqApplication" xml:space="preserve">
+    <value>보관 신청서</value>
+  </data>
+  <data name="ESE_StocReqListView_StocReqChooseProd" xml:space="preserve">
+    <value>보관 신청 선택 상품</value>
+  </data>
+  <data name="ESE_StocReqList_BOX" xml:space="preserve">
+    <value>박스</value>
+  </data>
+  <data name="ESE_StocReqList_CargoCheck" xml:space="preserve">
+    <value>검수</value>
+  </data>
+  <data name="ESE_StocReqList_CargoCheckDate" xml:space="preserve">
+    <value>검수일자</value>
+  </data>
+  <data name="ESE_StocReqList_Product" xml:space="preserve">
+    <value>상품</value>
+  </data>
+  <data name="ESE_StocReqList_StationMemo" xml:space="preserve">
+    <value>STATION 메모</value>
+  </data>
+  <data name="ESE_StocReqList_StocReqListSearchResult" xml:space="preserve">
+    <value>보관신청 현황 조회 결과</value>
+  </data>
+  <data name="ESE_StocReqList_WarehousingDate" xml:space="preserve">
+    <value>입고일자</value>
+  </data>
+  <data name="ESE_StocReqList_WarehousingStatus" xml:space="preserve">
+    <value>입고상태</value>
+  </data>
+  <data name="ESE_StocReq_BoxNum" xml:space="preserve">
+    <value>박스번호</value>
+  </data>
+  <data name="ESE_StocReq_ChooseProd" xml:space="preserve">
+    <value>상품 선택</value>
+  </data>
+  <data name="ESE_StocReq_INPUT_DELVNAME" xml:space="preserve">
+    <value>배송자 명</value>
+  </data>
+  <data name="ESE_StocReq_INPUT_DELVTELL" xml:space="preserve">
+    <value>배송자 연락처</value>
+  </data>
+  <data name="ESE_StocReq_MEMO_ESE" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="ESE_StocReq_MEMO_EST" xml:space="preserve">
+    <value>메모(EST)</value>
+  </data>
+  <data name="ESE_StocReq_NewProdAdd" xml:space="preserve">
+    <value>새 상품 등록</value>
+  </data>
+  <data name="ESE_StocReq_ProdBarcodeScan" xml:space="preserve">
+    <value>상품 바코드 스캔</value>
+  </data>
+  <data name="ESE_StocReq_ProdBarcodeScanExplanation" xml:space="preserve">
+    <value>등록된 상품의 경우 바코드 스캔으로 상품정보를 입력하실수 있습니다.</value>
+  </data>
+  <data name="ESE_StocReq_ProdBarcodeScanOutPutPart" xml:space="preserve">
+    <value>바코드 입력 결과 출력 부분</value>
+  </data>
+  <data name="ESE_StocReq_ProdSelectView" xml:space="preserve">
+    <value>상품 선택 상세</value>
+  </data>
+  <data name="ESE_StocReq_SameWithUserInfo" xml:space="preserve">
+    <value>회원 정보와 동일</value>
+  </data>
+  <data name="ESE_StocReq_SENDER_ADDR" xml:space="preserve">
+    <value>발송인 주소</value>
+  </data>
+  <data name="ESE_StocReq_SENDER_NAME" xml:space="preserve">
+    <value>발송인 명</value>
+  </data>
+  <data name="ESE_StocReq_SENDER_TEL" xml:space="preserve">
+    <value>발송인 연락처</value>
+  </data>
+  <data name="ESE_StocReq_StocReq" xml:space="preserve">
+    <value>보관 신청</value>
+  </data>
+  <data name="ESE_StocReq_StocReqInfo" xml:space="preserve">
+    <value>보관 신청 정보</value>
+  </data>
+  <data name="ESE_StocReq_StocReqMassiveExcelAdd" xml:space="preserve">
+    <value>보관신청 대량 엑셀 등록</value>
+  </data>
+  <data name="ESE_StocReq_StocReqSelectProd" xml:space="preserve">
+    <value>보관 신청 선택 상품</value>
+  </data>
+  <data name="ESE_StocReq_WearhousingDeliveryNum" xml:space="preserve">
+    <value>입고배송번호</value>
+  </data>
+  <data name="ESE_StocReq_WearhousingMethod" xml:space="preserve">
+    <value>입고방법</value>
+  </data>
+  <data name="ESE_StocReq_WearhousingNation" xml:space="preserve">
+    <value>입고국가</value>
+  </data>
+  <data name="ESE_StocReq_WriteIndividualStocReq" xml:space="preserve">
+    <value>개별 보관 신청서 작성</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>안녕</value>
+  </data>
+  <data name="Script_Barcode" xml:space="preserve">
+    <value>바코드</value>
+  </data>
+  <data name="Script_COST_CallCost" xml:space="preserve">
+    <value>요금표가 설정되지 않았습니다. STATION에 문의해주세요.</value>
+  </data>
+  <data name="Script_COST_CallTypeArriveNation" xml:space="preserve">
+    <value>도착국가 선택</value>
+  </data>
+  <data name="Script_COST_CallTypeBaseOutType" xml:space="preserve">
+    <value>출고타입을 선택해 주세요.</value>
+  </data>
+  <data name="Script_COST_CallTypeChoose" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="Script_COST_SetDefoultArriveNation" xml:space="preserve">
+    <value>도착국가 선택</value>
+  </data>
+  <data name="Script_COST_SetDefoultBaseOutType" xml:space="preserve">
+    <value>출고타입을 선택해 주세요.</value>
+  </data>
+  <data name="Script_emailConfirmequalTo" xml:space="preserve">
+    <value>Please enter the same email address as above</value>
+  </data>
+  <data name="Script_emailConfirmRequired" xml:space="preserve">
+    <value>Please enter your email address one more time</value>
+  </data>
+  <data name="Script_emailRequired" xml:space="preserve">
+    <value>Please enter your email address</value>
+  </data>
+  <data name="Script_emailValid" xml:space="preserve">
+    <value>Please enter a VALID email address</value>
+  </data>
+  <data name="Script_FinishCargoCheckHandling" xml:space="preserve">
+    <value>검수 완료 처리 하시겠습니까?</value>
+  </data>
+  <data name="Script_MustAgreeTermsAndConditions" xml:space="preserve">
+    <value>You must agree with Terms and Conditions</value>
+  </data>
+  <data name="Script_NoData" xml:space="preserve">
+    <value>데이터가 없습니다.</value>
+  </data>
+  <data name="Script_NoProd" xml:space="preserve">
+    <value>상품이 없습니다.</value>
+  </data>
+  <data name="Script_NoSelectData" xml:space="preserve">
+    <value>선택된 데이터가 없습니다.</value>
+  </data>
+  <data name="Script_NoSelectedData" xml:space="preserve">
+    <value>선택 항목이 없습니다.</value>
+  </data>
+  <data name="Script_NotUsageBarcode" xml:space="preserve">
+    <value>유효하지 않은 바코드 입니다.</value>
+  </data>
+  <data name="Script_OverLappedProd" xml:space="preserve">
+    <value>중복된 상품 입니다.</value>
+  </data>
+  <data name="Script_passwordConfirmequalTo" xml:space="preserve">
+    <value>Please enter the same password as above</value>
+  </data>
+  <data name="Script_passwordConfirmRequired" xml:space="preserve">
+    <value>Please enter your password one more time</value>
+  </data>
+  <data name="Script_passwordRequired" xml:space="preserve">
+    <value>Please enter your password</value>
+  </data>
+  <data name="Script_PleaseInputBoxNum" xml:space="preserve">
+    <value>박스넘버를 입력해 주세요.</value>
+  </data>
+  <data name="Script_ProdAddedInList" xml:space="preserve">
+    <value>상품이 리스트에 추가 되었습니다.</value>
+  </data>
+  <data name="Script_ProdAdd_CallCateChoose" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="Script_ProductName" xml:space="preserve">
+    <value>대표 상품명</value>
+  </data>
+  <data name="Script_Register_emailValid" xml:space="preserve">
+    <value>Please enter a VALID email address</value>
+  </data>
+  <data name="Script_RequiredInput" xml:space="preserve">
+    <value>다음 항목은 필수 입력 값 입니다.</value>
+  </data>
+  <data name="Script_SelectWhetherDelete" xml:space="preserve">
+    <value>선택 항목을 삭제하시겠습니까?</value>
+  </data>
+  <data name="Script_StocNumZero" xml:space="preserve">
+    <value>보관 수량이 0 입니다.</value>
+  </data>
+  <data name="Script_WhetherCancel" xml:space="preserve">
+    <value>취소하시겠습니까?</value>
+  </data>
+  <data name="Script_WhetherDelete" xml:space="preserve">
+    <value>삭제하시겠습니까?</value>
+  </data>
+  <data name="Script_WhetherSelectedCancel" xml:space="preserve">
+    <value>선택 항목을 취소하시겠습니까?</value>
+  </data>
+  <data name="ESE_Comm_PostPone" xml:space="preserve">
+    <value>보류</value>
+  </data>
+  <data name="ESE_Comm_Ready" xml:space="preserve">
+    <value>준비중 입니다.</value>
+  </data>
+  <data name="ESE_Comm_Use" xml:space="preserve">
+    <value>사용</value>
+  </data>
+  <data name="Script_ConfirmPassword" xml:space="preserve">
+    <value>비밀번호 확인</value>
+  </data>
+  <data name="Script_CurrentPassword" xml:space="preserve">
+    <value>현재 비밀번호</value>
+  </data>
+  <data name="Script_DepositAmountOnlyNum" xml:space="preserve">
+    <value>입금 금액은 숫자만을 사용합니다.</value>
+  </data>
+  <data name="Script_DepositCurrencyIsThree" xml:space="preserve">
+    <value>입금 화폐단위는 3글자입니다.</value>
+  </data>
+  <data name="Script_EseGradeAdd" xml:space="preserve">
+    <value>계정 등급 관리 추가</value>
+  </data>
+  <data name="Script_EseGradeUpdate" xml:space="preserve">
+    <value>계정 등급 관리 수정</value>
+  </data>
+  <data name="Script_EseManagerAdd" xml:space="preserve">
+    <value>계정 정보 등록</value>
+  </data>
+  <data name="Script_EseManagerUpdate" xml:space="preserve">
+    <value>계정 정보 수정</value>
+  </data>
+  <data name="Script_MarOutReqOnlyUseNum" xml:space="preserve">
+    <value>환전 신청 MAR는  숫자만을 사용합니다.</value>
+  </data>
+  <data name="Script_NewPassword" xml:space="preserve">
+    <value>새 비밀번호</value>
+  </data>
+  <data name="Script_NoGrade" xml:space="preserve">
+    <value>등록된 계정 등급이 없습니다.</value>
+  </data>
+  <data name="Script_OneByOneQnaContents" xml:space="preserve">
+    <value>1:1 문의 내용</value>
+  </data>
+  <data name="Script_OneByOneQnaEnrollment" xml:space="preserve">
+    <value>1:1 문의 등록</value>
+  </data>
+  <data name="Script_PasswordAtleastEight" xml:space="preserve">
+    <value>비밀번호는 최소 8자 이상입니다.</value>
+  </data>
+  <data name="Script_PasswordRegExp" xml:space="preserve">
+    <value>비밀번호는 영문,숫자,특수문자(!$%^&amp;* 만 허용)를 사용하여 8자 이상, 영문은 대소문자를 구분합니다.</value>
+  </data>
+  <data name="Script_RegistrationMaximumTen" xml:space="preserve">
+    <value>계정은 10개 까지 사용하실수 있습니다.</value>
+  </data>
+  <data name="Script_RegistrationToThree" xml:space="preserve">
+    <value>계정 등급은 3개 까지 사용하실수 있습니다.</value>
+  </data>
+  <data name="Script_DoubleInput" xml:space="preserve">
+    <value>다음 항목은 소수점 두자리 포함 숫자 입력 값 입니다.</value>
+  </data>
+  <data name="Script_IntInput" xml:space="preserve">
+    <value>다음 항목은 숫자 입력 값 입니다.</value>
+  </data>
+  <data name="API_CAN_NOT_EXECUTE_BECAUSE_THERE_IS_NO_PRODUCT_INFORMATION" xml:space="preserve">
+    <value>상품정보가 없어서 실행할수 없습니다.</value>
+  </data>
+  <data name="API_DATABASE_ERROR" xml:space="preserve">
+    <value>데이터베이스 에러입니다.</value>
+  </data>
+  <data name="API_INVALID_PARAMETER" xml:space="preserve">
+    <value>매개 변수가 잘못되었습니다.</value>
+  </data>
+  <data name="API_MAXIMUM_UPLOAD_LIMIT" xml:space="preserve">
+    <value>최대 업로드 한도</value>
+  </data>
+  <data name="API_NO_DATA" xml:space="preserve">
+    <value>데이터가 없습니다.</value>
+  </data>
+  <data name="API_REMAINING_NUMBER" xml:space="preserve">
+    <value>남은 갯수</value>
+  </data>
+  <data name="API_SHIPPING_NUMBER_ALREADY_SET" xml:space="preserve">
+    <value>이미 배송번호가 설정되었습니다.</value>
+  </data>
+  <data name="API_UNKNOWN_SHIPPING_COMPANY" xml:space="preserve">
+    <value>알수없는 배송회사 입니다.</value>
+  </data>
+  <data name="API_WE_CANNOT_GET_PRODUCT_INFO" xml:space="preserve">
+    <value>상품정보를 가져올수 없습니다.</value>
+  </data>
+  <data name="API_YOU_HAVE_USED_ALL_THE_INVOICE_NUMBERS" xml:space="preserve">
+    <value>송장번호를 모두 사용하였습니다.</value>
+  </data>
+  <data name="Script_PleaseBdQnaSelect" xml:space="preserve">
+    <value>문의 유형 선택</value>
+  </data>
+  <data name="Script_PleaseExchangeReqMar" xml:space="preserve">
+    <value>환전 신청 MAR</value>
+  </data>
+  <data name="Script_PleaseTitleInput" xml:space="preserve">
+    <value>제목</value>
+  </data>
+  <data name="Script_passwordComparison" xml:space="preserve">
+    <value>새 비밀번호가 확인 값과 다릅니다.</value>
+  </data>
+  <data name="ESE_RETURN_DuplicatedInfo" xml:space="preserve">
+    <value>중복된 정보 입니다.</value>
+  </data>
+  <data name="ETS_CHARGEABLE_WEIGHT" xml:space="preserve">
+    <value>적용무게</value>
+  </data>
+  <data name="ETS_CLEAR_PDT_CODE" xml:space="preserve">
+    <value>신청타입</value>
+  </data>
+  <data name="ETS_CURRENCY_GOODS" xml:space="preserve">
+    <value>기준 화폐</value>
+  </data>
+  <data name="ETS_DELV_CODE" xml:space="preserve">
+    <value>배송타입</value>
+  </data>
+  <data name="ETS_DEP_NATION_CODE" xml:space="preserve">
+    <value>출발국가</value>
+  </data>
+  <data name="ETS_DIM_HEIGHT" xml:space="preserve">
+    <value>높이</value>
+  </data>
+  <data name="ETS_DIM_LENGTH" xml:space="preserve">
+    <value>세로</value>
+  </data>
+  <data name="ETS_DIM_WIDTH" xml:space="preserve">
+    <value>가로</value>
+  </data>
+  <data name="ETS_EST_CODE" xml:space="preserve">
+    <value>STATION</value>
+  </data>
+  <data name="ETS_MESSAGE_DELV" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="ETS_NATION_CODE" xml:space="preserve">
+    <value>도착 국가</value>
+  </data>
+  <data name="ETS_ORDERNO1" xml:space="preserve">
+    <value>주문번호</value>
+  </data>
+  <data name="ETS_QTY_BOX" xml:space="preserve">
+    <value>박스수량</value>
+  </data>
+  <data name="ETS_REALVOLUME" xml:space="preserve">
+    <value>부피무게</value>
+  </data>
+  <data name="ETS_REALWEIGHT" xml:space="preserve">
+    <value>실제무게</value>
+  </data>
+  <data name="ETS_RECEIVERTYPE" xml:space="preserve">
+    <value>수취인 타입</value>
+  </data>
+  <data name="ETS_RECEIVER_ADDR1" xml:space="preserve">
+    <value>기본주소</value>
+  </data>
+  <data name="ETS_RECEIVER_ADDR2" xml:space="preserve">
+    <value>상세주소</value>
+  </data>
+  <data name="ETS_RECEIVER_CITY" xml:space="preserve">
+    <value>시</value>
+  </data>
+  <data name="ETS_RECEIVER_CPHONENO" xml:space="preserve">
+    <value>전화번호2</value>
+  </data>
+  <data name="ETS_RECEIVER_DISTRICT" xml:space="preserve">
+    <value>구</value>
+  </data>
+  <data name="ETS_RECEIVER_EMAIL" xml:space="preserve">
+    <value>이메일</value>
+  </data>
+  <data name="ETS_RECEIVER_NAME" xml:space="preserve">
+    <value>수취인 명</value>
+  </data>
+  <data name="ETS_RECEIVER_STATE" xml:space="preserve">
+    <value>성</value>
+  </data>
+  <data name="ETS_RECEIVER_TELNO" xml:space="preserve">
+    <value>전화번호1</value>
+  </data>
+  <data name="ETS_RECEIVER_ZIPCODE" xml:space="preserve">
+    <value>우편번호</value>
+  </data>
+  <data name="ETS_SDATA1" xml:space="preserve">
+    <value>ETC1</value>
+  </data>
+  <data name="ETS_SDATA2" xml:space="preserve">
+    <value>ETC2</value>
+  </data>
+  <data name="ETS_SDATA3" xml:space="preserve">
+    <value>ETC3</value>
+  </data>
+  <data name="ETS_SENDER_ADDR" xml:space="preserve">
+    <value>주소</value>
+  </data>
+  <data name="ETS_SENDER_NAME" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="ETS_SENDER_TELNO" xml:space="preserve">
+    <value>전화번호</value>
+  </data>
+  <data name="ETS_SOCIALNO_BIZNO" xml:space="preserve">
+    <value>주민/통관번호</value>
+  </data>
+  <data name="ETS_TEMPCOST" xml:space="preserve">
+    <value>예상 배송비</value>
+  </data>
+</root>

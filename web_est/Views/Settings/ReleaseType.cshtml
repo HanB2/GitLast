@@ -1,0 +1,490 @@
+﻿@model ConfReleaseTypeListModels
+
+
+
+
+
+<!-- RIBBON -->
+<div id="ribbon">
+    <div style="padding-top:10px;"></div>
+    <span style="color:white; font-size:14px;">
+        <i class="fa fa-gear"></i> 환경설정 / 기본정보 / 출고타입
+    </span>
+</div>
+<!-- END RIBBON -->
+
+<div id="content">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "form1", @name = "form1", @class = "form-horizontal", onsubmit = "return validation_check();" }))
+    {
+        <section id="normal-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget jarviswidget-color-blueDark horizonScroll" id="wid-id-0" data-widget-editbutton="false" data-widget-fullscreenbutton="true" style="margin-bottom: 0;">
+
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>전체 목록</h2>
+                        </header>
+
+                        <div class="panel panel-info" style="padding: 0;">
+                            @if (Model != null && Model.Items.Count > 0)
+                            {
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav navbar-left">
+                                        <li>@string.Format("{1} 페이지 중 {0} 페이지 (전체 : {2}개)", Model.Pager.CurrentPage, Model.Pager.TotalPages, Model.Pager.TotalItems)</li>
+                                    </ul>
+
+                                    <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
+                                        <li>한 페이지에 보여줄 갯수 : </li>
+                                        <li>
+                                            <select id="items_per_page" name="items_per_page" style="margin-left:10px;" onchange="javascript:pagesize_change();">
+                                                @foreach (var item in ViewData["ITEMS_PER_PAGE_LIST"] as List<string>)
+                                                {
+                                                    <option value="@item" @if (ViewData["ITEMS_PER_PAGE"].ToString().Trim() == item) { ViewContext.Writer.Write("selected=\"selected\""); }>@item</option>
+                                                }
+                                            </select>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+
+                            <div id="search_result_div" class="wrap table-responsive" style="overflow:auto; width:100%; height:100%; max-height:100%">
+                                <table id="search_result_table" class="table table-bordered table-hover" style="margin-bottom: 0px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">번호</th>
+                                            <th style="text-align:center;">국가코드</th>
+                                            <th style="text-align:center;">국가명</th>
+                                            <th style="text-align:center;">배송타입</th>
+                                            <th style="text-align:center;">출고타입</th>
+                                            <th style="text-align:center;">출고타입 코드</th>
+                                            @*<th style="text-align:center;">설명</th>*@
+                                            <th style="text-align:center;">요율표</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @if (Model != null && Model.Items.Count() > 0)
+                                        {
+                                            int cnt = (Model.Pager.CurrentPage - 1) * Model.Pager.PageSize + 1;
+                                            foreach (var item in Model.Items)
+                                            {
+                                                <tr>
+                                                    <td align="center">@(cnt++)</td>
+                                                    <td align="center">@item.NATION_CODE</td>
+                                                    <td align="left">@item.NATION_NAME</td>
+                                                    <td align="center">@item.DELV_CODE</td>
+                                                    <td align="center">@item.RELEASE_NAME</td>
+                                                    <td align="center">@item.RELEASE_CODE</td>
+                                                    @*<td align="left">@item.MEMO</td>*@
+                                                    <td align="center">
+                                                        <a href="#" class="btn btn-labeled btn-info" onclick="show_modal('@item.NATION_CODE', '@item.NATION_NAME', '@item.DELV_CODE', '@item.RELEASE_NAME', '@item.RELEASE_CODE');">기본요율표 설정</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="6" align="left">데이터가 없습니다.</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!--페이징-->
+                        @if (Model != null && Model.Items.Count > 0)
+                        {
+                            <table class="table" style="border: none; margin: 0; padding: 0; width: 100%;">
+                                <tr style="border: none; margin: 0; padding: 0;">
+                                    <td align="center" style="border: none; margin: 0; padding: 10px 10px 0px 10px;">
+                                        <!--nav aria-label="Page navigation"-->
+                                        <ul class="pagination" style="margin: 0; padding: 0; font-size: 13px;">
+
+                                            @if (Model.Pager.CurrentPage > 1)
+                                            {
+                                                <li><a href="javascript:page_change('1');">◀◀</a></li>
+                                                <li><a href="javascript:page_change('@(Model.Pager.CurrentPage - 1)');">◀</a></li>
+                                            }
+
+                                            @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                            {
+                                                <li @if (page == Model.Pager.CurrentPage) { ViewContext.Writer.Write("class=\"active\""); }><a href="javascript:page_change('@page');">@page</a></li>
+                                            }
+
+                                            @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
+                                            {
+                                                <li><a href="javascript:page_change('@(Model.Pager.CurrentPage + 1)');">▶</a></li>
+                                                <li><a href="javascript:page_change('@Model.Pager.TotalPages');">▶▶</a></li>
+                                            }
+
+                                        </ul>
+                                        <!--/nav-->
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+
+                    </div>
+                </article>
+            </div>
+        </section>
+    }
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="BasicCostTableModal" tabindex="-1" role="dialog" aria-labelledby="BasicCostTableModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                <h4 class="modal-title" id="BasicCostTableModalLabel"><i class="fa fa-lg fa-fw fa-cog"></i> <b>기본요율표 설정</b></h4>
+            </div>
+
+            <div id="basic_cost_table_modal_body" class="modal-body" style="max-height: 500px; overflow: auto;">
+                <div class="row">
+                    <label class="control-label text-primary" style="font-size: 13px; margin-left: 20px;">국가명 : </label>
+                    <label id="nation_name"></label><br />
+                    <label class="control-label text-primary" style="font-size: 13px; margin-left: 20px;">출고타입 : </label>
+                    [<label id="delv_code"></label>] <label id="release_name"></label>
+                </div>
+
+                <br />
+                <table class="table table-bordered table-hover" style="margin-bottom: 0px;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center; vertical-align: middle;">번호</th>
+                            <th style="text-align:center; vertical-align: middle;">무게<br />(<label id="weight_unit"></label>)</th>
+                            <th style="text-align:center; vertical-align: middle;">통관배송비<br />(MAR)</th>
+                            <th style="text-align:center; vertical-align: middle;">일반배송요금<br />(MAR)</th>
+                            <th style="text-align:center; vertical-align: middle;">재고배송요금<br />(MAR)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cost_table">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <div class="nav navbar-nav navbar-left">
+                    <a href="#" id="waiting" style="display: none; padding-left: 10px; border: 0px;"><i id="waiting-image" class="fa fa-spinner fa-spin fa-2x"></i></a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <input type="file" id="myFileInput" name="myFileInput" style="display: none;" onchange="basic_cost_table_upload();" />
+                    <input type="button" class="btn btn-info" id="btn_basic_cost_table_download" onclick="basic_cost_table_download();" value="Excel 다운로드" />
+                    <input type="button" class="btn btn-warning" id="btn_basic_cost_table_upload" onclick="$('#myFileInput').val(''); document.getElementById('myFileInput').click();" value="Excel 업로드" />
+                    <input type="button" class="btn btn-success" id="btn_basic_cost_table_set" onclick="basic_cost_table_set();" value="저장" />
+                    <input type="button" class="btn btn-danger" id="btn_close" data-dismiss="modal" value="닫기" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+    @* 검색결과 테이블이 화면에 최대한 꽉차게 보이도록 설정한다 *@
+    function AdjustSize() {
+        var height = document.documentElement.clientHeight;
+        @*document.getElementById("search_result_div").style.height = (height - 150) + "px";*@
+        document.getElementById("search_result_div").style.maxHeight = (height - 150) + "px";
+        document.getElementById("basic_cost_table_modal_body").style.maxHeight = (height - 300) + "px";
+    }
+
+    $(document).ready(function () {
+        @* 검색결과 테이블이 화면에 최대한 꽉차게 보이도록 설정한다 *@
+        @if (Model != null && Model.Items.Count() > 0)
+        {
+            ViewContext.Writer.Write("AdjustSize();");
+        }
+    });
+
+    $(window).resize(function () {
+        @* 검색결과 테이블이 화면에 최대한 꽉차게 보이도록 설정한다 *@
+        AdjustSize();
+    });
+
+    function validation_check() {
+        $('#loading').show();
+        return true;
+    }
+
+    @* 한페이지크기 변경 *@
+    function pagesize_change() {
+        var ret = validation_check();
+        if (!ret) {
+            return false;
+        }
+
+        document.getElementById("form1").submit();
+        return true;
+    }
+
+    @* 페이지번호 변경 *@
+    function page_change(pageVal) {
+        var ret = validation_check();
+        if (!ret) {
+            return false;
+        }
+
+        $('#form1').append('<input type="hidden" name="search_page" value="' + pageVal + '" />');
+        document.getElementById("form1").submit();
+        return true;
+    }
+
+
+
+    var release_nation_code = '';
+    var release_output_code = '';
+
+    @* 기본요율표 설정 모달 보여주기 *@
+    function show_modal(nation_code, nation_name, delv_code, release_name, release_code) {
+
+        release_nation_code = nation_code;
+        release_output_code = release_code;
+
+        $("#nation_name").html(nation_name);
+        $("#delv_code").html(delv_code);
+        $("#release_name").html(release_name);
+        $('#cost_table').html('');
+
+        DisableButton();
+        //$('#BasicCostTableModal').modal('show');
+        $('#BasicCostTableModal').modal({
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        $.ajax({
+            url: '@Url.Content("~/Settings/Ajax_GetBasicCostTable")',
+            type: 'POST',
+            data: JSON.stringify({
+                nation_code: release_nation_code,
+                release_code: release_output_code
+            }),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                EnableButton();
+                if (result.Success == true) {
+                    show_cost_table(result.Data);
+                    $('#weight_unit').html(result.WeightUnit);
+                } else {
+                    alert(result.ErrorMessage);
+                }
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                EnableButton();
+                alert("Error : Ajax_GetBasicCostTable()");
+            }
+        });
+    }
+
+    @* 기본요율표 html로 표시하기 *@
+    function show_cost_table(data) {
+
+        $('#cost_table').html('');
+
+        var count = data.length;
+        var temp = '';
+        for (var i = 0; i < count; i++) {
+            temp += '<tr>';
+            temp += '<td align="center">' + (i + 1) + '</td>';
+            temp += '<td align="right"><input type="text" class="weight_value" id="weight" name="weight" style="width: 100%; text-align: right; border-width: 0px;" readonly="readonly" value="' + data[i].WEIGHT + '" /></td>';
+            temp += '<td align="right"><input type="text" class="customs_fee_value" id="customsfee" name="customsfee" style="width: 100%; text-align: right; border-width: 0px;" readonly="readonly" value="' + data[i].CUSTOMS_FEE + '" /></td>';
+            temp += '<td align="right"><input type="text" class="shipping_fee_normal_value" id="shippingfeenor" name="shippingfeenor" style="width: 100%; text-align: right;" value="' + data[i].SHIPPING_FEE_NOR + '" /></td>';
+            temp += '<td align="right"><input type="text" class="shipping_fee_stock_value" id="shippingfeestc" name="shippingfeestc" style="width: 100%; text-align: right;" value="' + data[i].SHIPPING_FEE_STC + '" /></td>';
+            temp += '</tr>';
+        }
+        $('#cost_table').html(temp);
+    }
+
+    @* 기본요율표 저장하기 *@
+    function basic_cost_table_set() {
+
+        var allVals_weight = [];
+        $('.weight_value').each(function () {
+            debugger;
+            allVals_weight.push($(this).val());
+        });
+
+        var allVals_customs_fee = [];
+        $('.customs_fee_value').each(function () {
+            debugger;
+            allVals_customs_fee.push($(this).val());
+        });
+
+        var allVals_shipping_fee_normal = [];
+        $('.shipping_fee_normal_value').each(function () {
+            debugger;
+            allVals_shipping_fee_normal.push($(this).val());
+        });
+
+        var allVals_shipping_fee_stock = [];
+        $('.shipping_fee_stock_value').each(function () {
+            debugger;
+            allVals_shipping_fee_stock.push($(this).val());
+        });
+
+        if (!confirm('저장 하시겠습니까?')) {
+            return;
+        }
+
+        DisableButton();
+
+        $.ajax({
+            url: '@Url.Content("~/Settings/Ajax_BasicCostTableUpdate")',
+            type: 'POST',
+            data: JSON.stringify({
+                nation_code: release_nation_code,
+                release_code: release_output_code,
+                weight_list: allVals_weight,
+                normal_fee_list: allVals_shipping_fee_normal,
+                stock_fee_list: allVals_shipping_fee_stock
+            }),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                EnableButton();
+                if (result.Success == true) {
+                    alert(result.Message);
+                } else {
+                    alert(result.ErrorMessage);
+                }
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                EnableButton();
+                alert('기본요율표 저장 실패!!!\n잠시후 다시 실행해 보시기 바랍니다.');
+            }
+        });
+    }
+
+    function DisableButton() {
+        $('#waiting').show();
+        $('#btn_basic_cost_table_download').prop('disabled', true);
+        $('#btn_basic_cost_table_upload').prop('disabled', true);
+        $('#btn_basic_cost_table_set').prop('disabled', true);
+        $('#btn_close').prop('disabled', true);
+    }
+
+    function EnableButton() {
+        $('#waiting').hide();
+        $('#btn_basic_cost_table_download').prop('disabled', false);
+        $('#btn_basic_cost_table_upload').prop('disabled', false);
+        $('#btn_basic_cost_table_set').prop('disabled', false);
+        $('#btn_close').prop('disabled', false);
+    }
+
+    @* Excel Download *@
+    function basic_cost_table_download() {
+
+        var allVals_weight = [];
+        $('.weight_value').each(function () {
+            debugger;
+            allVals_weight.push($(this).val());
+        });
+
+        var allVals_customs_fee = [];
+        $('.customs_fee_value').each(function () {
+            debugger;
+            allVals_customs_fee.push($(this).val());
+        });
+
+        var allVals_shipping_fee_normal = [];
+        $('.shipping_fee_normal_value').each(function () {
+            debugger;
+            allVals_shipping_fee_normal.push($(this).val());
+        });
+
+        var allVals_shipping_fee_stock = [];
+        $('.shipping_fee_stock_value').each(function () {
+            debugger;
+            allVals_shipping_fee_stock.push($(this).val());
+        });
+
+        DisableButton();
+
+        $.ajax({
+            url: '@Url.Content("~/Settings/Ajax_BasicCostTableExcelDownload")',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({
+                nation_code: release_nation_code,
+                release_code: release_output_code,
+                weight_list: allVals_weight,
+                customs_fee_list: allVals_customs_fee,
+                normal_fee_list: allVals_shipping_fee_normal,
+                stock_fee_list: allVals_shipping_fee_stock
+            }),
+            success: function (result) {
+                EnableButton();
+                if (result.Success == true) {
+                    window.location = result.Data;
+                } else {
+                    alert(result.ErrorMessage);
+                }
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                EnableButton();
+                alert("Excel 다운로드 실패!!!\n잠시후 다시 실행해 보시기 바랍니다.");
+            }
+        });
+    }
+
+    @* Excel Upload *@
+    function basic_cost_table_upload() {
+
+        // 파일 첨부 체크
+        if ($("#myFileInput").val() == "") {
+            return false;
+        }
+
+        // 파일 확장자 체크
+        var ext = $('#myFileInput').val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['xlsx', 'xls']) == -1) {
+            alert('Excel 파일을 선택하세요. ');
+            return false;
+        }
+
+        var formData = new FormData();
+        formData.append("uploadfile", $("input[name=myFileInput]")[0].files[0]);
+
+        DisableButton();
+
+        $.ajax({
+            url: '@Url.Content("~/Settings/Ajax_BasicCostTableExcelUpload")',
+            processData: false,
+            contentType: false,
+            data: formData,
+            type: 'POST',
+            success: function (result) {
+                EnableButton();
+                if (result.Success == true) {
+                    show_cost_table(result.Data);
+                    alert(result.Message);
+                } else {
+                    alert(result.ErrorMessage);
+                }
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                EnableButton();
+                alert('Excel 업로드 실패!!!\n잠시후 다시 실행해 보시기 바랍니다.');
+            }
+        });
+    };
+
+</script>

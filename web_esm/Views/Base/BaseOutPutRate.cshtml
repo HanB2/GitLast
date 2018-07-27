@@ -1,0 +1,160 @@
+﻿@model web_esm.Models_Act.Base.BaseOutPutRateModels
+<div id="content">
+
+
+
+
+
+
+	<section id="widget-grid" class="" style="width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> 출고타입 정보 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form", @enctype = "multipart/form-data" }))
+							{
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.schType)
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.Item.NATION_CODE)
+								@Html.HiddenFor(model => model.Item.RELEASE_CODE)
+
+								<fieldset>
+									<div class="row">
+										<label class="label col col-3">국가코드</label>
+										<label class="label col col-9">@Model.Item.NATION_CODE</label>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">출고타입</label>
+										<label class="label col col-9">@Model.Item.RELEASE_NAME</label>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">출고타입 코드</label>
+										<label class="label col col-9">@Model.Item.RELEASE_CODE</label>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">출고타입 설명</label>
+										<label class="label col col-9">@Model.Item.MEMO</label>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">출고타입 기호</label>
+										<label class="label col col-9">@Model.Item.DELV_CODE</label>
+									</div>
+								</fieldset>
+
+								<fieldset>
+
+									<!--Html 헬퍼 사용 시 onchange 가 동작 하지 않는 알수없는 오류가 있어 사용하지 않음-->
+									<div class="input input-file">
+										<span class="button"><input id="File_FILE" name="File.FILE" onchange="this.parentNode.nextSibling.value = this.value" type="file">Browse</span><input type="text" placeholder="Include some files" readonly="">
+									</div>
+									
+									<!--DownloadSample-->
+									<a class="btn btn-primary" href="javascript:void(0);" style="padding:5px 22px; "> 요금표 엑셀 다운로드</a>
+									<a class="btn btn-primary" href="javascript:act_excel();" style="padding:5px 22px; float:right; "> 요금표 엑셀 업로드</a>
+									<br /><br /><br />
+								</fieldset>
+									<footer>
+										<button type="submit" class="btn btn-primary">
+											목록
+										</button>
+									</footer>
+							}
+
+						</div>
+
+					</div>
+				</div>
+			</article>
+
+
+
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> 수취인 정보 </h2>
+					</header>
+					<div role="content">
+
+
+						<section id="widget-grid" class="">
+							<div class="row">
+								<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+									<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+										<header role="heading">
+											<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+											<h2>요금 정보</h2>
+											<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+										</header>
+
+										<div role="content">
+											<div class="widget-body no-padding">
+
+
+												<div class="table-responsive">
+
+													<table class="table table-bordered table-striped">
+														<thead>
+															<tr>
+																<th style="width:40%;">무게(KG)</th>
+																<th style="width:60%;">요금(MAR)</th>
+															</tr>
+														</thead>
+														<tbody>
+
+															@for (int i = 0; i < Model.Items.Count; i++)
+															{
+																<tr>	
+																	<td>@Model.Items[i].WEIGHT</td>	
+																	<td>@Model.Items[i].CUSTOMS_FEE</td>	
+																</tr>	
+															}
+														</tbody>
+													</table>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</article>
+							</div>
+						</section>
+
+
+					</div>
+				</div>
+			</article>
+
+		</div>
+	</section>
+
+
+
+
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific{
+	<script type="text/javascript">
+		// 요금표 엑셀 업로드
+		function act_excel() {
+			$('#act_type').val('excel');
+			$('#view_form').submit();
+		}
+	</script>
+}
+
+

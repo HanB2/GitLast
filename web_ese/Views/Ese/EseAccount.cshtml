@@ -1,0 +1,149 @@
+﻿@model web_ese.Models_Act.Ese.EseAccountModels
+
+<div id="content">
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_EseAccount_EseAccountInfo</h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								
+
+								@Html.AntiForgeryToken()
+
+								<fieldset>
+
+									<!--SWIFT CODE 서버명-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseAccount_SwiftCode</label>
+										<section class="col col-10">
+											<label class="input">
+
+												@Html.TextBoxFor(model => model.setting_SwiftCode)
+												@Html.ValidationMessageFor(model => model.setting_SwiftCode)
+
+
+											</label>
+										</section>
+									</div>
+
+									<!--은행 주소-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseAccount_BankAddr</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.setting_BankAddr)
+												@Html.ValidationMessageFor(model => model.setting_BankAddr)
+											</label>
+										</section>
+									</div>
+
+									<!--당행 계좌번호-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseAccount_AccountNum</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.setting_AccountNum)
+												@Html.ValidationMessageFor(model => model.setting_AccountNum)
+											</label>
+										</section>
+									</div>
+
+									<!--영문 수취인 명-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseAccount_ReceiverName_en</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.setting_ReceiverName_en)
+												@Html.ValidationMessageFor(model => model.setting_ReceiverName_en)
+											</label>
+										</section>
+									</div>
+
+									<!--메모-->
+									<div class="row">
+										<label class="label col col-12">@comm_global.Language.Resources.ESE_EseAccount_setting_Memo</label>
+
+									</div>
+
+									<section>
+										<div id="collapseOne-1" class="panel-collapse collapse in">
+											@Html.TextAreaFor(model => model.setting_Memo, new { @class = "custom-scroll", @cols = "100", @ROWS = "3" })
+									</section>
+								</fieldset>
+
+								<footer>
+									<button type="button" class="btn btn-primary" onclick="submit()">
+										@comm_global.Language.Resources.Button_UPDATE
+									</button>
+								</footer>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>	
+
+<!-- END MAIN CONTENT -->
+<!--button type이 button 이니까 submit 라는 스크립트 만들어서 거기서 해결되게-->
+
+@section pagespecific {
+	
+	<script type="text/javascript">
+    
+		$(document).ready(function () {
+			formSettingValue();
+			formSetting();
+		});
+
+	  
+		function formSettingValue() {
+			//id		클래스		길이		콤보박스
+
+
+			settingForm.push(['setting_SwiftCode', 'no', '100', '0']); //SWIFT CODE 서버명
+			settingForm.push(['setting_BankAddr', 'no', '100', '0']); // 은행 주소
+			settingForm.push(['setting_AccountNum', 'no', '50', '0']); // 당행 계좌번호
+			settingForm.push(['setting_ReceiverName_en', 'no', '100', '0']); // 영문 수취인 명
+		}
+	
+
+		function formSetting() {
+
+			for (i = 0; i < settingForm.length; i++) {
+				tmp_id = settingForm[i][0];	//id
+				tmp_class = settingForm[i][1];	//class
+				tmp_maxLeng = settingForm[i][2]; //길이제한
+
+				if (tmp_class != 'no')
+					$('#' + tmp_id).addClass(tmp_class);
+
+				if (tmp_maxLeng != 'no')
+					$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+			}
+
+			$(".etoINt").attr("onkeyup", "if(this.value == ''){ this.value='0'; }else{  this.value=this.value.replace(/[^0-9]/g,'') * 1}");
+
+		}
+
+		
+	
+	
+	
+	
+	</script>
+
+
+
+
+
+	}

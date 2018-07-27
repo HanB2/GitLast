@@ -1,0 +1,71 @@
+﻿@model web_esm.Models_Act.Ese.EseInfoModels
+
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+<div id="content">
+
+
+	<div class="row">
+
+		<!-- NEW WIDGET START -->
+		<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+				<header role="heading">
+					<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+					<h2>Default Tabs with border </h2>
+
+					<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+				</header>
+				<!-- widget div-->
+				<div role="content">
+					<div class="widget-body">
+						<hr class="simple">
+						<ul id="myTab1" class="nav nav-tabs bordered">
+							<li class="active">
+								<a href="#s1" data-toggle="tab" aria-expanded="true"> ESE 기본정보 </a>
+							</li>
+							<li class="">
+								<a href="#s2" data-toggle="tab" aria-expanded="true"> ESE 계좌정보 </a>
+							</li>	
+							<li class="">
+								<a href="#s3" data-toggle="tab" aria-expanded="true"> 계정 등급 관리 </a>
+							</li>
+							<li class="">
+								<a href="#s4" data-toggle="tab" aria-expanded="true"> 계정 관리 </a>
+							</li>
+						</ul>					
+						<div id="myTabContent1" class="tab-content padding-10">
+							<!--EST 기본정보-->
+							<div class="tab-pane fade active in" id="s1">
+								<iframe width="820px" height="840px;" scrolling="no" frameborder="0" id="viewIframe" src="/Ese/EseIframeInfo?eseCode=@Model.viewEseCode"></iframe>
+							</div>
+							<!--EST 계좌정보-->
+							<div class="tab-pane fade active in" id="s2">
+								<iframe width="820px" height="500px;" scrolling="no" frameborder="0" id="viewIframe" src="/Ese/EseIframeAccount?eseCode=@Model.viewEseCode"></iframe>
+							</div>
+							<!--계정 등급 관리-->
+							<div class="tab-pane fade active in" id="s3">
+								<iframe width="820px" height="700px;" scrolling="no" frameborder="0" id="viewIframe" src="/Ese/EseIframeGrade?eseCode=@Model.viewEseCode"></iframe>
+							</div>
+							<!--계정 관리-->
+							<div class="tab-pane fade active in" id="s4">
+								<iframe width="820px" height="680px;" scrolling="no" frameborder="0" id="viewIframe" src="/Ese/EseIframeUser?eseCode=@Model.viewEseCode"></iframe>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</article>
+	</div>
+
+
+
+
+</div>

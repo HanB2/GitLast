@@ -1,0 +1,310 @@
+﻿@model web_ese.Models_Act.Ese.EseInfoModels
+
+<div id="content">
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_EseInfo_EseBaseInfo </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								Model.act_type = "BASE";
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.schTxt2)
+								@Html.AntiForgeryToken()
+
+								<fieldset>
+									<!--SENDER 이름-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_SenderName</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.ESE_NAME)
+												@Html.ValidationMessageFor(model => model.Item.ESE_NAME)
+											</label>
+										</section>
+
+									</div>
+
+									<!--우편번호, 사업자 번호-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_ZipCode</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.ZIPCODE)
+												@Html.ValidationMessageFor(model => model.Item.ZIPCODE)
+											</label>
+										</section>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_BIZNO</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.BIZNO)
+												@Html.ValidationMessageFor(model => model.Item.BIZNO)
+											</label>
+										</section>
+									</div>
+
+									<!--주소-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_ADDR</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.ADDR)
+												@Html.ValidationMessageFor(model => model.Item.ADDR)
+											</label>
+										</section>
+									</div>
+
+									<!--대표자이름, 대표자 전화번호-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_REPRESENTATIVE</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.REPRESENTATIVE)
+												@Html.ValidationMessageFor(model => model.Item.REPRESENTATIVE)
+											</label>
+										</section>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_TELNO_REP</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.TELNO_REP)
+												@Html.ValidationMessageFor(model => model.Item.TELNO_REP)
+											</label>
+										</section>
+									</div>
+
+									<!--대표자 E_MAIL-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_EMAIL_REP</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.EMAIL_REP)
+												@Html.ValidationMessageFor(model => model.Item.EMAIL_REP)
+											</label>
+										</section>
+									</div>
+
+									<!--현재 보유 MAR-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_MAR</label>
+										<label class="label col col-10">@Model.Item.MAR</label>
+									</div>
+									
+									<!--홈페이지 URL, API 연동 KEY-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_HOMEPAGE</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.HOMEPAGE)
+												@Html.ValidationMessageFor(model => model.Item.HOMEPAGE)
+											</label>
+										</section>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_API_KEY</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.API_KEY, new {@readonly =true })
+											</label>
+										</section>
+									</div>
+
+									<!--메모-->
+									<div class="row">
+										<label class="label col col-12">@comm_global.Language.Resources.ESE_EseInfo_MEMO</label>
+									</div>
+									<section>
+										@Html.TextAreaFor(model => model.Item.MEMO, new { @class = "custom-scroll", @cols = "170", @ROWS = "6" })
+									</section>
+								</fieldset>
+								<!--Submit-->
+								<footer>
+									<button type="button" class="btn btn-primary" onclick="javascript: callSubmit();">
+										@comm_global.Language.Resources.Button_UPDATE
+									</button>
+								</footer>
+								}
+						</div>
+					</div>
+				</div>
+			
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_EseInfo_EseTaskInfo </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form2", @class = "smart-form" }))
+							{
+								Model.act_type = "USER";
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.act_type)
+								@Html.AntiForgeryToken()
+
+								<fieldset>
+
+									<!--담당자 이름, 담당자 전화번호-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_TASKMAN</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.TASKMAN)
+											</label>
+										</section>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_TELNO_TASK</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.TELNO_TASK)
+											</label>
+										</section>
+									</div>
+									<!--담당자 E-MAIL-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_EMAIL_TASK</label>
+										<section class="col col-4">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.EMAIL_TASK)
+											</label>
+										</section>			
+									</div>
+
+								</fieldset>
+								<!--Submit-->
+								<footer>
+									<button type="submit" class="btn btn-primary" onclick="submit()">
+										@comm_global.Language.Resources.Button_UPDATE
+									</button>
+								</footer>
+								}
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+		</div>
+	</section>
+</div>
+<!-- END MAIN CONTENT -->
+
+@section pagespecific {
+	
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			formSettingValue();
+			formSetting();
+		});
+
+		function formSettingValue() {
+			//id		클래스		길이		콤보박스
+
+
+			settingForm.push(['Item_ESE_NAME', 'no', '100', '0']); //SENDER 이름
+			settingForm.push(['Item_ZIPCODE', 'no', '10', '0']); // 우편번호
+			settingForm.push(['Item_BIZNO', 'no', '20', '0']); // 사업자 번호
+			settingForm.push(['Item_ADDR', 'no', '100', '0']); // 주소
+			settingForm.push(['Item_REPRESENTATIVE', 'no', '30', '0']); // 대표자 이름
+			settingForm.push(['Item_TELNO_REP', 'no', '20', '0']); // 대표자 전화번호
+			settingForm.push(['Item_EMAIL_REP', 'no', '50', '0']); // 대표자 E-MAIL
+			settingForm.push(['Item_HOMEPAGE', 'no', '100', '0']); // 홈페이지 URL
+			settingForm.push(['Item_API_KEY', 'no', '30', '0']); // API 연동 KEY
+
+		}
+
+
+		function formSetting() {
+
+			for (i = 0; i < settingForm.length; i++) {
+				tmp_id = settingForm[i][0];	//id
+				tmp_class = settingForm[i][1];	//class
+				tmp_maxLeng = settingForm[i][2]; //길이제한
+
+				if (tmp_class != 'no')
+					$('#' + tmp_id).addClass(tmp_class);
+
+				if (tmp_maxLeng != 'no')
+					$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+			}
+
+			$(".etoINt").attr("onkeyup", "if(this.value == ''){ this.value='0'; }else{  this.value=this.value.replace(/[^0-9]/g,'') * 1}");
+
+		}
+		function callSubmit() {
+
+			if ($("#Item_ESE_NAME").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_SenderName" + "]");
+				$("#Item_ESE_NAME").focus();
+				return false;
+			}
+
+			if ($("#Item_ZIPCODE").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_ZipCode" + "]");
+				$("#Item_ZIPCODE").focus();
+				return false;
+			}
+
+			if ($("#Item_BIZNO").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_BIZNO" + "]");
+				$("#Item_BIZNO").focus();
+				return false;
+			}
+
+			if ($("#Item_ADDR").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_ADDR" + "]");
+				$("#Item_ADDR").focus();
+				return false;
+			}
+
+			if ($("#Item_REPRESENTATIVE").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_REPRESENTATIVE" + "]");
+				$("#Item_REPRESENTATIVE").focus();
+				return false;
+			}
+
+			if ($("#Item_TELNO_REP").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_TELNO_REP" + "]");
+				$("#Item_TELNO_REP").focus();
+				return false;
+			}
+
+			if ($("#Item_EMAIL_REP").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_EMAIL_REP" + "]");
+				$("#Item_EMAIL_REP").focus();
+				return false;
+			}
+
+			if ($("#Item_HOMEPAGE").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_HOMEPAGE" + "]");
+				$("#Item_HOMEPAGE").focus();
+				return false;
+			}
+
+			if ($("#Item_API_KEY").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseInfo_API_KEY" + "]");
+				$("#Item_API_KEY").focus();
+				return false;
+			}
+
+			
+
+
+
+			$('#view_form').submit();
+		}
+
+
+    </script>
+
+
+	}
+

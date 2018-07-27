@@ -1,0 +1,99 @@
+﻿@model AccountLoginModel
+@{
+    @*ViewBag.PageId = "extr-page";*@
+    ViewBag.PageClass = "animated fadeInDown";
+}
+
+
+
+
+
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+            <div class="well no-padding">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "form1", @name = "form1", @class = "smart-form client-form", onsubmit = "return validation_check();" }))
+{
+                    <header>
+                        Sign In
+                    </header>
+                    @Html.HiddenFor(m => m.ReturnUrl)
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationBootstrap()
+                    <fieldset>
+                        <section>
+                            <label class="label">E-mail</label>
+                            <label class="input">
+                                <i class="icon-append fa fa-user"></i>
+                                @Html.TextBoxFor(m => m.Email)
+                                <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address/username</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="label">Password</label>
+                            <label class="input">
+                                <i class="icon-append fa fa-lock"></i>
+                                @Html.PasswordFor(m => m.Password)
+                                <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
+                            </label>
+                            <div class="note">
+                                <a href="@Url.Action("forgotpassword", "account")"><i class="fa fa-frown-o"></i> Forgot password?</a>
+                            </div>
+                        </section>
+
+                        <section>
+                            <label class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                <i></i>Stay signed in
+                            </label>
+                        </section>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" class="btn btn-primary">
+                            Sign in
+                        </button>
+                    </footer>
+}
+            </div>
+            @*{ Html.RenderPartial("_SocialMedia"); }*@
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(window).load(function () {
+        if (document.getElementById("Email").value.toString().length > 0) {
+            $("#Password").focus();
+        } else {
+            $("#Email").focus();
+        }
+    });
+
+    function validation_check() {
+        var email = document.getElementById('Email').value.trim();
+        if (email.length == 0) {
+            alert('이메일을 입력하세요.');
+            return false;
+        }
+        if (!validateEmail(email)) {
+            alert('이메일 주소가 유효하지 않습니다.');
+            return false;
+        }
+
+        var password = document.getElementById('Password').value.trim();
+        if (password.length == 0) {
+            alert('비밀번호를 입력하세요.');
+            return false;
+        }
+
+        //$('#loading').show();
+        //$("#form1").submit();
+        return true;
+    }
+
+    function validateEmail(email_addr) {
+        var re = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email_addr);
+    }
+</script>

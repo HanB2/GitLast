@@ -1,0 +1,178 @@
+﻿@model web_ese.Models_Act.Stoc.StocReqModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+<div id="content">
+
+	<div class="alert alert-block alert-success" style="max-width:1000px;">
+		<h4 class="alert-heading"><i class="fa fa-check-square-o"></i> @comm_global.Language.Resources.ESE_StocReqListView_StocReqApplication </h4>
+	</div>
+
+	
+	<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="max-width:1000px; margin:0px;">
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<h2>@comm_global.Language.Resources.ESE_StocReqListView_StocReqChooseProd</h2>
+		</header>
+		<div role="content">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th style="width:10%;">@comm_global.Language.Resources.ESE_Comm_Category</th>
+								<th style="width:15%;">@comm_global.Language.Resources.ESE_Comm_Barcord</th>
+								<th style="width:15%;">@comm_global.Language.Resources.ESE_ProdAdd_SKU</th>
+								<th>@comm_global.Language.Resources.ESE_Comm_PRODUCT_NAME</th>
+								<th style="width:15%;">@comm_global.Language.Resources.ESE_Comm_Brand</th>
+								<th style="width:8%;">@comm_global.Language.Resources.ESE_ProdList_Req</th>
+								<th style="width:8%;">@comm_global.Language.Resources.ESE_ProdList_RealWarehousing</th>
+								<th style="width:8%;">@comm_global.Language.Resources.ESE_Comm_Poor</th>
+							</tr>
+						</thead>
+						<tbody id="goodsRow">
+
+							@foreach (var item in Model.InItems)
+							{
+								<tr>
+									<td>의류</td> <!--추후 카테고리 작업-->
+									<td>@item.BARCODE</td>
+									<td>@item.SKU</td>
+									<td>@item.GOODS_NAME</td>
+									<td>@item.BRAND</td>
+									<td>@item.QTY</td>
+									<td>@item.REAL_CNT</td>
+									<td>@item.BAD_CNT</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+			<!-- end widget content -->
+
+		</div>
+		<!-- end widget div -->
+
+	</div>
+
+
+
+	@if (Model.Item.INPUT_STAT == 20)
+	{
+	<section id="widget-grid" class="" style="max-width:1000px; margin:0 0 30px;">
+		<div class="row">
+			<article class="col-sm-12">
+				<a class="btn btn-default" href="javascript:statChk();"><i class="fa fa-trash-o"></i> @comm_global.Language.Resources.ESE_StocReqListView_CargoCheckConfirm</a>
+			</article>
+		</div>
+	</section>
+	}else
+	{
+		<br/>
+	}
+
+
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_StocReq_StocReqInfo </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.act_key)
+
+								<fieldset>
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_WearhousingNation</label>
+										<label class="label col col-4">@Model.Item.NATIONNAME</label>
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_StocReqInfoStation</label>
+										<label class="label col col-4">@Model.Item.EST_NAME</label>
+									</div>
+
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_WearhousingMethod</label>
+										<label class="label col col-4">@Model.Item.INPUT_TYPE_TEXT</label>
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_STATUS</label>
+										<label class="label col col-4">@Model.Item.INPUT_STAT_TEXT</label>
+									</div>
+									
+									@if (Model.Item.INPUT_TYPE == 0)
+									{
+									<div class="row" id="etoDel">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_WearhousingDeliveryNum</label>
+										<label class="label col col-4">@Model.Item.INPUT_DELVNO</label>
+										<label class="label col col-6"></label>
+									</div>
+									}
+									else
+									{
+									<div class="row" id="etoSelf">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_INPUT_DELVNAME</label>
+										<label class="label col col-4">@Model.Item.INPUT_DELVNAME</label>
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_INPUT_DELVTELL</label>
+										<label class="label col col-4">@Model.Item.INPUT_DELVTELL</label>
+									</div>
+									}
+
+								</fieldset>
+								<fieldset>
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_SENDER_NAME</label>
+										<label class="label col col-4">@Model.Item.SENDER_NAME</label>
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_SENDER_TEL</label>
+										<label class="label col col-4">@Model.Item.SENDER_TEL</label>
+									</div>
+
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_SENDER_ADDR</label>
+										<label class="label col col-10">@Model.Item.SENDER_ADDR</label>
+									</div>
+
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_MEMO_ESE</label>
+										<label class="label col col-10">@Model.Item.MEMO_ESE</label>
+									</div>
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_MEMO_EST</label>
+										<label class="label col col-10">@Model.Item.MEMO_EST</label>
+									</div>
+								</fieldset>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+
+
+<script type="text/javascript">
+
+	function statChk() {
+		var msg = "@comm_global.Language.Resources.Script_FinishCargoCheckHandling";
+		if (confirm(msg)) {
+			$('#view_form').submit();
+		}
+	}
+
+</script>
+
+
+
+}

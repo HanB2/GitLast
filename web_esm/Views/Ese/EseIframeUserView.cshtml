@@ -1,0 +1,150 @@
+﻿@model web_esm.Models_Act.Ese.EseUserModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+<article class="col-sm-12 col-md-12 col-lg-6" style="height:600px; padding:0px;">
+
+	<!-- Widget ID (each widget will need unique ID)-->
+	<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+			<h2> 상세 정보 </h2>
+		</header>
+
+		<div role="content">
+			<!-- widget content -->
+			<div class="widget-body no-padding">
+
+				@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+				{
+					@Html.HiddenFor(model => model.act_type)
+					@Html.HiddenFor(model => model.act_key)
+					@Html.HiddenFor(model => model.Item.SEQNO)
+					@Html.HiddenFor(model => model.viewEseCode)
+
+					@Html.AntiForgeryToken()
+
+					<fieldset>
+						<!--계정 ID-->
+						<div class="row">
+							<label class="label col col-2">계정 ID</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.EMAIL)
+								</label>
+							</section>
+						</div>
+
+						<!--비밀번호-->
+						<div class="row">
+							<label class="label col col-2">비밀번호</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.PASSWD)
+								</label>
+							</section>
+						</div>
+
+						<!--그룹 ID-->
+						<div class="row">
+							<label class="label col col-2">그룹 ID</label>
+							<section class="col col-10">
+								<label class="select">
+									@Html.DropDownList("GroupId", new SelectList(Model.GroupIdArray, "opt_key", "opt_value", Model.Item.GROUP_ID)) <i></i>
+								</label>
+							</section>
+						</div>
+
+						<!--부서-->
+						<div class="row">
+							<label class="label col col-2">부서</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.DEPARTMENT)
+								</label>
+							</section>
+						</div>
+
+						<!--직급-->
+						<div class="row">
+							<label class="label col col-2">직급</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.POSITION)
+								</label>
+							</section>
+						</div>
+
+						<!--메모-->
+						<div class="row">
+							<label class="label col col-2">메모</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.MEMO)
+								</label>
+							</section>
+						</div>
+
+						<!--상태-->
+						<div class="row">
+							<label class="label col col-2">상태</label>
+							<section class="col col-10">
+								<div class="inline-group">
+									<label class="radio">
+										@Html.RadioButtonFor(m => m.RadioBoxPop, "true", new { id = "compatible" })
+										<i></i>@Html.Label("사용")
+									</label>
+									<label class="radio">
+										@Html.RadioButtonFor(m => m.RadioBoxPop, "false", new { id = "notcompatible" })
+										<i></i>@Html.Label("보류")
+									</label>
+								</div>
+							</section>
+						</div>
+
+						<!--사용자 이름-->
+						<div class="row">
+							<label class="label col col-2">사용자 이름</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.USERNAME)
+								</label>
+							</section>
+						</div>
+
+						<!--사용자 전화번호-->
+						<div class="row">
+							<label class="label col col-2">사용자 전화번호</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.TELNO)
+								</label>
+							</section>
+						</div>
+
+					</fieldset>
+
+				}
+			</div>
+		</div>
+	</div>
+</article>
+
+
+
+
+@section pagespecific {
+	<script type="text/javascript">
+	function formSubmit() {
+		$('#view_form').submit();
+	}
+
+	// 등록/수정
+	function act_ifarame() {
+		var ifra = document.getElementById('viewIframe').contentWindow;
+		ifra.formSubmit();
+	}
+	</script>
+}

@@ -1,0 +1,87 @@
+﻿
+@{
+	Layout = "~/Views/Shared/_LayoutLogin2.cshtml";
+}
+
+
+<div id="content" class="container" style="max-width:966px;">
+
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+			<h1 class="page-title txt-color-blueDark">
+				<i class="fa-fw fa fa-pencil-square-o"></i>
+				ETOMARS
+				<span>
+					> 비밀번호 찾기
+				</span>
+			</h1>
+		</div>
+	</div>
+
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2>안내문구 </h2>
+					</header>
+					<div role="content"  style="height:256px;">
+						<div class="widget-body no-padding">
+									비밀번호 찾기 성공 시 초기화된 비밀번호가 <br />
+									E-Mail로 전송됩니다.
+						</div>
+					</div>
+				</div>
+			</article>
+
+				<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+					<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+						<header role="heading">
+							<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+							<h2>필수 입력 항목 </h2>
+						</header>
+						<div role="content"  >
+							<div class="widget-body no-padding">
+								<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+									<fieldset>
+										<div class="row">
+											<label class="label col col-3">*E-mail</label>
+											<section class="col col-9">
+												<label for="address2" class="input">
+													<input type="text" name="address2" id="address2" placeholder="">
+												</label>
+											</section>
+										</div>
+									</fieldset>
+
+									<fieldset>
+										<div class="row">
+											<section class="col col-12">
+												<div class="note">
+													회원가입시 등록한 고객명과 이메일을 입력해 주세요.
+												</div>
+											</section>
+										</div>
+									</fieldset>
+
+									<footer>
+										<button type="submit" class="btn btn-primary">
+											비밀번호 초기화
+										</button>
+									</footer>
+
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</article>
+		</div>
+	</section>
+
+
+</div>
+<!-- END MAIN CONTENT -->

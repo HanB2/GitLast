@@ -1,0 +1,93 @@
+﻿@model web_esm.Models_Act.Base.BaseLocalModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+			<article class="col-sm-12 col-md-12 col-lg-12" style="height:400px; padding:0px;">
+				<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>현지 배송업체 추가 / 수정 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null,null,FormMethod.Post, new { @id = "view_form", @class = "smart-form" })) {
+							   @Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.Item.SEQNO)
+								@Html.AntiForgeryToken()
+
+								<fieldset>
+									<!--국가명-->
+									<div class="row">
+										<label class="label col col-2">국가명</label>
+										<section class="col col-10">
+											<label class="select">
+												@Html.DropDownList("schType", new SelectList(Model.nationArray, "opt_key", "opt_value", Model.Item.NATION_CODE), "선택", new { onchange = "setNATIONCODE(this.value)" }) <i></i>
+												@Html.ValidationMessageFor(model => model.Item.NATION_CODE)
+											</label>
+										</section>
+									</div>
+									<!--배송회사명-->
+									<div class="row">
+										<label class="label col col-2">배송회사명</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.NAME, new { @id = "NAME" })
+												@Html.ValidationMessageFor(model => model.Item.NAME)
+											</label>
+										</section>
+									</div>
+									<!--사이트 URL-->
+									<div class="row">
+										<label class="label col col-2">사이트 URL</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.HOMEPAGE, new { @id = "HOMEPAGE" })
+											</label>
+										</section>
+									</div>
+									<!--배송회사 ID-->
+									<div class="row">
+										<label class="label col col-2">배송회사 ID</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.COM_ID, new { @id = "COM_ID" })
+											</label>
+										</section>
+									</div>
+									<!--메모-->
+									<div class="row">
+										<label class="label col col-2">메모</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.MEMO, new { @id = "MEMO" })
+											</label>
+										</section>
+									</div>
+
+								</fieldset>
+
+								}
+
+						</div>
+					</div>
+				</div>
+			</article>
+	
+
+@section pagespecific {
+	<script type="text/javascript">
+				function formSubmit() {
+					$('#view_form').submit();
+				}
+				function setNATIONCODE(code) {
+					//alert(tmp.text);
+					$("#NATION_CODE").val(code);
+					//$("#nation_name_tmp").val(name);
+				}
+
+	</script>
+
+}

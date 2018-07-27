@@ -1,0 +1,17 @@
+﻿<!-- RIBBON -->
+<div id="ribbon">
+	<ol class="breadcrumb">
+		<li>@ViewBag.NaviMainString</li>
+		@if (ViewBag.NaviSubString != "")
+		{
+			<li>@ViewBag.NaviSubString</li>
+		}
+	</ol>
+
+	<ol style="float:right;color: #bbb!important;padding: 11px 34px 11px 0!important;">
+		<li style="display: inline-block;">MAR :</li>
+		<li style="display: inline-block; color: #e4e4e4;">@ViewBag.MyMar</li>
+		
+	</ol>
+</div>
+<!-- END RIBBON -->

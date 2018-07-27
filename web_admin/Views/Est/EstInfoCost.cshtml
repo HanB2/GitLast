@@ -1,0 +1,210 @@
+﻿
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+			<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+				<header role="heading">
+					<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+					<h2>국가별 요율표 조회 </h2>
+				</header>
+				<div role="content">
+					<div class="widget-body no-padding">
+						<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+							<fieldset>
+
+								<div class="row">
+
+									<section class="col col-4">
+										<label>도착국가</label>
+										<label class="select">
+											<select name="country">
+												<option value="0" selected="" disabled="">대한민국</option>
+											</select> <i></i>
+										</label>
+									</section>
+									<section class="col col-4">
+										<label>출고타입</label>
+										<label class="select">
+											<select name="country">
+												<option value="0" selected="" disabled="">중국 배송 A</option>
+											</select> <i></i>
+										</label>
+									</section>
+								</div>
+
+							</fieldset>
+
+							<footer>
+								<button type="submit" class="btn btn-primary">
+									배송 요금표 조회
+								</button>
+							</footer>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</article>
+	</div>
+</section>
+
+
+
+
+<section id="widget-grid" class="" style="width:1000px;">
+	<div class="row">
+		<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+			<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+				<header role="heading">
+					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+					<h2> 출고타입 정보 </h2>
+				</header>
+				<div role="content">
+					<div class="widget-body no-padding">
+						<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+							<fieldset>
+								<div class="row">
+									<label class="label col col-3">국가</label>
+									<label class="label col col-9">대한민국</label>
+								</div>
+
+								<div class="row">
+									<label class="label col col-3">출고타입</label>
+									<label class="label col col-9">중국배송 A</label>
+								</div>
+
+								<div class="row">
+									<label class="label col col-3">출고타입 코드</label>
+									<label class="label col col-9">CN_TYPE_A</label>
+								</div>
+
+								<div class="row">
+									<label class="label col col-3">출고타입 설명</label>
+									<label class="label col col-9">중국배송 기본 타입 설명</label>
+								</div>
+
+								<div class="row">
+									<label class="label col col-3">출고타입 기호</label>
+									<label class="label col col-9">A</label>
+								</div>
+
+								<div class="row">
+									<label class="label col col-3">사용 여부</label>
+									<label class="label col col-9">사용</label>
+								</div>
+
+								<div class="row">
+									<label class="label col col-3">등록일자</label>
+									<label class="label col col-9">2018-03-30 00:00:00</label>
+								</div>
+
+								<div class="row">
+									<label class="label col col-3">수정일자</label>
+									<label class="label col col-9">2018-03-30 00:00:00</label>
+								</div>
+							</fieldset>
+
+							<fieldset>
+								<div class="input input-file">
+									<span class="button"><input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</span><input type="text" placeholder="Include some files" readonly="">
+								</div>
+
+								<a class="btn btn-primary" href="javascript:void(0);" style="padding:5px 22px; "> 요금표 엑셀 다운로드</a>
+								<a class="btn btn-primary" href="javascript:void(0);" style="padding:5px 22px; float:right; "> 요금표 엑셀 업로드</a>
+								<br /><br /><br />
+							</fieldset>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</article>
+
+
+
+		<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+			<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+				<header role="heading">
+					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+					<h2> 출고타입 요금 정보 </h2>
+				</header>
+				<div role="content">
+
+
+					<section id="widget-grid" class="">
+						<div class="row">
+							<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+								<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+									<header role="heading">
+										<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+										<h2>무게별 요금</h2>
+										<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+									</header>
+
+									<div role="content">
+										<div class="widget-body no-padding">
+
+
+											<div class="table-responsive">
+
+												<table class="table table-bordered table-striped">
+													<thead>
+														<tr>
+															<th style="width:40%;">무게(KG)</th>
+															<th style="width:60%;">요금(MAR)</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>	<td>0.1</td>	<td>1.0</td>	</tr>
+														<tr>	<td>0.2</td>	<td>1.1</td>	</tr>
+														<tr>	<td>0.3</td>	<td>1.2</td>	</tr>
+														<tr>	<td>0.4</td>	<td>1.3</td>	</tr>
+														<tr>	<td>0.5</td>	<td>1.4</td>	</tr>
+														<tr>	<td>0.6</td>	<td>1.5</td>	</tr>
+														<tr>	<td>0.7</td>	<td>1.6</td>	</tr>
+														<tr>	<td>0.8</td>	<td>1.7</td>	</tr>
+														<tr>	<td>0.9</td>	<td>1.8</td>	</tr>
+														<tr>	<td>1.0</td>	<td>1.9</td>	</tr>
+														<tr>	<td>1.25</td>	<td>2.1</td>	</tr>
+														<tr>	<td>1.50</td>	<td>2.2</td>	</tr>
+														<tr>	<td>1.75</td>	<td>2.3</td>	</tr>
+														<tr>	<td>2.0</td>	<td>2.4</td>	</tr>
+														<tr>	<td>2.5</td>	<td>2.5</td>	</tr>
+														<tr>	<td>3.0</td>	<td>2.6</td>	</tr>
+														<tr>	<td>...</td>	<td>2.7</td>	</tr>
+														<tr>	<td>...</td>	<td>2.8</td>	</tr>
+														<tr>	<td>...</td>	<td>2.9</td>	</tr>
+														<tr>	<td>...</td>	<td>2.10</td>	</tr>
+														<tr>	<td>...</td>	<td>2.11</td>	</tr>
+														<tr>	<td>...</td>	<td>2.12</td>	</tr>
+														<tr>	<td>...</td>	<td>2.13</td>	</tr>
+														<tr>	<td>...</td>	<td>2.14</td>	</tr>
+														<tr>	<td>...</td>	<td>2.15</td>	</tr>
+														<tr>	<td>...</td>	<td>2.16</td>	</tr>
+														<tr>	<td>...</td>	<td>2.17</td>	</tr>
+														<tr>	<td>...</td>	<td>2.18</td>	</tr>
+														<tr>	<td>...</td>	<td>2.19</td>	</tr>
+														<tr>	<td>...</td>	<td>2.20</td>	</tr>
+														<tr>	<td>...</td>	<td>2.21</td>	</tr>
+
+													</tbody>
+												</table>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</article>
+						</div>
+					</section>
+
+
+				</div>
+			</div>
+		</article>
+
+	</div>
+</section>

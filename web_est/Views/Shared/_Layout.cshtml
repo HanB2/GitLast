@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html id="@ViewBag.PageId" class="@Settings.CurrentTheme">
+<head>
+    <title> ETOMARS STATION </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    @Styles.Render("~/content/web_est")
+
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="~/content/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/content/img/favicon/favicon.ico" type="image/x-icon">
+
+    <!-- GOOGLE FONT -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+    <!-- AWESOME FONT -->
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> -->
+</head>
+
+@{ Html.RenderPartial("_Loading"); }
+
+<body class="@ViewBag.PageClass @Settings.CurrentTheme">
+    @{ Html.RenderPartial("_Header"); }
+    @{ Html.RenderPartialIf("_Aside", Request.IsAuthenticated); }
+    @{ Html.RenderPartial("_Scripts"); }
+    <div id="main" role="main">
+        @RenderBody()
+    </div>
+    @{ Html.RenderPartialIf("_Footer", Request.IsAuthenticated); }
+    @*{ Html.RenderPartial("_Scripts"); }*@
+</body>
+
+</html>

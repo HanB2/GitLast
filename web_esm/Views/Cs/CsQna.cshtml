@@ -1,0 +1,290 @@
+﻿@model web_esm.Models_Act.Cs.CsQnaModels
+<div id="content">
+
+
+	<!--조회-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>조회 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using(Html.BeginForm(null,null,FormMethod.Post, new { @id = "listForm", @name = "listForm", @class= "smart-form " })) {
+								<fieldset>
+									@Html.HiddenFor(model => model.act_type)
+									@Html.HiddenFor(model => model.act_key)
+									@Html.HiddenFor(model => model.sortKey)
+									@Html.HiddenFor(model => model.Paging.page)
+									@Html.HiddenFor(model => model.Paging.pageNum)
+									@Html.HiddenFor(model => model.Paging.pageTotNum)
+
+									<!--문의유형-->
+									<div class="row">
+
+										<label class="label col col-1">문의유형</label>
+										<section class="col col-3">
+											<label class="select">
+												@Html.DropDownList("schType", new SelectList(Model.schTypeArray, "opt_value", "opt_key"), "전체") <i></i>
+											</label>
+										</section>
+										<label class="label col col-1">분류</label>
+										<section class="col col-3">
+											<label class="select"> <!--일단은 보류-->
+												@Html.DropDownList("schType", new SelectList(Model.clafictArray, "opt_value", "opt_key"), "전체") <i></i>
+											</label>
+										</section>
+										<label class="label col col-1">상태</label>
+										<section class="col col-3"> <!--일단은 보류-->
+											<label class="select">
+												@Html.DropDownList("schType", new SelectList(Model.statusArray, "opt_value", "opt_key"), "전체") <i></i>
+											</label>
+										</section>
+
+									</div>
+									<!--검색조건-->
+									<div class="row">
+										<label class="label col col-1">검색조건</label>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("schTypeTxt", new SelectList(Model.schTypeTxtArray, "opt_value", "opt_key"), "선택")  <i></i>
+											</label>
+										</section>
+										<section class="col col-9">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.schTxt, new { placeholder = "검색어" })
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<label class="label col col-1">등록일자</label>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schSdt, new { @id = "schSdt", @placeholder = "Expected start date" })
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schEdt, new { @id = "schEdt", @placeholder = "Expected end date" })
+											</label>
+										</section>
+
+										<label class="label col col-2">&nbsp;</label>
+
+										<label class="label col col-1">처리일자</label>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schSdt, new { @id = "schSdt", @placeholder = "Expected start date" })
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schEdt, new { @id = "schEdt", @placeholder = "Expected end date" })
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer>
+									<button type="submit" class="btn btn-primary" onclick="javascript: searchAll();">
+										전체 조회
+									</button>
+
+									<button type="submit" class="btn btn-primary" onclick="javascript: searchAct();">
+										조회
+									</button>
+								</footer>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--정렬부분-->
+	<div class="row">
+		<article class="col-sm-12">
+			<label style="float:right;" class="select">
+				@Html.DropDownList("pageNum", new SelectList(Model.pageNumArray, "opt_key", "opt_value", Model.Paging.pageNum), new { onchange = "javascript:setPageNum(this.value)" }) <i></i>
+			</label>
+			<label style="float:right;" class="select">
+				@Html.DropDownList("sortKey", new SelectList(Model.sortKeyArray, "opt_key", "opt_value", Model.sortKey), new { onchange = "javascript:sortKey(this.value)" }) <i></i>
+			</label>
+			<label style="float:right;">정렬</label>
+
+		</article>
+	</div>
+	<!--문의사항 조회 결과-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>문의사항 조회 결과</h2>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:5%;">번호</th>
+											<th style="width:6%;"></th>
+											<th style="width:8%;">문의유형</th>
+											<th style="width:6%;">분류</th>
+											<th style="width:auto;">제목</th>
+											<th style="width:8%;">상태</th>
+											<th style="width:12%;">문의일자</th>
+											<th style="width:12%;">답변일자</th>
+											<th style="width:12%;">작성자</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model.Items)
+										{
+											<tr>
+												<td>@item.SEQNO</td><!--번호-->
+												<td>
+													<a onclick="javascript:callEdit('@item.SEQNO');" href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+														<i class="fa fa-edit"></i>
+													</a>						
+												</td>
+
+												<td>@item.QNA_TYPE_txt</td><!--문의유형-->
+												<td>Station</td><!--스테이션-->
+												<td>@item.TITLE</td><!--제목-->
+												<td>Status</td><!--아직 추가 안했음 상태-->
+												<td>@item.REGDATE</td><!--문의일자-->
+												<td>@item.ANSWER_DATE</td><!--답변일자-->
+												<td>@item.WRITER_NAME</td><!--작성자-->
+											</tr>
+										}
+	
+
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				@Html.Raw(ViewData["pageing"])
+			</article>
+		</div>
+	</section>
+
+
+
+</div>
+
+<!--문의사항 조회결과 상세-->
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">문의사항 내용</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<iframe width="100%" height="460px;" scrolling="no" frameborder="0" id="viewIframe" src=""></iframe>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					닫기
+				</button>
+				<button onclick="javascript:act_ifarame();" id="modal_act" type="button" class="btn btn-default">
+					등록
+				</button>
+			</div>
+		
+	</div>
+</div>
+
+	</div>
+
+@section pagespecific {
+
+	<script type="text/javascript">
+
+
+
+		
+		// 정렬 페이지 수 기준
+		function setPageNum(val) {
+			$('#Paging_page').val('1');
+			$('#Paging_pageNum').val(val);
+			$('#listForm').submit();
+		}
+
+		//정렬 항목 기준 
+		function sortKey(val) {
+			$('#Paging_page').val('1');
+			$('#sortKey').val(val);
+			$('#listForm').submit();
+		}
+
+
+		//데이터 피커 생성자
+		$(function() {
+    		$("#schSdt, #schEdt").datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+		});
+
+		//조회
+		function searchAct() {
+			$("#Paging_page").val('1');
+			$("#listForm").submit();
+		}
+
+		//전체조회
+		function searchAll() {
+			$("#schType").val('');
+			$("#schSdt").val('');
+			$("#schEdt").val('');
+			$("#schTypeTxt").val('');
+			$("#schTxt").val('');
+			$("#Paging_page").val('1');
+
+			$("#listForm").submit();
+		}
+		//수정 팝업창 호출
+		function callEdit(seqno) {
+			$("#modal_act").html('수정');
+			$('#viewIframe').attr('src', '/Cs/CsQnaView?seqNo=' + seqno);
+		}
+
+		// 등록/수정
+		function act_ifarame() {
+			var ifra = document.getElementById('viewIframe').contentWindow;
+			ifra.formSubmit();
+		}
+
+		//페이징 공통 함수
+		function movPage(page) {
+			$('#page').val(page);
+			$('#listForm').submit();
+		}
+	</script>
+
+}

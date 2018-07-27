@@ -1,0 +1,272 @@
+﻿
+<div id="content">
+
+
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>조회 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<fieldset>
+
+									<div class="row">
+										<label class="label col col-1">국가</label>
+										<section class="col col-3">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">대한민국</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<label class="label col col-1">SATION</label>
+										<section class="col col-4">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">ch001-상호명</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<label class="label col col-1">상태</label>
+										<section class="col col-2">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">접수</option>
+													<option value="0" selected="" disabled="">검수필요</option>
+													<option value="0" selected="" disabled="">입고</option>
+												</select> <i></i>
+											</label>
+										</section>
+									</div>
+<pre>
+국가 콤보박스 - 소속 STATION 국가 디폴트 추가된 STATION 있을경우 해당 국가 항목만 추가
+STATION - 소속 STATION 디폴트 표기 값 : CH001-상호명
+</pre>
+
+									<div class="row">
+										<label class="label col col-1">검색조건</label>
+										<section class="col col-2">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">대표상품명</option>
+													<option value="0" selected="" disabled="">바코드</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<section class="col col-9">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="검색어">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+
+										<label class="label col col-1">브랜드</label>
+										<section class="col col-6">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="검색어">
+											</label>
+										</section>
+
+										<label class="label col col-1">등록일자</label>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												<input type="text" name="startdate" id="startdate" placeholder="Expected start date" class="hasDatepicker">
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												<input type="text" name="startdate" id="startdate" placeholder="Expected start date" class="hasDatepicker">
+											</label>
+										</section>
+
+									</div>
+
+								</fieldset>
+
+								<footer>
+									<button type="submit" class="btn btn-primary">
+										전체 조회
+									</button>
+
+									<button type="submit" class="btn btn-primary">
+										조회
+									</button>
+								</footer>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<div class="row">
+		<article class="col-sm-12">
+
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-file-text"></i> 선택 취소</a>
+
+			<label style="float:right;" class="select">
+				<select name="country">
+					<option value="0" selected="" disabled="">100개보기</option>
+				</select> <i></i>
+			</label>
+			<label style="float:right;" class="select">
+				<select name="country">
+					<option value="0" selected="" disabled="">대표상품명</option>
+				</select> <i></i>
+			</label>
+			<label style="float:right;">정렬</label>
+
+		</article>
+	</div>
+
+
+
+
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>보관신청현황 조회 결과</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+
+					</header>
+
+<pre>
+*리스트에 메모 항목은 센더가 작성한 항목으로 삭제 하는 방안 건의
+
+*취소 - 상태 접수 상태에서만 가능 이미 배송중인 건에 관한 내용은 로컬로 처리
+*상태가 입고 가 아닌경우 처리 로직
+	- 창고에서 수량 확인 후 입출고 내역 작성 후 상태 변경 (입고 수향 반영 안됨)
+	- 고객 확인 : 신청서에 창고가 입력한 메모 확인 또는 로컬 확인 후 신청서 상세보기에서 검수 확인 버튼 클릭 
+	- 고객 확인 시 : 입고 수량 반영
+
+변동 사항
+	- 수정 버튼 클릭 시 등록 페이지로 이동
+	- 상세 페이지 구조 변경 : 창고 검수 내용 표기 와 확인 버튼 추가 
+</pre>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+
+
+							<div class="table-responsive">
+
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:2%;" rowspan="2"></th>
+											<th style="width:5%;" rowspan="2">번호</th>
+											<th style="width:6%;" rowspan="2"></th>
+											<th style="width:8%;">국가</th>
+											<th style="width:12%;">STATION</th>
+											<th style="width:4%;">박스</th>
+											<th style="width:4%;">상품</th>
+											<th style="width:6%;">입고상태</th>
+											<th style="width:4%;">검수</th>
+											<th style="width:12%;">요청일자</th>
+											<th style="width:12%;">입고일자</th>
+											<th style="width:12%;">검수일자</th>
+										</tr>
+										<tr>
+											<th colspan="20" style="width:auto;">STATION 메모</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td rowspan="2">
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td rowspan="2">1</td>
+											<td rowspan="2">
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i> 
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i> 
+												</a>
+											</td>
+											<td>대한민국</td>
+											<td>서울지점</td>
+											<td>3</td>
+											<td>40</td>
+											<td>검수요청</td>
+											<td>OK</td>
+											<td>-</td>
+											<td>2018-03-30 11:23:23</td>
+											<td>2018-03-30 11:23:23</td>
+											<td>2018-04-30 11:23:23</td>
+										</tr>
+										<tr>
+											<td colspan="20">깨지기 쉬운 상품이므로 취급에 주의해 주시기 바랍니다.</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<ul class="pagination pagination-lg">
+						<li>
+							<a href="javascript:void(0);"><i class="fa fa-chevron-left"></i></a>
+						</li>
+						<li class="active">
+							<a href="javascript:void(0);">1</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">2</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">3</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">4</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">5</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);"><i class="fa fa-chevron-right"></i></a>
+						</li>
+					</ul>
+				</div>
+
+			</article>
+		</div>
+	</section>
+
+
+
+</div>
+
+
+
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:900px;">
+		<div class="modal-content" >
+
+
+				@Html.Partial("StcReqInfo")
+			
+
+
+		</div>
+	</div>
+</div>

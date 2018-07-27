@@ -1,0 +1,266 @@
+﻿@model web_ese.Models_Act.Cs.CsQnaModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+<!--문의사항 조회 결과 상세-->
+@if (@Model.act_type == "ins")
+{
+
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_ProdAdd_RequiredField </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.Item.QNA_TYPE)
+								@Html.HiddenFor(model => model.Item.SEQNO)
+								@Html.AntiForgeryToken()
+								<fieldset>
+
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_CsQna_SelectQnaType </label>
+										<section class="col col-10">
+											<label class="select">
+												@Html.DropDownList("schType", new SelectList(Model.schTypeArray, "opt_value", "opt_key"), "선택")<i></i>
+												@Html.ValidationMessageFor(model => model.Item.QNA_TYPE)
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_Title</label>
+										<section class="col col-10">
+											<label for="TITLE" class="input">
+												@Html.TextBoxFor(model => model.Item.TITLE, new { maxlength = 50 })
+												@Html.ValidationMessageFor(model => model.Item.TITLE)
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-12">@comm_global.Language.Resources.ESE_CsQna_QnaTypeContent</label>
+									</div>
+									<div class="row">
+										<section class="col col-12">
+												@Html.TextAreaFor(model => model.Item.QUESTION, new { @class = "QuestionContent", @cols = "100", @ROWS = "8" })
+										</section>
+									</div>
+								</fieldset>
+
+							}
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+
+	
+
+
+}
+@if (@Model.act_type == "updt")
+{
+
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_ProdAdd_RequiredField </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.Item.QNA_TYPE)
+								@Html.HiddenFor(model => model.Item.SEQNO)
+								@Html.AntiForgeryToken()
+								<fieldset>
+
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_CsQna_SelectQnaType </label>
+										<section class="col col-10">
+											<label class="select">
+												@Html.DropDownList("schType", new SelectList(Model.schTypeArray, "opt_value", "opt_key", Model.Item.QNA_TYPE))<i></i>
+												@Html.ValidationMessageFor(model => model.Item.QNA_TYPE)
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_Title</label>
+										<section class="col col-10">
+											<label for="TITLE" class="input">
+												@Html.TextBoxFor(model => model.Item.TITLE, new { maxlength = 50 })
+												@Html.ValidationMessageFor(model => model.Item.TITLE)
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-12">@comm_global.Language.Resources.ESE_CsQna_QnaTypeContent</label>
+									</div>
+									<div class="row">
+										<section class="col col-12">
+											@Html.TextAreaFor(model => model.Item.QUESTION, new { @class = "QuestionContent", @cols = "100", @ROWS = "8" })
+										</section>
+									</div>
+								</fieldset>
+
+							}
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+
+
+
+
+}
+@if (@Model.act_type == "view")
+{
+
+
+	<article class="col-sm-12 col-md-12 col-lg-6" style="height:400px; padding:0px;">
+		<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+
+			<header role="heading">
+				<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+				<h2> [@Model.Item.QNA_TYPE_txt] &nbsp;&nbsp; @Model.Item.TITLE </h2>
+				<div class="widget-toolbar" id="switch-1" role="menu">
+					<span class="">@comm_global.Language.Resources.ESE_CsQna_QnaDate : @Model.Item.REGDATE</span>
+				</div>
+			</header>
+			<div role="content" style="min-height: 360px;">
+				<div class="widget-body">
+					@Model.Item.QUESTION
+				</div>
+				<!-- end widget content -->
+
+			</div>
+
+		</div>
+	</article>
+
+	<!--답변-->
+	<article class="col-sm-12 col-md-12 col-lg-6" style="height:400px; padding:0px;">
+		<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+
+			<header role="heading">
+				<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+				@if (@Model.Item.WRITER_NAME == "")
+				{
+					<h2> @comm_global.Language.Resources.ESE_CsQna_WriterName : @Model.Item.WRITER_NAME </h2>
+					<div class="widget-toolbar" id="switch-1" role="menu">
+						<span class="">@comm_global.Language.Resources.ESE_CsQna_AnswerDate : @Model.Item.ANSWER_DATE</span>
+					</div>
+				}
+				else
+				{
+
+					<h2> @comm_global.Language.Resources.ESE_CsQnaView_AnswerTitle</h2>
+				}
+
+			</header>
+			<div role="content" style="min-height: 360px;">
+				<div class="widget-body">
+
+					<p>@Model.Item.ANSWER</p>
+				</div>
+				<!-- end widget content -->
+
+			</div>
+
+		</div>
+	</article>
+	
+}
+
+
+
+@section pagespecific {
+	<script type="text/javascript">
+
+		var settingForm = [];
+
+		$(document).ready(function () {
+			formSettingValue();
+			formSetting();
+		});
+
+
+		function formSettingValue() {
+			//id		클래스		길이		콤보박스
+
+			settingForm.push(['Item_TITLE', 'TITLE', '100', '0']); //제목
+			settingForm.push(['Item_QUESTION', 'QuestionContent', '65535', '0']); // 내용
+
+		}
+
+		function formSetting() {
+
+			for (i = 0; i < settingForm.length; i++) {
+				tmp_id = settingForm[i][0];	//id
+				tmp_class = settingForm[i][1];	//class
+				tmp_maxLeng = settingForm[i][2]; //길이제한 max
+
+
+				if (tmp_class != 'no')
+					$('#' + tmp_id).addClass(tmp_class);
+
+				if (tmp_maxLeng != 'no')
+					$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+			}
+
+
+		}
+
+		// 등록/수정
+		function act_ifarame() {
+			var ifra = document.getElementById('viewIframe').contentWindow;
+			ifra.formSubmit();
+		}
+
+		function formSubmit() {
+
+
+			if ($("#schType").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_PleaseBdQnaSelect" + "]");
+				$("#schType").focus();
+				return false;
+			}
+
+			if ($("#Item_TITLE").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_PleaseTitleInput" + "]");
+				$("#Item_TITLE").focus();
+				return false;
+			}
+
+			if ($("#Item_QUESTION").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_OneByOneQnaContents" + "]");
+				$("#Item_QUESTION").focus();
+				return false;
+			}
+
+			$('#view_form').submit();
+		}
+	</script>
+}

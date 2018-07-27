@@ -1,0 +1,26 @@
+﻿<!-- HEADER -->
+<header id="header">
+    <div id="logo-group">
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo"> <img src="~/content/img/etomars_header_logo.png" alt="ETOMARS" title="ETOMARS" style="width:150px;"> </span>
+        <!-- END LOGO PLACEHOLDER -->
+    </div>
+
+    <div>
+    @if (Request.IsAuthenticated)
+    {
+        <h2 style="margin-top:0px; padding-top:8px;"><b>@Session["ESTNAME"]</b></h2>
+    }
+    else
+    {
+        <h1 style="padding-top:2px;"><b>STATION</b></h1>
+    }
+    </div>
+
+    <section id="top-right">
+        <div class="pull-right">
+            @Html.Partial("_TopRight")
+        </div>
+    </section>
+</header>
+<!-- END HEADER -->

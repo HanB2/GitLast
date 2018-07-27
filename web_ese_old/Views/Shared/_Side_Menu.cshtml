@@ -1,0 +1,183 @@
+﻿
+<!-- User info start-->
+<div class="login-info">
+	<span>
+		<!-- User image size is adjusted inside CSS, it should stay as it -->
+
+		<a href="javascript:void(0);">
+			<img src="~/img/favicon/etomars_favicon.ico" alt="me" class="online" >
+			<span>
+				계정 : lakantoq@naver.com
+			</span>
+		</a>
+
+	</span>
+</div>
+
+<nav>
+    <ul>
+		<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+			<a href="@Url.Content("~/Home/Index")" title="메인">
+				<i class="fa fa-lg fa-fw fa-home"></i>
+				<span class="menu-item-parent">메인</span>
+			</a>
+		</li>
+
+        <li class="">
+            <a href="#" title="보관상품">
+                <i class="fa fa-lg fa-fw fa-cube"></i>
+                <span class="menu-item-parent">상품관리</span>
+            </a>
+            <ul>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "StcProdAdd" ? "active" : "")">
+					<a href="@Url.Content("~/StcProd/StcProdAdd")" title="Dashboard"><span class="menu-item-parent">상품등록</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "StcProdList" ? "active" : "")">
+					<a href="@Url.Content("~/StcProd/StcProdList")" title="Dashboard"><span class="menu-item-parent">등록상품조회</span></a>
+				</li>
+            </ul>
+        </li>
+		
+        <li class="">
+            <a href="#" title="보관신청">
+                <i class="fa fa-lg fa-fw fa-cubes"></i>
+                <span class="menu-item-parent">보관관리</span>
+            </a>
+            <ul>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "StcReqAdd" ? "active" : "")">
+                    <a href="@Url.Content("~/StcReq/StcReqAdd")" title="Dashboard"><span class="menu-item-parent">보관신청</span></a>
+                </li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "StcReqList" ? "active" : "")">
+					<a href="@Url.Content("~/StcReq/StcReqList")" title="Dashboard"><span class="menu-item-parent">보관신청 현황 조회</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "StcReqStcList" ? "active" : "")">
+					<a href="@Url.Content("~/StcReq/StcReqStcList")" title="Dashboard"><span class="menu-item-parent">재고조회</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "StcInOut" ? "active" : "")">
+					<a href="@Url.Content("~/StcReq/StcInOut")" title="Dashboard"><span class="menu-item-parent">입출고 내역 조회</span></a>
+				</li>
+            </ul>
+        </li>
+
+		<li class="">
+			<a href="#" title="픽업신청">
+				<i class="fa fa-lg fa-fw fa-truck"></i>
+				<span class="menu-item-parent">픽업신청</span>
+			</a>
+			<ul>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "PicReqAdd" ? "active" : "")">
+					<a href="@Url.Content("~/PicReq/PicReqAdd")" title="Dashboard"><span class="menu-item-parent">픽업신청</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "PicReqList" ? "active" : "")">
+					<a href="@Url.Content("~/PicReq/PicReqList")" title="Dashboard"><span class="menu-item-parent">픽업신청 조회</span></a>
+				</li>
+			</ul>
+		</li>
+
+		<li class="">
+			<a href="#" title="배송">
+				<i class="fa fa-lg fa-fw fa-envelope"></i>
+				<span class="menu-item-parent">배송</span>
+			</a>
+			<ul>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EtsReqStcadd" ? "active" : "")">
+					<a href="@Url.Content("~/EtsReq/EtsReqStcadd")" title="Dashboard"><span class="menu-item-parent">보관상품 배송신청</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EtsReqChnadd" ? "active" : "")">
+					<a href="@Url.Content("~/EtsReq/EtsReqChnadd")" title="Dashboard"><span class="menu-item-parent">중국 배송신청</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EtsReqEtcadd" ? "active" : "")">
+					<a href="@Url.Content("~/EtsReq/EtsReqEtcadd")" title="Dashboard"><span class="menu-item-parent">일반 배송신청</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EtsSchLabel" ? "active" : "")">
+					<a href="@Url.Content("~/EtsSch/EtsSchLabel")" title="Dashboard"><span class="menu-item-parent">배송라벨출력</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EtsSchStat" ? "active" : "")">
+					<a href="@Url.Content("~/EtsSch/EtsSchStat")" title="Dashboard"><span class="menu-item-parent">배송상태조회</span></a>
+				</li>
+			</ul>
+		</li>
+
+		<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EtsCost" ? "active" : "")">
+			<a href="@Url.Content("~/EtsCost/EtsCost")" title="배송요금">
+				<i class="fa fa-lg fa-fw fa-usd"></i>
+				<span class="menu-item-parent">배송요금</span>
+			</a>
+		</li>
+
+		<li class="">
+			<a href="#" title="계정정보">
+				<i class="fa fa-lg fa-fw fa-user"></i>
+				<span class="menu-item-parent">계정정보</span>
+			</a>
+			<ul>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EseInfo" ? "active" : "")">
+					<a href="@Url.Content("~/EseInfo/EseInfo")" title="Dashboard"><span class="menu-item-parent">ESE 정보</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EseInfoAccount" ? "active" : "")">
+					<a href="@Url.Content("~/EseInfo/EseInfoAccount")" title="Dashboard"><span class="menu-item-parent">ESE 계좌정보</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EseInfoMy" ? "active" : "")">
+					<a href="@Url.Content("~/EseInfo/EseInfoMy")" title="Dashboard"><span class="menu-item-parent">ESE 계정정보</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "EseInfoManage" ? "active" : "")">
+					<a href="@Url.Content("~/EseInfo/EseInfoManage")" title="Dashboard"><span class="menu-item-parent">ESE 계정관리</span></a>
+				</li>
+			</ul>
+		</li>
+
+		<li class="">
+			<a href="#" title="MAR">
+				<i class="fa fa-lg fa-fw fa-maxcdn"></i>
+				<span class="menu-item-parent">MAR</span>
+			</a>
+			<ul>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "MarChargepg" ? "active" : "")">
+					<a href="@Url.Content("~/Mar/MarChargepg")" title="Dashboard"><span class="menu-item-parent">MAR 충전 (PG)</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "MarChargereq" ? "active" : "")">
+					<a href="@Url.Content("~/Mar/MarChargereq")" title="Dashboard"><span class="menu-item-parent">MAR 충전 (이체)</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "MarRefundreq" ? "active" : "")">
+					<a href="@Url.Content("~/Mar/MarRefundreq")" title="Dashboard"><span class="menu-item-parent">MAR 환불 신청</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "MarCharge" ? "active" : "")">
+					<a href="@Url.Content("~/Mar/MarCharge")" title="Dashboard"><span class="menu-item-parent">MAR 충전/사용 이력</span></a>
+				</li>
+
+				<!--li class="@(ViewContext.RouteData.Values["Action"].ToString() == "MarUse" ? "active" : "")">
+					<a href="@Url.Content("~/Mar/MarUse")" title="Dashboard"><span class="menu-item-parent">MAR 사용 이력</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "MarRefund" ? "active" : "")">
+					<a href="@Url.Content("~/Mar/MarRefund")" title="Dashboard"><span class="menu-item-parent">MAR 환불 이력</span></a>
+				</li-->
+			</ul>
+		</li>
+
+		<li class="">
+			<a href="#" title="공지사항">
+				<i class="fa fa-lg fa-fw fa-volume-up"></i>
+				<span class="menu-item-parent">공지사항</span>
+			</a>
+			<ul>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeEtm" ? "active" : "")">
+					<a href="@Url.Content("~/Notice/NoticeEtm")" title="Dashboard"><span class="menu-item-parent">ETOMARS 공지사항</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeEts" ? "active" : "")">
+					<a href="@Url.Content("~/Notice/NoticeEts")" title="Dashboard"><span class="menu-item-parent">EST 공지사항</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeQna" ? "active" : "")">
+					<a href="@Url.Content("~/Notice/NoticeQna")" title="Dashboard"><span class="menu-item-parent">1:1 문의</span></a>
+				</li>
+				<!--li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeFaq" ? "active" : "")">
+					<a href="@Url.Content("~/Notice/NoticeFaq")" title="Dashboard"><span class="menu-item-parent">자주묻는 질문</span></a>
+				</li>
+				<li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeFile" ? "active" : "")">
+					<a href="@Url.Content("~/Notice/NoticeFile")" title="Dashboard"><span class="menu-item-parent">자료실</span></a>
+				</li-->
+			</ul>
+		</li>
+
+    </ul>
+	<!--span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </!--span>-->
+</nav>

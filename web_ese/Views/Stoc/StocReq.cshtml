@@ -1,0 +1,697 @@
+﻿@model web_ese.Models_Act.Stoc.StocReqModels
+
+<div id="content">
+
+
+
+
+	<!--보관신청 대량 엑셀 등록-->
+	@if (Model.act_type == "ins")
+	{
+
+		<section id="widget-grid" class="" style="max-width:1000px;">
+			<div class="row">
+				<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+					<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+						<header role="heading">
+							<span class="widget-icon"> <i class="fa fa-floppy-o"></i> </span>
+							<h2>@comm_global.Language.Resources.ESE_StocReq_StocReqMassiveExcelAdd </h2>
+						</header>
+						<div role="content">
+							<div class="widget-body no-padding">
+								<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+									<fieldset>
+
+										<div class="row">
+											<section class="col col-9">
+												<label class="select">
+													<select name="country">
+														<option value="0" selected="" disabled="">@comm_global.Language.Resources.ESE_Comm_EtormarsForm</option>
+													</select> <i></i>
+												</label>
+											</section>
+											<label class="label col col-3">
+												<a class="btn btn-primary" href="javascript:void(0);" style="padding:5px 22px; ">@comm_global.Language.Resources.ESE_ProdAdd_ExcelFormDownload</a>
+											</label>
+										</div>
+
+									</fieldset>
+									<fieldset>
+										<div class="row">
+											<section class="col col-9">
+												<div class="input input-file">
+													<span class="button"><input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">@comm_global.Language.Resources.ESE_ProdAdd_StocProdMassiveExcelAddBrowse</span><input type="text" placeholder= "Include some files" readonly="">
+												</div>
+											</section>
+											<label class="label col col-3">
+												<a class="btn btn-primary" href="javascript:void(0);" style="padding:5px 22px; ">@comm_global.Language.Resources.ESE_ProdAdd_ExcelFormUpload&nbsp;&nbsp;</a>
+											</label>
+										</div>
+
+									</fieldset>
+
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
+	}
+
+
+	<!--개별 보관 신청서 작성-->
+	<div class="alert alert-block alert-success" style="max-width:1000px;">
+		<h4 class="alert-heading"><i class="fa fa-check-square-o"></i> @comm_global.Language.Resources.ESE_StocReq_WriteIndividualStocReq</h4>
+	</div>
+
+	
+	<!--상품 바코드 스캔-->
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_StocReq_ProdBarcodeScan </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<fieldset>
+									<div class="row">
+										<label class="label col col-1">@comm_global.Language.Resources.ESE_StocReq_BoxNum</label>
+										<section class="col col-3">
+											<label for="address2" class="input">
+												<input type="text" name="boxNum" id="boxNum" placeholder="" maxlength="20" value="1">
+											</label>
+										</section>
+										<section class="col col-8">
+											<label for="barcodeChk" class="input">
+												<input type="text" name="barcodeChk" id="barcodeChk" placeholder= "이 곳에 커서를 활성화 하신 후 바코드를 스캔해주세요." onkeypress="if(event.keyCode==13) {goodsTableAdd_Stock(this.value); return false;}" maxlength="20">
+											</label>
+										</section>
+									</div>
+									<section class="col col-12">
+										<p> @comm_global.Language.Resources.ESE_StocReq_ProdBarcodeScanExplanation </p>
+										<p id="barcodeResult"> @comm_global.Language.Resources.ESE_StocReq_ProdBarcodeScanOutPutPart </p>
+									</section>
+								</fieldset>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+
+
+	<!--보관 신청 선택 상품-->
+	<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="max-width:1000px; margin:0px;">
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<h2>@comm_global.Language.Resources.ESE_StocReq_StocReqSelectProd</h2>
+		</header>
+		<div role="content">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th></th>
+								<th style="width:15%;">@comm_global.Language.Resources.ESE_Comm_Barcord</th>
+								<th style="width:15%;">@comm_global.Language.Resources.ESE_ProdAdd_SKU</th>
+								<th>@comm_global.Language.Resources.ESE_Comm_PRODUCT_NAME</th>
+								<th style="width:15%;">@comm_global.Language.Resources.ESE_Comm_Brand</th>
+								<th style="width:8%;">@comm_global.Language.Resources.ESE_StocReq_BoxNum</th>
+								<th style="width:8%;">@comm_global.Language.Resources.ESE_Comm_SelectProdNum</th>
+							</tr>
+						</thead>
+						<tbody id="goodsRow">
+
+							@foreach (var item in Model.InItems)
+							{
+								<tr>
+									<td><input type="checkbox" name="goods_chk"></td>
+									<td>@item.BARCODE</td>
+									<td>@item.SKU</td>
+									<td>@item.GOODS_NAME</td>
+									<td>@item.BRAND</td>
+									<td>
+										<input type="hidden" name="lst_goods_barcode" class="lst_goods_barcode" value="@item.BARCODE" />
+										<input type="text" name="lst_goods_box" class="form-control lst_goods_box" value="@item.BOXNUM"  />
+									</td>
+									<td><input type="text" name="lst_goods_cnt" class="form-control lst_goods_cnt" value="@item.QTY" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+			<!-- end widget content -->
+
+		</div>
+		<!-- end widget div -->
+
+	</div>
+
+
+	<section id="widget-grid" class="" style="max-width:1000px; margin:0 0 30px;">
+		<div class="row">
+			<article class="col-sm-12">
+				<a class="btn btn-default" href="javascript:goodsTableDel();"><i class="fa fa-trash-o"></i> @comm_global.Language.Resources.Button_ChooseDelete</a>
+				<a class="btn btn-default" href="javascript:goodsTableDelAll();"><i class="fa fa-trash-o"></i> @comm_global.Language.Resources.Button_AllDelete</a>
+
+
+
+				<label style="float:right;" class="select">
+					<a class="btn btn-default" href="@Url.Action("ProdAdd", "Prod")" style="float:right"> @comm_global.Language.Resources.ESE_StocReq_NewProdAdd</a>
+				</label>
+				<label style="float:right;" class="select">
+					<a class="btn btn-default" href="#" data-toggle="modal" data-target="#myModalSelect"> @comm_global.Language.Resources.ESE_StocReq_ChooseProd</a>
+				</label>
+			</article>
+		</div>
+	</section>
+
+
+
+	<!--보관 신청 정보-->
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_StocReq_StocReqInfo </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+				{
+				@Html.HiddenFor(model => model.act_type)
+				@Html.HiddenFor(model => model.act_key)
+				@Html.HiddenFor(model => model.BaseEseCode)
+				@Html.HiddenFor(model => model.BaseEseName)
+				@Html.HiddenFor(model => model.BaseEseTel)
+				@Html.HiddenFor(model => model.BaseAddr)
+				@Html.HiddenFor(model => model.goodsLst)
+				@Html.HiddenFor(model => model.Item.EST_CODE)
+				@Html.HiddenFor(model => model.Item.INPUT_TYPE)
+
+				@Html.HiddenFor(model => model.sortKey)
+				@Html.HiddenFor(model => model.Paging.page)
+				@Html.HiddenFor(model => model.Paging.pageNum)
+				@Html.HiddenFor(model => model.Paging.pageTotNum)
+				@Html.HiddenFor(model => model.schNation)
+				@Html.HiddenFor(model => model.schStation)
+				@Html.HiddenFor(model => model.schTypeTxt)
+				@Html.HiddenFor(model => model.schTxt)
+				@Html.HiddenFor(model => model.schSdt)
+				@Html.HiddenFor(model => model.schEdt)
+				@Html.HiddenFor(model => model.schType)
+
+
+
+				<fieldset>
+					<div class="row">
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_WearhousingNation</label>
+						<section class="col col-4">
+							<label class="select">
+								@Html.DropDownList("DEP_NATION_CODE", new SelectList(Model.arraySNation, "opt_key", "opt_value"), new { onchange = "javascript:callStation(this.value);" }) <i></i>
+							</label>
+						</section>
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_StocReqInfoStation</label>
+						<section class="col col-4">
+							<label class="select">
+								@Html.DropDownList("GET_EST_CODE", new SelectList(Model.arrayStation, "opt_key", "opt_value")) <i></i>
+							</label>
+						</section>
+					</div>
+
+					<div class="row">
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_WearhousingMethod</label>
+						<section class="col col-4">
+							<label class="select">
+								@Html.DropDownList("GET_INPUT_TYPE", new SelectList(Model.inputTypeArray, "opt_key", "opt_value"), new { onchange = "javascript:callType(this.value);" }) <i></i>
+							</label>
+						</section>
+						<label class="label col col-6"></label>
+					</div>
+
+					<div class="row" id="etoDel">
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_WearhousingDeliveryNum</label>
+						<section class="col col-4">
+							<label for="address2" class="input">
+								@Html.TextBoxFor(model => model.Item.INPUT_DELVNO)
+							</label>
+						</section>
+						<label class="label col col-6"></label>
+					</div>
+
+					<div class="row" id="etoSelf">
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_INPUT_DELVNAME</label>
+						<section class="col col-4">
+							<label for="INPUT_DELVNAME" class="input">
+								@Html.TextBoxFor(model => model.Item.INPUT_DELVNAME)
+							</label>
+						</section>
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_INPUT_DELVTELL</label>
+						<section class="col col-4">
+							<label for="INPUT_DELVTELL" class="input">
+								@Html.TextBoxFor(model => model.Item.INPUT_DELVTELL)
+							</label>
+						</section>
+					</div>
+
+
+				</fieldset>
+				<fieldset>
+					<section>
+						<div class="inline-group">
+							<label class="radio">
+								<input type="radio" name="inputAuto" value="0" checked="checked" onclick="javascript: inputAutoType(this.value);">
+								<i></i>@comm_global.Language.Resources.ESE_Comm_DirectInput
+							</label>
+							<label class="radio">
+								<input type="radio" name="inputAuto" value="1" onclick="javascript: inputAutoType(this.value);">
+								<i></i>@comm_global.Language.Resources.ESE_StocReq_SameWithUserInfo
+							</label>
+						</div>
+					</section>
+
+
+					<div class="row">
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_SENDER_NAME</label>
+						<section class="col col-4">
+							<label for="SENDER_NAME" class="input">
+								@Html.TextBoxFor(model => model.Item.SENDER_NAME)
+							</label>
+						</section>
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_SENDER_TEL</label>
+						<section class="col col-4">
+							<label for="SENDER_TEL" class="input">
+								@Html.TextBoxFor(model => model.Item.SENDER_TEL)
+							</label>
+						</section>
+					</div>
+
+					<div class="row">
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_SENDER_ADDR</label>
+						<section class="col col-10">
+							<label for="SENDER_ADDR" class="input">
+								@Html.TextBoxFor(model => model.Item.SENDER_ADDR)
+							</label>
+						</section>
+					</div>
+
+					<div class="row">
+						<label class="label col col-2">@comm_global.Language.Resources.ESE_StocReq_MEMO_ESE</label>
+						<section class="col col-10">
+							<label for="MEMO_ESE" class="input">
+								@Html.TextBoxFor(model => model.Item.MEMO_ESE)
+							</label>
+						</section>
+					</div>
+				</fieldset>
+
+
+				<footer>
+
+					@if (Model.act_type == "updt")
+						{
+						<button type="button" class="btn btn-primary" onclick="javascript: callSubmit();">
+							@comm_global.Language.Resources.Button_UPDATE
+						</button>
+
+						<button type="button" onclick="javascript:act_List();" class="btn btn-primary">
+							@comm_global.Language.Resources.Button_LIST
+						</button>
+						}
+						else
+						{
+						<button type="button" class="btn btn-primary" onclick="javascript: callSubmit();">
+							@comm_global.Language.Resources.Button_StocReq
+						</button>
+						}
+
+				</footer>
+				}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+
+
+
+	<!--상품 선택-->
+<div class="modal fade in" id="myModalSelect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:900px; ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">@comm_global.Language.Resources.ESE_StocReq_ProdSelectView</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<iframe width="100%" height="900px;" scrolling="no" frameborder="0" id="viewIframe" src="~/Stoc/StocReqSelect"></iframe>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button onclick="javascript:chkPopupStocGoods();" id="modal_act" type="button" class="btn btn-default">
+					@comm_global.Language.Resources.Button_Choose
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">
+					@comm_global.Language.Resources.Button_Close
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+@section pagespecific {
+
+
+<script type="text/javascript">
+
+	var settingForm = [];
+
+
+
+	$(document).ready(function () {
+		$("#etoDel").show();
+		$("#etoSelf").hide();
+
+	});
+
+
+	function callType(type) {
+
+		$("#etoDel").val('');
+		$("#etoSelf").val('');
+		if (type == 0) {
+			$("#Item_INPUT_DELVNO").val('');
+			$("#etoDel").show();
+			$("#etoSelf").hide();
+		} else {
+			$("#Item_INPUT_DELVNO").val($("#BaseEseCode").val());
+			$("#etoDel").hide();
+			$("#etoSelf").show();
+		}
+	}
+
+
+	function inputAutoType(type) {
+		if (type == '1') {
+			$("#Item_SENDER_NAME").val($("#BaseEseName").val());
+			$("#Item_SENDER_TEL").val($("#BaseEseTel").val());
+			$("#Item_SENDER_ADDR").val($("#BaseAddr").val());
+		} else {
+			$("#Item_SENDER_NAME").val('');
+			$("#Item_SENDER_TEL").val('');
+			$("#Item_SENDER_ADDR").val('');
+		}
+	}
+
+
+	//상품 삭제
+	function goodsTableDel() {
+
+		if ($("input[name='goods_chk']").is(":checked")) {
+			if (confirm("@comm_global.Language.Resources.Script_WhetherDelete")) {
+				$("[name='goods_chk']:checked").parents("tr").next().remove();
+				$("[name='goods_chk']:checked").parents("tr").remove();
+			}
+
+		} else {
+			alert("@comm_global.Language.Resources.Script_NoSelectData");
+		}
+	}
+
+	//상품 삭제
+	function goodsTableDelAll() {
+
+		$('#goodsRow').empty();
+	}
+
+
+
+	//보관 상품 추가 기능=====================================================
+
+	//보관 상품 추가 팝업 오픈
+	function chkPopupStocGoods() {
+		var ifra = document.getElementById('viewIframe').contentWindow;
+		var data = ifra.callChkSelect();
+
+		var leng = data.length;
+
+		if (leng > 0) {
+			var jbSplit = data.split(',');
+			for (var i in jbSplit) {
+				goodsTableAdd_Stock(jbSplit[i])
+			}
+			$("#closeModal").click();
+		}
+	}
+
+
+
+	//보관 상품 추가 팝업에서 선택 시 상품 테이블 추가
+	function stocGoodsPopupAdd() {
+		//배열로 넘어온 바코드를 반복문을 돌려  goodsAjaxAdd_Stock(bacord) 를 실행
+	}
+
+	//보관 상품 추가
+	function goodsTableAdd_Stock(barcode) {
+
+		var tmp_length = barcode.length;
+
+		var boxNum = $("#boxNum").val();
+
+		if (boxNum.length == 0) {
+			$("#boxNum").focus();
+			alert("@comm_global.Language.Resources.Script_PleaseInputBoxNum");
+			return false;
+		}
+		//입력된 바코드가 13자리 일 경우에만 동작 길이로 체크 안될시 AJAX 처리... 매번???
+		//if (tmp_length == 8 || tmp_length == 12 || tmp_length == 13 || tmp_length == 14) {
+		if (1 == 1) {
+
+			if (chkDuplBarcode(barcode)) {	//바코드 번호 중복 시 cnt 증가
+				$('#barcodeChk').val('');
+				$('#barcodeResult').text('@comm_global.Language.Resources.Script_OverLappedProd');
+
+			} else {
+
+				$.ajax({
+					type: "POST",
+					url: '/Stoc/StocReqChkBarcode',
+					datatype: "json",
+					data: {
+						AjaxBarCode: barcode
+					},
+					success: function (data) {
+						if (data.BARCODE != null) {
+							var i = 1;
+							if ($('.lst_goods_num').length) {
+								i = ($('.lst_goods_num').last().val() * 1) + 1;
+							}
+							var addRow = '<tr>'
+								+ ' <td><input type="checkbox" name="goods_chk"></td> '
+								+ ' <td>' + data.BARCODE + '</td> '
+								+ ' <td>' + data.SKU + '</td> '
+								+ ' <td>' + data.GOODS_NAME + '</td> '
+								+ ' <td>' + data.BRAND + '</td> '
+								+ ' <td> '
+								+ ' <input type="hidden" name="lst_goods_barcode" class="lst_goods_barcode" value="' + data.BARCODE + '" /> '
+								+ ' <input type="text" name="lst_goods_box" class="form-control lst_goods_box" value="' + boxNum + '"  /></td> '
+								+ ' <td><input type="text" name="lst_goods_cnt" class="form-control lst_goods_cnt" value="0" onkeyup="this.value=this.value.replace(/[^0-9]/g,\'\');" /></td> '
+							+ ' </tr> ';
+
+							$('#goodsRow').append(addRow);
+
+							$('#barcodeChk').val('');
+							$('#barcodeResult').text('@comm_global.Language.Resources.Script_ProdAddedInList');
+						} else {
+							$('#barcodeChk').val('');
+							$('#barcodeResult').text('@comm_global.Language.Resources.Script_NotUsageBarcode');
+						}
+					}
+				});
+
+			}
+
+		} else {
+			$('#barcodeResult').text('@comm_global.Language.Resources.Script_NotUsageBarcode');
+		}
+	}
+
+
+	//바코드 번호 중복 체크
+	function chkDuplBarcode(barcode) {
+		var result = false;
+
+		$(".lst_goods_barcode").each(function () {
+			if ($(this).val() == barcode) {
+
+				//상품 카운트 증가 로직
+				//var tmpKey = $(this).attr("data");
+				//var tmpCnt = $("#lst_goods_cnt_" + tmpKey).val();
+				//$("#lst_goods_cnt_" + tmpKey).val((tmpCnt * 1 ) + 1);
+				result = true;
+			}
+		});
+
+		return result;
+	}
+
+	function callStation(val) {
+		var defaultStation = '';
+		$.ajax({
+			type: "POST",
+			url: '/Ets/EtsReqChkStation',
+			datatype: "json",
+			data: {
+				AjaxNationCode: val
+			},
+			success: function (data) {
+				$('#GET_EST_CODE').empty();
+				if (data.length >= 1) {
+					for (var i = 0; i < data.length; i++) {
+						var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+						$('#GET_EST_CODE').append(option);
+					}
+				} else {
+					var option = $("<option value=''>=============</option>");
+					$('#GET_EST_CODE').append(option);
+				}
+			}
+		});
+	}
+
+
+
+	function callSubmit() {
+
+		var lst_goods_barcode = '';
+		var lst_goods_box = '';
+		var lst_goods_cnt = '';
+
+		var goodsLst = "";
+
+		var chkGoos = true;
+
+		//배송 신청 상품 갯수 확인
+		if ($("input[name=lst_goods_barcode]").length == 0) {
+			alert('@comm_global.Language.Resources.Script_NoProd');
+			return false;
+		} else {	//베송 신청 상품 유효성 확인
+			$("input[name=lst_goods_barcode]").each(function (idx) {
+
+				lst_goods_barcode = $("input[name=lst_goods_barcode]:eq(" + idx + ")").val();
+				lst_goods_box = $("input[name=lst_goods_box]:eq(" + idx + ")").val();
+				lst_goods_cnt = $("input[name=lst_goods_cnt]:eq(" + idx + ")").val();
+
+				if (lst_goods_cnt == 0) {
+					alert("@comm_global.Language.Resources.Script_StocNumZero");
+					goodsLst = "";
+					$("input[name=lst_goods_cnt]:eq(" + idx + ")").focus();
+					chkGoos = false;
+				}
+				goodsLst += lst_goods_barcode + "^|^" + lst_goods_box + "^|^" + lst_goods_cnt + "^||^";
+
+				if (!chkGoos)
+					return false;
+
+			});
+		}
+
+		if (!chkGoos)
+			return false;
+
+		$('#goodsLst').val(goodsLst);
+
+
+		if ($("#Item_INPUT_DELVNO").val() == '') {
+			alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_StocReq_WearhousingDeliveryNum" + "]");
+			$("#Item_INPUT_DELVNO").focus();
+			return false;
+		}
+
+		if ($("#GET_INPUT_TYPE option:selected").val() != 0) {
+
+			if ($("#Item_INPUT_DELVNAME").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_StocReq_INPUT_DELVNAME" + "]");
+				$("#Item_INPUT_DELVNAME").focus();
+				return false;
+			}
+
+			if ($("#Item_INPUT_DELVTELL").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_StocReq_INPUT_DELVTELL" + "]");
+				$("#Item_INPUT_DELVTELL").focus();
+				return false;
+			}
+		}
+
+		if ($("#Item_SENDER_NAME").val() == '') {
+			alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_StocReq_SENDER_NAME" + "]");
+			$("#Item_SENDER_NAME").focus();
+			return false;
+		}
+
+		if ($("#Item_SENDER_TEL").val() == '') {
+			alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_StocReq_SENDER_TEL" + "]");
+			$("#Item_SENDER_TEL").focus();
+			return false;
+		}
+
+		if ($("#Item_SENDER_ADDR").val() == '') {
+			alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_StocReq_SENDER_ADDR" + "]");
+			$("#Item_SENDER_ADDR").focus();
+			return false;
+		}
+
+		$('#Item_EST_CODE').val($('#GET_EST_CODE').val());
+		$('#Item_INPUT_TYPE').val($('#GET_INPUT_TYPE').val());
+
+		$('#view_form').submit();
+
+	}
+
+	function act_List() {
+		$('#view_form').attr('action', '/Stoc/StocReqList');
+		$('#act_type').val('list');
+		$('#view_form').submit();
+	}
+
+
+</script>
+
+
+
+}

@@ -1,0 +1,50 @@
+﻿
+
+
+<div id="logo-group" style="text-align: center;">
+	<a href="@Url.Content("~/Home/index")"><span id="logo"> <img src="/img/etomars_header.png" alt="ETOMARS" style="width:140px; margin-left:-18px; margin-top:-3px; display:block;"></span></a>
+</div>
+
+<!-- #TOGGLE LAYOUT BUTTONS -->
+<!-- pulled right: nav area -->
+<div class="pull-right">
+
+
+
+	<!-- collapse menu button -->
+	<div id="hide-menu" class="btn-header pull-right">
+		<span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+	</div>
+	<!-- end collapse menu -->
+	<!-- #MOBILE -->
+	<!-- logout button -->
+	<div id="logout" class="btn-header transparent pull-right">
+		<span> <a href="login.html" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+	</div>
+	<!-- end logout button -->
+	<!-- fullscreen button -->
+	<div id="fullscreen" class="btn-header transparent pull-right">
+		<span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+	</div>
+	<!-- end fullscreen button -->
+	<!-- multiple lang dropdown : find all flags in the flags page -->
+	<ul class="header-dropdown-list hidden-xs">
+		<li>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="@Url.Content("~/img/blank.gif")" class="flag flag-us" alt="United States"> <span> US</span> <i class="fa fa-angle-down"></i> </a>
+			<ul class="dropdown-menu pull-right">
+				<li class="active">
+					<a href="javascript:void(0);"><img src="@Url.Content("~/img/blank.gif")" class="flag flag-us" alt="United States"> English (US)</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);"><img src="@Url.Content("~/img/blank.gif")" class="flag flag-kr" alt="Korea"> 한국어</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);"><img src="@Url.Content("~/img/blank.gif")" class="flag flag-cn" alt="China"> 中文</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<!-- end multiple lang -->
+
+</div>
+<!-- end pulled right: nav area -->

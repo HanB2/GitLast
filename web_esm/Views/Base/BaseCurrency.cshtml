@@ -1,0 +1,202 @@
+﻿
+@model web_esm.Models_Act.Base.BaseCurrencyModels
+
+
+<div id="content" style="max-width:1000px;">
+
+	<div class="row">
+		<article class="col-sm-12">
+
+
+			<div class="alert alert-info fade in">
+				<i class="fa-fw fa fa-info"></i>
+				<strong>기준단위 : USD</strong>
+			</div>
+		</article>
+	</div>
+
+	<!--Table Start-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<div class="jarviswidget-ctrls" role="menu">
+							<a onclick="javascript:callAdd();" href="#"  class="button-icon" data-toggle="modal" data-target="#myModal">
+								<i class="fa fa-plus"></i>
+							</a>
+						</div>
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>통화 설정</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="table-responsive">
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm"}))
+{
+	@Html.HiddenFor(model => model.act_type)
+	@Html.HiddenFor(model => model.act_key)
+
+
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											
+											<th style="width:5%;"></th>
+											<th style="width:8%;">화폐단위</th>
+											<th style="width:18%;">설명</th>
+											<th style="width:6%;">기준단위</th>
+											<th style="width:4%;">환율</th>
+											<th style="width:12%;">적용날짜</th>
+										</tr>
+									</thead>
+									<tbody>
+										@for(int i = 0; i < Model.Items.Count; i++)
+										{
+										<tr>	
+											<td>
+												<a onclick="javascript:callEdit('@Model.Items[i].SEQNO');" href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a onclick="javascript: callDelete('@Model.Items[i].SEQNO');" href="#" class="btn btn-default btn-xs">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</td>
+											<td>@Model.Items[i].CURRENCY_UNIT </td>
+											<td>@Model.Items[i].MEMO </td>
+											<td>@Model.Items[i].BASIC_UNIT </td>
+											<td>
+												@Html.HiddenFor(model => model.Items[i].CURRENCY_UNIT)
+												@Html.TextBoxFor(model => model.Items[i].AMNT, new { id = @Model.Items[i].SEQNO })
+ 											</td>
+											<td>@Model.Items[i].DATETIME_UPD</td>
+										</tr>
+										}				
+									</tbody>
+								</table>
+}
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</article>
+		</div>
+		<a class="btn btn-primary btn-lg" onclick="javascript:set_AMNT();" href="#" style="float:right;"> 환율 일괄저장</a>
+		<a class="btn btn-primary btn-lg" onclick="javascript:get_AMNT();" href="#" > 환율 가져오기</a>
+	</section>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+{
+	@Html.HiddenFor(model => model.act_type)
+	@Html.HiddenFor(model => model.act_key)
+}
+
+</div>
+
+<!--modal-->
+
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">통화 설정 상세</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<iframe width="100%" height="280px;" scrolling="no" frameborder="0" id="viewIframe" src=""></iframe>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button onclick="javascript:act_ifarame();" id="modal_act" type="button" class="btn btn-default">
+					등록
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					닫기
+				</button>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+<div id="result">
+</div>
+
+@section pagespecific{
+	<script type="text/javascript">
+
+
+		//등록 팝업창 호출
+		function callAdd() {
+			$("#modal_act").html('등록');
+			$('#viewIframe').attr('src', '/Base/BaseCurrencyView');
+		}
+
+		//수정 팝업창 호출
+		function callEdit(seqno) {
+			$("#modal_act").html('수정');
+			$('#viewIframe').attr('src', '/Base/BaseCurrencyView?seqNo=' + seqno);
+		}
+
+		// 등록/수정
+		function act_ifarame() {
+			var ifra = document.getElementById('viewIframe').contentWindow;
+			ifra.formSubmit();
+		}
+
+
+		//삭제
+		function callDelete(seqno) {
+			var msg = "삭제하시겠습니까?";
+			if (confirm(msg)) {
+				$('#act_type').val('del');
+				$('#act_key').val(seqno);
+				$('#listForm').submit();
+			}
+		}
+
+		//환율 일괄 저장
+		function set_AMNT() {
+			var msg = "환율을 저장 하시겠습니까?";
+			if (confirm(msg)) {
+				$('#act_type').val('set_AMNT');
+				$('#act_key').val('0');
+				$('#listForm').submit();
+			}
+		}
+
+
+		//환율 가져오기
+		function get_AMNT() {
+			var msg = "환율을 가져오시겠습니까?";
+			if (confirm(msg)) {
+				$.ajax({
+					type: "POST",
+					url: '/Base/GetExchangeRate',
+					datatype: "json",
+					success: function (data) {
+						for (var i = 0; i < data.length; i++) {
+							$('#' + data[i].SEQNO).val(data[i].AMNT);
+						}
+						alert("확인 후 환율 일괄저장 버튼을 클릭해야 적용 됩니다.");
+						
+					}
+				});
+			}
+		}
+
+
+	</script>
+
+	}

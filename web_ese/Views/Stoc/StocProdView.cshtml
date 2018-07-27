@@ -1,0 +1,196 @@
+﻿@model comm_model.StcGoods
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+
+
+	<!--필수 입력 항목-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12" >
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_ProdAdd_RequiredField </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.SEQNO)
+								@Html.AntiForgeryToken()
+
+								<fieldset>
+									<!--바코드, SKU-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_Barcord</label>
+										<label class="label col col-4">@Model.BARCODE</label>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_SKU</label>
+										<label class="label col col-4">@Model.SKU</label>
+									</div>
+									<!--대표 상품명-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_PRODUCT_NAME</label>
+										<label class="label col col-10">@Model.PRODUCT_NAME</label>
+									</div>
+								</fieldset>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--선택 입력 항목-->
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_ProdAdd_SelectInputField </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.SEQNO)
+								@Html.AntiForgeryToken()
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.act_key)
+
+								<fieldset>
+									<!--카테고리-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_Category</label>
+										
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.CATEGORY1_txt  &nbsp;</label>
+										</section>
+									</div>
+									<!--상품명 (영어)-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_PRODUCT_NAME_EN</label>
+
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.PRODUCT_NAME_EN  &nbsp;</label>
+										</section>
+									</div>
+									<!--상품명 (중국어)-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_PRODUCT_NAME_CN</label>
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.PRODUCT_NAME_CN  &nbsp;</label>
+										</section>
+									</div>
+									<!--상품명 (한국어)-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_PRODUCT_NAME_KR</label>
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.PRODUCT_NAME_KR  &nbsp;</label>
+										</section>
+									</div>
+									<!--상품명 (일본어)
+									<div class="row">
+										<label class="label col col-2">상품명 (일본어)</label>
+										<label class="label col col-10">@Model.PRODUCT_NAME</label>
+									</div>-->
+									<!--브랜드명-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_Brand</label>
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.BRAND  &nbsp;</label>
+										</section>
+									</div>
+									
+									
+									<!--단위, 규격-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_viewWEIGHT_UNIT</label>
+										<section class="col col-4">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.WEIGHT_UNIT  &nbsp;</label>
+										</section>
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_STANDARD</label>
+										<section class="col col-4">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.STANDARD  &nbsp;</label>
+										</section>
+									</div>
+
+									<!--가격, 중량/용량-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocListProdView_PRICE</label>
+										<section class="col col-4">
+											<label class="label col col-6" style="padding-left: 0px;">@Model.PRICE  &nbsp;</label>
+										</section>
+
+
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_UNIT_WEIGHT</label>
+										<section class="col col-4">
+											<label class="label col col-6" style="padding-left: 0px;">@Model.UNIT_WEIGHT  &nbsp;</label>
+										</section>
+									</div>
+
+									
+									<!--유통기한, 유통만료일자-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_EXPIRATION</label>						
+										<section class="col col-4">
+											<label class="label col col-6" style="padding-left: 0px;">@Model.EXPIRATION  &nbsp;</label>
+										</section>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocListProdView_EXPIRATION_DATE</label>
+										<section class="col col-4">
+											<label class="label col col-10" style="padding-left: 0px;">@Model.EXPIRATION_DT  &nbsp;</label>
+										</section>
+									</div>
+									<!--원산지-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_StocListProdView_Origin</label>
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.ORIGIN  &nbsp;</label>
+										</section>
+									</div>
+									<!--성분-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_INGREDIENT</label>
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.INGREDIENT  &nbsp;</label>
+										</section>
+									</div>
+									<!--상세스펙-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_SPEC</label>
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.SPEC  &nbsp;</label>
+										</section>
+									</div>
+									<!--판매사이트 URL-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_SALE_SITE_URL</label>
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.SALE_SITE_URL  &nbsp;</label>
+										</section>
+									</div>
+									<!--Image URL-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_PRODUCT_IMAGE</label>
+										<section class="col col-10">
+											<label class="label col col-12" style="padding-left: 0px;">@Model.PRODUCT_IMAGE  &nbsp;</label>
+										</section>
+									</div>
+								</fieldset>
+							}
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>

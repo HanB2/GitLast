@@ -1,0 +1,30 @@
+﻿@model web_ese.Models_Act.Cs.CsEsmNoticeModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+	<!--공지사항 조회 결과 상세-->
+<article class="col-sm-12 col-md-12 col-lg-6" style="height:400px; padding:0px;">
+	<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" >
+
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+			<h2> @Model.Item.TITLE_KR </h2>
+			<div class="widget-toolbar" id="switch-1" role="menu">
+				<span class="">@comm_global.Language.Resources.ESE_Comm_Regdate :  @Model.Item.REGDATE</span>
+			</div>
+		</header>
+		<div role="content" style="min-height: 360px;">
+			<div class="widget-body">
+
+				<p>@Model.Item.CONTENTS_KR</p>
+			</div>
+			<!-- end widget content -->
+
+		</div>
+
+	</div>
+</article>
+

@@ -1,0 +1,357 @@
+﻿@model web_ese.Models_Act.Comm.HomeModels
+<div id="content">
+
+
+	@if (Session["STATUS"].ToString() == "2")
+	{
+		<div class="row" style="max-width:1200px;">
+			<div class="col-sm-12">
+
+				<div class="well">
+					<h1 class="semi-bold">미승인 가입자 안내 영역</h1>
+					<p>
+						1. 계정관리 정보 입력	<br/>
+						2. 관리자 승인 대기<br />
+						3. 승인후 모든 기능 사용 가능<br />
+					</p>
+
+				</div>
+
+
+			</div>
+		</div>
+	}
+
+
+
+	<!--ETOMARS 공지사항-->
+	<section id="widget-grid" class="">
+		<div class="row" style="max-width:1200px;">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false" role="widget" style="">
+					<header role="heading">
+						<h2> <i class="fa fa-volume-up"></i> <strong>@comm_global.Language.Resources.ESE_Home_ETOMARS</strong> <i>@comm_global.Language.Resources.ESE_Home_IndexNotice</i></h2>
+						<div class="jarviswidget-ctrls" role="menu">
+							<a href="@Url.Content("~/Cs/CsEsmNotice")" class="button-icon " data-original-title="더보기">
+								<i class="fa fa-plus"></i>
+							</a>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="custom-scroll table-responsive">
+								<table class="table table-bordered" style="padding:0px;">
+									<tbody>					
+									@foreach (var item in Model.ETM_NOTICE)
+									{ 
+										<tr>
+											<td style="padding:4px;">
+
+												<a onclick="javascript:callEdit('@item.SEQNO');" href="#" data-toggle="modal" data-target="#myModal">
+													@item.TITLE
+												</a>			
+											
+											</td> <!--공지유형-->
+											<td style="padding:4px; width:200px;">@item.GET_DATE</td> <!--등록일자-->
+										</tr>
+									}										
+									@for (int i = 0; i < 5 - @Model.ETM_NOTICE.Count; i++)
+										{
+											<tr>
+												<td style="padding:4px;">&nbsp;</td> <!--공지유형-->
+												<td style="padding:4px; width:200px;">&nbsp;</td> <!--등록일자-->
+											</tr>
+										}
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--STATION 공지사항-->
+	<section id="widget-grid" class="">
+		<div class="row" style="max-width:1200px;">
+
+
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false" role="widget" style="">
+					<header role="heading">
+						<h2> <i class="fa fa-volume-up"></i> <strong>@comm_global.Language.Resources.ESE_Home_STATION</strong> <i>@comm_global.Language.Resources.ESE_Home_STATIONNOTICE</i></h2>
+						<div class="jarviswidget-ctrls" role="menu">
+							<a href="@Url.Content("~/Cs/CsEstNotice")" class="button-icon " data-original-title="더보기">
+								<i class="fa fa-plus"></i>
+							</a>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="custom-scroll table-responsive">
+								<table class="table table-bordered" style="padding:0px;">
+									<tbody>
+										@foreach (var item in Model.EST_NOTICE)
+										{ 
+										<tr>
+											<td style="padding:4px;">
+
+												<a onclick="javascript:callEdit('@item.SEQNO');" href="#" data-toggle="modal" data-target="#myModal">
+													@item.TITLE
+												</a>	
+											</td>
+											<td style="padding:4px; width:200px;">@item.WRITER</td>
+											<td style="padding:4px; width:200px;">@item.GET_DATE</td>
+										</tr>
+										}
+
+										@for (int i = 0; i < 5 - @Model.EST_NOTICE.Count; i++)
+										{
+											<tr>
+												<td style="padding:4px;">&nbsp;</td>
+												<td style="padding:4px; width:200px;">&nbsp;</td>
+												<td style="padding:4px; width:200px;">&nbsp;</td>
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+
+
+
+
+		</div>
+	</section>
+
+	<!--상품정보, 보관상태, 배송상태, C/S-->
+	<section id="widget-grid" class="">
+		<div class="row" style="max-width:1200px;">
+			<article class="col-sm-12 col-md-12 col-lg-3 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-cube"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_Home_ProdInfo </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+								<header>
+									@comm_global.Language.Resources.ESE_Home_AddedProd
+
+								</header>
+								<fieldset style="height:201px;">
+									<label class="input"> 
+										<input type="text" class="input-lg" value="@Model.GOODS_CNT @comm_global.Language.Resources.ESE_Home_EtsMainNum" style="text-align:right;" readonly>
+									</label>
+								</fieldset>
+								<footer>
+									<button type="button" class="btn btn-default" onclick="location.href='@Url.Content("~/Prod/ProdAdd")'">
+										<i class="fa fa-cube"></i> @comm_global.Language.Resources.Button_ProdAdd 
+									</button>
+								</footer>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<!--보관상태-->
+			<article class="col-sm-12 col-md-12 col-lg-3 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-cubes"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_Home_StocStatus </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<header>
+									@comm_global.Language.Resources.ESE_Home_StocProd
+								</header>
+								<fieldset style="height:201px;">
+									
+									<label class="input">
+										<input type="text" class="input-lg" value="@Model.GODS_STOCK @comm_global.Language.Resources.ESE_Home_EtsMainNum" style="text-align:right;" readonly>
+									</label>
+								</fieldset>
+
+								<footer>
+									<button type="button" class="btn btn-default" onclick="location.href='@Url.Content("~/Stoc/StocReq")'">
+										<i class="fa fa-cubes"></i> @comm_global.Language.Resources.Button_StocReq
+									</button>
+								</footer>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<!--배송상태-->
+			<article class="col-sm-12 col-md-12 col-lg-3 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-envelope"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_Home_EtsStatus </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+								<fieldset style="height:250px;">
+									<div class="row">
+										<label class="label col col-6">@comm_global.Language.Resources.ESE_Home_EtsWaitingGoods</label>
+										<section class="col col-6">
+											<label class="input">
+												<input type="text" class="input-xs" value="@Model.ETS_STAT_30 @comm_global.Language.Resources.ESE_Home_EtsMainNum" style="text-align:right;" readonly>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-6">@comm_global.Language.Resources.ESE_Home_EtsFinishedGoods</label>
+										<section class="col col-6">
+											<label class="input">
+												<input type="text" class="input-xs" value="@Model.ETS_STAT_100 @comm_global.Language.Resources.ESE_Home_EtsMainNum" style="text-align:right;" readonly>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-6">@comm_global.Language.Resources.ESE_Home_EtsWaitingGoOutGoods</label>
+										<section class="col col-6">
+											<label class="input">
+												<input type="text" class="input-xs" value="@Model.ETS_STAT_200 @comm_global.Language.Resources.ESE_Home_EtsMainNum" style="text-align:right;" readonly>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-6">@comm_global.Language.Resources.ESE_Home_FinishedGoOutGoods</label>
+										<section class="col col-6">
+											<label class="input">
+												<input type="text" class="input-xs" value="@Model.ETS_STAT_500 @comm_global.Language.Resources.ESE_Home_EtsMainNum" style="text-align:right;" readonly>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-6">@comm_global.Language.Resources.ESE_Home_ClearanceProceeding</label>
+										<section class="col col-6">
+											<label class="input">
+												<input type="text" class="input-xs" value="@Model.ETS_STAT_700 @comm_global.Language.Resources.ESE_Home_EtsMainNum" style="text-align:right;" readonly>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<footer>
+									<button type="button" class="btn btn-default" onclick="location.href='@Url.Content("~/Ets/EtsReq")'">
+										<i class="fa fa-envelope"></i>@comm_global.Language.Resources.Button_EtsReq
+									</button>
+								</footer>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<!--C/S-->
+			<article class="col-sm-12 col-md-12 col-lg-3 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-info"></i> </span>
+						<h2>C / S </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<header>
+									@comm_global.Language.Resources.ESE_Home_CsUnansweredQna
+								</header>
+								<fieldset style="height:201px;">
+									<label class="input">
+										<input type="text" class="input-lg" value="@Model.CS_CNT @comm_global.Language.Resources.ESE_Home_CsUnansweredQnaNum"  style="text-align:right;" readonly>
+									</label>
+								</fieldset>
+								<footer>
+									<button type="button" class="btn btn-default" onclick="location.href='@Url.Content("~/Cs/CsQna")'">
+										<i class="fa fa-info"></i> @comm_global.Language.Resources.Button_CsQnaEnrollment
+									</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+
+
+		</div>
+	</section>
+</div>
+
+
+
+
+
+
+
+
+<!--공지사항 조회 결과 상세-->
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">@comm_global.Language.Resources.ESE_CsEsmNotice_NoticeView</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<iframe width="100%" height="400px;" scrolling="no" frameborder="0" id="viewIframe" src=""></iframe>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					@comm_global.Language.Resources.Button_Close
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+@section pagespecific {
+
+
+	<script type="text/javascript">
+
+			// 등록/수정
+			function act_ifarame() {
+				var ifra = document.getElementById('viewIframe').contentWindow;
+				ifra.formSubmit();
+			}
+
+			//수정 팝업창 호출
+			function callEdit(seqno) {
+				$("#modal_act").html('수정');
+				$('#viewIframe').attr('src', '/Cs/CsEsmNoticeView?seqNo=' + seqno);
+			}
+	</script>
+
+
+}

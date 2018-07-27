@@ -1,0 +1,192 @@
+﻿@model web_ese.Models_Act.Cost.CostIndexModels
+<div id="content">
+
+
+	<!--국가별 요율표 조회-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_COST_SelectRateListByNation </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null,null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" })) {
+
+								<fieldset>									
+									
+									<!--STATION-->
+									<div class="row">
+										<label class="label col col-4">@comm_global.Language.Resources.ESE_Comm_StocReqInfoStation</label>
+										<section class="col col-8">
+											<label class="select">
+												@Html.DropDownList("station", new SelectList(Model.stationArray, "opt_key", "opt_value"), new { onchange = "javascript:setDefoult();" }) <i></i>
+											</label>
+										</section>
+									</div>
+									<!--도착국가-->
+									<div class="row">
+										<label class="label col col-4">@comm_global.Language.Resources.ESE_COST_ArriveNation</label>
+										<section class="col col-8">
+											<label class="select">
+												@Html.DropDownList("nation", new SelectList(Model.nationArray, "opt_key", "opt_value"), "선택", new { onchange = "javascript:callType(this.value);" }) <i></i>
+											</label>
+										</section>
+									</div>
+									<!--출고타입-->
+									<div class="row">
+										<label class="label col col-4">@comm_global.Language.Resources.ESE_COST_ReleaseType</label>
+										<section class="col col-8">
+											<label class="select">
+												@Html.DropDownList("type", new SelectList(Model.typeArray, "opt_key", "opt_value"), "도착국가 선택", new { onchange = "javascript:callCost();" }) <i></i>
+											</label>
+										</section>
+									</div>
+
+								</fieldset>
+								
+								}
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_COST_ShippingChargeList</h2>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+
+											<th style="width:25%;">@comm_global.Language.Resources.ESE_COST_WeightKg</th>
+											<th style="width:25%;">@comm_global.Language.Resources.ESE_COST_ReleaseType</th>
+											<th style="width:25%;">@comm_global.Language.Resources.ESE_COST_StandardShippingMar </th>
+											<th style="width:25%;">@comm_global.Language.Resources.ESE_COST_StocShippingMar</th>
+										</tr>
+									</thead>
+									<tbody id="goodsRow">
+										<tr>
+											<td colspan="4">@comm_global.Language.Resources.ESE_COST_ShippingChargeListExplanation</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</article>
+		</div>
+	</section>
+
+
+</div>
+
+
+@section pagespecific {
+
+
+	<script type="text/javascript">
+
+		function setDefoult() {
+			$("#nation option:eq(0)").attr("selected", "selected");
+			$("#type option:eq(0)").attr("selected", "selected");
+			$('#type').empty();
+			var option = $("<option value=''>@comm_global.Language.Resources.Script_COST_SetDefoultArriveNation</option>");
+			$('#type').append(option);
+			$('#goodsRow').empty();
+			var addRow = '<tr><td colspan="4">@comm_global.Language.Resources.Script_COST_SetDefoultBaseOutType.</td></tr>';
+			$('#goodsRow').append(addRow);
+		}
+
+
+
+		//배송 요금표 조회
+		function callType(val) {
+
+			if (val != "") {
+
+				$('#goodsRow').empty();
+				var addRow = '<tr><td colspan="4">@comm_global.Language.Resources.Script_COST_CallTypeBaseOutType</td></tr>';
+				$('#goodsRow').append(addRow);
+
+				$.ajax({
+					type: "POST",
+					url: '/Ets/EtsReqChkReleaseCode',
+					datatype: "json",
+					data: {
+						AjaxNationCode: val
+					},
+					success: function (data) {
+						$('#type').empty();
+						if (data.length >= 1) {
+							var option = $("<option value=''>@comm_global.Language.Resources.Script_COST_CallTypeChoose</option>");
+							$('#type').append(option);
+							for (var i = 0; i < data.length; i++) {
+								var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+								$('#type').append(option);
+							}
+						} else {
+							var option = $("<option value=''>@comm_global.Language.Resources.Script_COST_CallTypeArriveNation</option>");
+							$('#type').append(option);
+						}
+					}
+				});
+			}
+		}
+		function callCost() {
+
+			var NationCode = $("#nation option:selected").val();
+			var EST_CODE = $("#station option:selected").val();
+			var DELV_CODE = $("#type option:selected").val();
+
+
+			if (NationCode != "" && EST_CODE != "" && DELV_CODE != "") {
+				$.ajax({
+					type: "POST",
+					url: '/Ets/EtsReqChkCost',
+					datatype: "json",
+					data: {
+						AjaxNationCode: NationCode,
+						AjaxReleaseCode: DELV_CODE,
+						AjaxEstCode: EST_CODE
+					},
+					success: function (data) {
+						if (data.length >= 1) {
+							$('#goodsRow').empty();
+							for (var i = 0; i < data.length; i++) {
+
+								var addRow = '<tr>'
+									+ '		<td> '+ data[i].WEIGHT +'</td> '
+									+ '		<td> ' + data[i].RELEASE_CODE + '</td> '
+									+ '		<td> '+ data[i].SHIPPING_FEE_NOR +'</td> '
+									+ '		<td> '+ data[i].SHIPPING_FEE_STC +'</td> '
+									+ '	</tr> ';
+
+								$('#goodsRow').append(addRow);
+							}
+
+						} else {
+							alert('@comm_global.Language.Resources.Script_COST_CallCost');
+						}
+					}
+				});
+			}
+		}
+
+	</script>
+
+
+}
+
+

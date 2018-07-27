@@ -1,0 +1,194 @@
+﻿
+
+
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+		×
+	</button>
+	<h4 class="modal-title" id="myModalLabel">보관신청 정보</h4>
+</div>
+<div class="modal-body">
+
+
+
+
+	<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="max-width:1000px; ">
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<h2>보관 신청 선택 상품</h2>
+		</header>
+		<div role="content">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>카테고리</th>
+								<th>바코드</th>
+								<th>SKU</th>
+								<th>대표상품명</th>
+								<th>브랜드</th>
+								<th style="width:5%;">신청</th>
+								<th style="width:5%;">실입고</th>
+								<th style="width:5%;">불량</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>의류</td>
+								<td>1245323232</td>
+								<td>1245323232</td>
+								<td>중국 차이나 홍콩반전 짜장면 곱배기</td>
+								<td>no Brand</td>
+								<td>10</td>
+								<td>11</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>의류</td>
+								<td>1245323232</td>
+								<td>1245323232</td>
+								<td>중국 차이나 홍콩반전 짜장면 곱배기</td>
+								<td>no Brand</td>
+								<td>10</td>
+								<td>11</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>의류</td>
+								<td>1245323232</td>
+								<td>1245323232</td>
+								<td>중국 차이나 홍콩반전 짜장면 곱배기</td>
+								<td>no Brand</td>
+								<td>10</td>
+								<td>11</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+			<!-- end widget content -->
+
+		</div>
+		<!-- end widget div -->
+
+		<button type="button" class="btn btn-primary" onclick="location.href='@Url.Content("~/StcReq/StcReqAdd")' ">
+			검수 확인
+		</button>
+	</div>
+
+
+
+
+
+
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> 보관 신청 정보 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<fieldset>
+									<div class="row">
+										<label class="label col col-2">입고국가</label>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="10000">
+											</label>
+										</section>
+										<label class="label col col-2">STATION</label>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="100">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-2">입고방법</label>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="">
+											</label>
+										</section>
+										<label class="label col col-2">입고배송번호</label>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-2">발송인<br /> 이름</label>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="">
+											</label>
+										</section>
+										<label class="label col col-2">발송인<br /> 전화번호</label>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-2">발송인 주소</label>
+										<section class="col col-10">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-2">메모</label>
+										<section class="col col-10">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="">
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+
+
+
+	<br/><br /><br /><br />
+
+
+
+
+
+</div>
+<div class="modal-footer">
+	<p>보관신청 정보 수정 클릭 시 등록 페이지로 이동하여 수정 하도록 유도</p>
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+		닫기
+	</button>
+
+	<button type="button" class="btn btn-primary" onclick="location.href='@Url.Content("~/StcReq/StcReqAdd")' ">
+		보관신청 정보 수정
+	</button>
+</div>

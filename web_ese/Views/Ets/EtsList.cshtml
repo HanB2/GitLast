@@ -1,0 +1,485 @@
+﻿
+
+@model web_ese.Models_Act.Ets.EtsListModels
+
+<div id="content">
+
+
+	<!--조회-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_Comm_Search </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.sortKey)
+								@Html.HiddenFor(model => model.Paging.page)
+								@Html.HiddenFor(model => model.Paging.pageNum)
+								@Html.HiddenFor(model => model.selChk)
+								<fieldset>
+									<!--출발국가, STATION, 상태-->
+									<div class="row">
+										<label class="label col col-1">출발국가</label>
+										<section class="col col-3">
+											<label class="select">
+												@Html.DropDownList("schSNation", new SelectList(Model.arraySNation, "opt_key", "opt_value"), "선택") <i></i>
+											</label>
+										</section>
+										<label class="label col col-1">STATION</label>
+										<section class="col col-3">
+											<label class="select">
+												@Html.DropDownList("schStation", new SelectList(Model.arrayStation, "opt_key", "opt_value"),"선택") <i></i>
+											</label>
+										</section>
+										<label class="label col col-1">상태</label>
+										<section class="col col-3">
+											<label class="select">
+												@Html.DropDownList("schStat", new SelectList(Model.arrayStat, "opt_key", "opt_value")) <i></i>
+											</label>
+										</section>
+									</div>
+
+									<!--도착국가, 등록일자-->
+									<div class="row">
+										<label class="label col col-1">도착국가</label>
+										<section class="col col-3">
+											<label class="select">
+												@Html.DropDownList("schENation", new SelectList(Model.arrayENation, "opt_key", "opt_value"), "선택") <i></i>
+											</label>
+										</section>
+
+										<label class="label col col-3"></label>
+										<label class="label col col-1">등록일자</label>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schSdt, new { @id = "schSdt", @placeholder = "Expected start date" })
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schEdt, new { @id = "schEdt", @placeholder = "Expected end date" })
+											</label>
+										</section>
+
+									</div>
+
+									<!--검색조건, 상품명-->
+									<div class="row">
+										<label class="label col col-1">검색조건</label>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("schTypeTxt", new SelectList(Model.schTypeTxtArray, "opt_key", "opt_value"), "선택") <i></i>
+											</label>
+										</section>
+										<section class="col col-9">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.schTxt, new { placeholder = "검색어" })
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer>
+									<button type="button" class="btn btn-primary" onclick="javascript: searchAll();">
+										전체 조회
+									</button>
+
+									<button type="button" class="btn btn-primary" onclick="javascript: searchAct();">
+										조회
+									</button>
+								</footer>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--중간 부분-->
+	<div class="row">
+		<article class="col-sm-12">
+
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-pencil"></i> 선택 삭제</a>
+
+
+			<label class="select">
+				<select name="country" style="height:32px; margin-left: 25px;">
+					<option value="0" selected="" disabled="">EOMARS 송장</option>
+				</select> <i></i>
+			</label>
+
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-file-text"></i> 라벨 출력</a>
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-file-text"></i> 엑셀 출력</a>
+
+
+			<label style="float:right;" class="select">
+				@Html.DropDownList("pageNum", new SelectList(Model.pageNumArray, "opt_key", "opt_value", Model.Paging.pageNum), new { onchange = "javascript:setPageNum(this.value)" }) <i></i>
+			</label>
+			<label style="float:right;" class="select">
+				@Html.DropDownList("sortKey", new SelectList(Model.sortKeyArray, "opt_key", "opt_value", Model.sortKey), new { onchange = "javascript:sortKey(this.value)" }) <i></i>
+			</label>
+			<label style="float:right;">정렬</label>
+
+		</article>
+	</div>
+
+
+	<!--상품 조회 결과-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>상품조회 결과</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+
+
+							<div class="table-responsive">
+
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:5%;"><input type="checkbox" id="allCheck" /></th>
+											<th style="width:2%;"></th>
+											<th style="width:4%;">@comm_global.Language.Resources.ESE_Comm_Num</th>
+											<th style="width:6%;">ETS NO</th>
+											<th style="width:7%;"></th>
+											<th style="width:7%;">출발국가</th>
+											<th style="width:7%;">도착국가</th>
+											<th style="width:9%;">주문번호</th>
+											<th style="width:9%;">현지택배번호</th>
+											<th style="width:8%;">배송비</th>
+											<th style="width:8%;">상태</th>
+											<th style="width:12%;">등록일자</th>
+											<th style="width:auto;">메모</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model.Items)
+										{
+											<tr>
+												<td>
+													<input type="checkbox" value="@item.WAYBILLNO" class="etoDelChk" name="checkbox-inline"> <!--checkBox에 추후 추가-->
+												</td>
+												<td>@(Model.Paging.startCnt--)</td> <!--번호-->
+												<td>@item.WAYBILLNO</td>
+												<td>
+													<a onclick="javascript:callEdit('@item.WAYBILLNO');" href="#" class="btn btn-default btn-xs">
+														<i class="fa fa-edit"></i>
+													</a>
+													<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_memo">
+														<i class="fa fa-pencil"></i>
+													</a>
+												</td>
+
+												<td>@item.DEP_NATION_CODE</td>
+												<td>@item.NATION_CODE</td>
+												<td>@item.ORDERNO1</td>
+												<td>@item.DELVNO</td>
+												<td>@item.DELVFEE</td>
+												<td>@item.STATUS</td><!--추후 item.STATUS_TEST로 바꿔야 함.-->
+												<td>@item.UPLOADYMD</td>
+												<td>@item.MEMO</td>
+											</tr>
+										}
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="4">
+												Total : @Model.Paging.totCnt
+											</td>
+										</tr>
+									</tfoot>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				@Html.Raw(ViewData["pageing"])
+
+			</article>
+		</div>
+	</section>
+
+
+
+</div>
+
+
+
+<!--메모 이력-->
+<div class="modal fade in" id="myModal_memo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+
+
+
+
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">메모 이력</h4>
+			</div>
+			<div class="modal-body">
+
+
+
+
+
+
+
+
+
+				<section id="widget-grid" class="">
+					<div class="row">
+						<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+							<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+								<header role="heading">
+									<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+									<h2>메모 이력 조회</h2>
+									<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+								</header>
+
+								<div role="content">
+									<div class="widget-body no-padding">
+
+
+										<div class="table-responsive">
+
+											<table class="table table-bordered table-striped">
+												<thead>
+													<tr>
+														<th style="width:auto;">메모</th>
+														<th style="width:10%;">작성자</th>
+														<th style="width:12%;">등록일자</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>차이나 프렌차이즈 롯데리아 햄버거 원가가 얼마인가요?</td>
+														<td>STATION ADIN</td>
+														<td>2018-03-01 00:00:00</td>
+													</tr>
+													<tr>
+														<td>100원입니다.</td>
+														<td>SENDER</td>
+														<td>2018-03-01 00:00:00</td>
+													</tr>
+												</tbody>
+											</table>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</article>
+					</div>
+				</section>
+
+
+				<section id="widget-grid" class="" style="max-width:1000px;">
+					<div class="row">
+						<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+							<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+								<header role="heading">
+									<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+									<h2> 메모 등록 </h2>
+								</header>
+								<div role="content">
+									<div class="widget-body no-padding">
+										<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+											<fieldset>
+
+
+												<section>
+													<label class="textarea textarea-resizable">
+														<textarea rows="3" class="custom-scroll"></textarea>
+													</label>
+												</section>
+											</fieldset>
+										</form>
+
+									</div>
+								</div>
+							</div>
+						</article>
+
+					</div>
+				</section>
+
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					메모등록
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					닫기
+				</button>
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+
+@section pagespecific {
+	
+<script type="text/javascript">
+
+
+	   $(function(){ 
+			//전체선택 체크박스 클릭 
+			$("#allCheck").click(function(){ //만약 전체 선택 체크박스가 체크된상태일경우 
+				if($("#allCheck").prop("checked")) { //해당화면에 전체 checkbox들을 체크해준다 
+					$(".etoDelChk").prop("checked", true); // 전체선택 체크박스가 해제된 경우 
+				} else { //해당화면에 모든 checkbox들의 체크를해제시킨다. 
+					$(".etoDelChk").prop("checked", false);
+				}
+			})
+		})
+
+		//데이터 피커 생성자
+		$(function() {
+    		$("#schSdt, #schEdt").datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+		});
+
+		//조회
+		function searchAct() {
+			$("#Paging_page").val('1');
+			$("#listForm").submit();
+		}
+
+		//전체조회
+		function searchAll() {
+			$("#schType").val('');
+			$("#schSdt").val('');
+			$("#schEdt").val('');
+			$("#schTypeTxt").val('');
+			$("#schTxt").val('');
+			$("#schSNation").val('');
+			$("#schStation").val('');
+			$("#schENation").val('');
+			$("#schStat").val('');
+
+
+
+			$("#Paging_page").val('1');
+
+			$("#listForm").submit();
+		}
+
+		//수정 페이지 이동
+		function callEdit(seqno) {
+
+			$('#listForm').attr('method', 'GET');
+			$('#listForm').attr('action', '/Prod/ProdAdd');
+			$('#act_type').val('updt');
+			$('#act_key').val(seqno);
+			$('#listForm').submit();
+
+		}
+
+		function callExcel() {
+
+			$('#listForm').attr('method', 'POST');
+			$('#listForm').attr('action', '/Prod/ProdListExcel');
+			$('#listForm').submit();
+
+		}
+
+
+		// 등록/수정
+		function act_MoveModif(seqno) {
+			var MoveModif = document.getElementById('view_form').contentWindow;
+			MoveModif.formSubmit();
+		}
+
+
+		//삭제
+		function callDelete(seqno) {
+			var msg = "삭제하시겠습니까?";
+			if (confirm(msg)) {
+				$('#act_type').val('del');
+				$('#act_key').val(seqno);
+				$('#listForm').submit();
+			}
+		}
+
+
+		function callDeleteSelect() {
+			var data = "";
+			var msg = "선택 항목을 삭제하시겠습니까?";
+			if (confirm(msg)) {
+				$(".etoDelChk").each(function () {
+					if ($(this).prop("checked")) {
+						var test = $(this).val();
+						data += $(this).val() + ',';
+					}
+				});
+				var leng = data.length;
+
+				if (leng == 0) {
+					alert("선택 항목이 없습니다.");
+				} else {
+					$('#act_type').val('delChk');
+					$("#delChk").val(data.substring(0, leng -1));
+					$('#listForm').submit();
+				}
+			}
+		}
+
+		// 정렬 페이지 수 기준
+		function setPageNum(val) {
+			$('#Paging_page').val('1');
+			$('#Paging_pageNum').val(val);
+			$('#listForm').submit();
+		}
+
+
+		//정렬 항목 기준
+		function sortKey(val) {
+			$('#Paging_page').val('1');
+			$('#sortKey').val(val);
+			$('#listForm').submit();
+		}
+
+		//페이징 공통 함수
+		function movPage(page) {
+			$('#Paging_page').val(page);
+			$('#listForm').submit();
+		}
+</script>
+
+	}

@@ -1,0 +1,195 @@
+﻿@model web_ese.Models_Act.Mar.MarOutReqModels
+
+
+<div id="content">
+	<!--페이지 이름-->
+	<div class="alert alert-block alert-success" style="max-width:1000px;">
+		<h4 class="alert-heading"><i class="fa fa-check-square-o"></i> @comm_global.Language.Resources.ESE_MarOutReq_Header </h4>
+	</div>
+
+
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<!--환전 요청 시 주의 사항-->
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-pink jarviswidget-sortable" id="wid-id-9" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" role="widget" style="">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+						<h2><strong>@comm_global.Language.Resources.ESE_MarOutReq_Attention</strong> </h2>
+					</header>
+					<div role="content">
+
+						<div class="widget-body" style="height:255px;">
+							<p class="alert alert-warning">
+
+								@comm_global.Language.Resources.ESE_MarOutReq_AttentionFirst
+
+							</p>
+							<p class="alert alert-warning">
+
+								@comm_global.Language.Resources.ESE_MarOutReq_AttentionSecond
+
+							</p>
+
+
+							<p class="alert alert-warning">
+
+								@comm_global.Language.Resources.ESE_MarOutReq_AttentionThird
+
+							</p>
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<!--신청자 정보-->
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_MarOutReq_OutReqPersonInfo </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+							{
+								@Html.AntiForgeryToken()
+								<fieldset>
+
+									<!--보유 MAR-->
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarOutReq_PossessionMar</label>
+										<label class="label col col-9">@Model.MY_MAR </label>
+									</div>
+
+									<!--띄어쓰기-->
+									<div class="row">
+										<label class="label col col-12">&nbsp;</label>
+									</div>
+									
+									<!--환전 신청 MAR-->
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarOutReq_ExchangeReqMar</label>
+										<section class="col col-9">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.REQ_AMOUNT, new { @id = "ReqMar", placeholder = "환전 신청 MAR", onkeyup = "this.value=this.value.replace(/[^0-9]/g,'');" })
+												@Html.ValidationMessageFor(model => model.REQ_AMOUNT)
+											</label>
+										</section>
+									</div>
+
+									<!--띄어쓰기-->
+									<div class="row">
+										<label class="label col col-12">&nbsp;</label>
+									</div>
+
+									<!--예상 환전 금액-->
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarOutReq_ExpectedExchangeAmount</label>
+										<label class="label col col-9">112.340</label>
+									</div>
+
+									<!--띄어쓰기-->
+									<div class="row">
+										<label class="label col col-12">&nbsp;</label>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarOutReq_OutReqMemo</label>
+										<section class="col col-9">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.REQ_MEMO, new { placeholder = "메모" })
+												@Html.ValidationMessageFor(model => model.REQ_MEMO)
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<!--Submit 부분-->
+								<footer>
+									<button type="button" class="btn btn-primary" onclick="javascript: ValidationAndSubmit();">
+										@comm_global.Language.Resources.ESE_MarOutReq_ExchangeReq
+									</button>
+								</footer>
+
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+		</div>
+	</section>
+
+
+</div>
+<!-- END MAIN CONTENT -->
+
+@section pagespecific {
+
+
+	<script type="text/javascript">
+
+		var settingForm = [];
+
+		$(document).ready(function () {
+			formSettingValue();
+			formSetting();
+		});
+
+
+		function formSettingValue() {
+			//id		클래스		길이		콤보박스
+
+			settingForm.push(['ReqMar', 'reqMar', '22', '0']); //환전 신청 MAR
+			settingForm.push(['REQ_MEMO', 'no', '200', '0']); // 메모
+
+		}
+
+		function formSetting() {
+
+			for (i = 0; i < settingForm.length; i++) {
+				tmp_id = settingForm[i][0];	//id
+				tmp_class = settingForm[i][1];	//class
+				tmp_maxLeng = settingForm[i][2]; //길이제한 max
+
+
+				if (tmp_class != 'no')
+					$('#' + tmp_id).addClass(tmp_class);
+
+				if (tmp_maxLeng != 'no')
+					$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+			}
+
+			$(".reqMar").attr("onkeyup", "this.value=this.value.replace(/[^0-9_.-]/g,'')");
+		}
+
+
+
+
+		//유효성 검사 + 서브밋
+		function ValidationAndSubmit() {
+
+
+			if (!$("#ReqMar").val().match(/^[0-9.]*$/)) {
+				alert("@comm_global.Language.Resources.Script_MarOutReqOnlyUseNum");
+				return false;
+			}
+
+
+			if ($("#ReqMar").val() == 0 || $("#ReqMar").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_PleaseExchangeReqMar" + "]");
+				$("#ReqMar").focus();
+				return false;
+			}
+
+			$("#listForm").submit();
+		}
+
+
+
+
+
+	</script>
+	}

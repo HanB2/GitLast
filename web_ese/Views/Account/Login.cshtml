@@ -1,0 +1,126 @@
+﻿@model AccountLoginModel
+@{
+    ViewBag.PageId = "extr-page";
+    ViewBag.PageClass = "animated fadeInDown";
+}
+
+@section topright{
+    <span id="extr-page-header-space"> <span class="hidden-mobile">@comm_global.Language.Resources.ESE_Login_NeedAnAccount</span> <a href="@Url.Action("register", "account")" class="btn btn-danger">@comm_global.Language.Resources.ESE_Login_CreateAccount</a> </span>
+}
+
+<div id="content" class="container">
+    <div class="row">
+        @{ Html.RenderPartial("_LoginText"); }
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+            <div class="well no-padding">
+                <form action="@Url.Action("login", "account")" method="POST" id="login-form" class="smart-form client-form">
+                    <header>
+                       @comm_global.Language.Resources.ESE_Login_SIGNIN 
+						<!--<br/> @comm_global.Language.Resources.Hello-->
+
+                    </header>
+                    @Html.HiddenFor(m => m.ReturnUrl)
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationBootstrap()
+                    <fieldset>
+                        <section>
+                            <label class="label"> @comm_global.Language.Resources.ESE_Login_EMAIL </label>
+                            <label class="input">
+                                <i class="icon-append fa fa-user"></i>
+                                <input type="email" name="email" value="">
+                                <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>@comm_global.Language.Resources.ESE_Login_PleaseEnterEmailAddrOrUsername</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="label">@comm_global.Language.Resources.ESE_Login_PASSWD</label>
+                            <label class="input">
+                                <i class="icon-append fa fa-lock"></i>
+                                <input type="password" name="password" value="">
+                                <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>@comm_global.Language.Resources.ESE_Login_EnterYourPasswd</b>
+                            </label>
+                            <div class="note">
+                                <a href="@Url.Action("forgotpassword", "account")"><i class="fa fa-frown-o"></i>@comm_global.Language.Resources.ESE_Login_ForgotPasswd</a>
+                            </div>
+                        </section>
+
+                        <section>
+                            <label class="checkbox">
+                                <input type="checkbox" name="rememberMe" value="true" checked="checked">
+                                <input type="hidden" name="rememberMe" value="false" />
+                                <i></i>@comm_global.Language.Resources.ESE_Login_StaySignedIn
+                            </label>
+                        </section>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" class="btn btn-primary">
+                            @comm_global.Language.Resources.Button_SubmitSignIn
+                        </button>
+						<div style="float:left;">
+							<!-- multiple lang dropdown : find all flags in the flags page -->
+							<ul class="header-dropdown-list hidden-xs">
+								<li>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="~/content/img/blank.gif" class="flag flag-us" alt="United States"> <span> @comm_global.Language.Resources.ESE_Login_AtagEnglish </span> <i class="fa fa-angle-down"></i> </a>
+									<ul class="dropdown-menu pull-left">
+										<li class="active">
+											<a href="javascript:void(0);"><img src="~/content/img/blank.gif" class="flag flag-us" alt="United States"> @comm_global.Language.Resources.ESE_Login_DropdownFlagEnglish</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);"><img src="~/content/img/blank.gif" class="flag flag-jp" alt="Japan"> @comm_global.Language.Resources.ESE_Login_DropdownFlagJapanese</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);"><img src="~/content/img/blank.gif" class="flag flag-cn" alt="China"> @comm_global.Language.Resources.ESE_Login_DropdownFlagChinese</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);"><img src="~/content/img/blank.gif" class="flag flag-kr" alt="Korea"> @comm_global.Language.Resources.ESE_Login_DropdownFlagKorean</a>
+										</li>
+
+									</ul>
+								</li>
+							</ul>
+							<!-- end multiple lang -->
+						</div>
+                    </footer>
+                </form>
+            </div>
+            <!--@{ Html.RenderPartial("_SocialMedia"); }-->
+        </div>
+    </div>
+</div>
+@section pagespecific {
+    <script type="text/javascript">
+		$(function () {
+			// Validation
+			$("#login-form").validate({
+				// Rules for form validation
+				rules: {
+					email: {
+						required: true,
+						email: true
+					},
+					password: {
+						required: true,
+						minlength: 3,
+						maxlength: 20
+					}
+				},
+
+				// Messages for form validation
+				messages: {
+					email: {
+						required: @comm_global.Language.Resources.Script_emailRequired,
+						email: @comm_global.Language.Resources.Script_emailValid,
+						},
+					password: {
+						required: @comm_global.Language.Resources.Script_passwordRequired,
+						}
+				},
+
+				// Do not change code below
+				errorPlacement: function (error, element) {
+					error.insertAfter(element.parent());
+				}
+			});
+		});
+    </script>
+}

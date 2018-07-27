@@ -1,0 +1,186 @@
+﻿@model web_esm.Models_Act.Cs.CsNoticeModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+<article class="col-sm-12 col-md-12 col-lg-6" style="height:400px; padding:0px;">
+
+	<!-- Widget ID (each widget will need unique ID)-->
+	<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+			<h2> 상세 정보 </h2>
+		</header>
+
+		<div role="content">
+			<!-- widget content -->
+			<div class="widget-body no-padding">
+
+				@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+				{
+					@Html.HiddenFor(model => model.act_type)
+					@Html.HiddenFor(model => model.act_key)
+					@Html.HiddenFor(model => model.Item.BD_TYPE)
+					@Html.HiddenFor(model => model.Item.SEQNO)
+					@Html.AntiForgeryToken()
+
+					<fieldset>
+						<!--공지유형, 작성자ID-->
+						<div class="row">
+							<label class="label col col-2">공지유형</label>
+							<section class="col col-4">
+								<label class="select">
+									@Html.DropDownList("schType", new SelectList(Model.schTypeArray, "opt_value", "opt_key", Model.Item.BD_TYPE)) <i></i>
+								    @Html.ValidationMessageFor(model => model.Item.BD_TYPE)
+									
+								</label>
+							</section>
+							<label class="label col col-2" >작성자_ID :</label>
+							<label class="label col col-4" >@Model.Item.WRITER_NAME</label>
+							
+						</div>
+
+						<!--제목(KR)-->
+						<div class="row" >
+							<label class="label col col-2">제목(KR)</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.TITLE_KR, new { @id = "TITLE_KR", @style = "width:600px" })
+									@Html.ValidationMessageFor(model => model.Item.TITLE_KR)
+								</label>
+							</section>
+						</div>
+
+						<!--제목(CN)-->
+						<div class="row">	
+							<label class="label col col-2">제목(CN)</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.TITLE_CN, new { @id = "TITLE_CN", @style = "width:600px" })
+									@Html.ValidationMessageFor(model => model.Item.TITLE_CN)
+								</label>
+							</section>
+						</div>
+
+						<!--제목(EN)-->
+						<div class="row">
+							<label class="label col col-2">제목(EN)</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.TITLE_EN, new { @id = "TITLE_EN", @style = "width:600px" })
+									@Html.ValidationMessageFor(model => model.Item.TITLE_EN)
+								</label>
+							</section>
+						</div>
+
+						<!--등록일시, 수정일시-->
+						<div class="row">
+							<label class="label col col-6" name="REGDATE">등록일시 :  @Model.Item.REGDATE</label>
+							
+
+							<label class="label col col-6" name="UP_DATE">수정일시 :  @Model.Item.UP_DATE </label>
+							
+
+						</div>		
+					</fieldset>
+
+					<fieldset>			
+						<!--팝업여부-->
+						<div class="row">
+							<label class="label col col-2">팝업여부</label>
+							<section class="col col-10">
+								<div class="inline-group">
+
+									<label class="radio">
+										@Html.RadioButtonFor(m => m.RadioBoxPop, "true", new { id = "compatible" })
+										<i></i>@Html.Label( "사용")
+									</label>
+									<label class="radio">
+										@Html.RadioButtonFor(m => m.RadioBoxPop, "false", new { id = "notcompatible" })
+										<i></i>@Html.Label( "미사용")
+									</label>									
+								</div>
+							</section>
+						</div>
+
+						<!--팝업시작날짜, 팝업종료날짜-->
+						<div class="row">
+							<label class="label col col-2">팝업시작날짜</label>
+							<section class="col col-4">
+								<label class="input">
+									<i class="icon-append fa fa-calendar"></i>
+									@Html.TextBoxFor(model => model.Item.POPUP_START, new { @id = "POPUP_START" })
+								</label>
+							</section>
+							<label class="label col col-2">팝업종료날짜</label>
+							<section class="col col-4">
+								<label class="input">
+									<i class="icon-append fa fa-calendar"></i>
+									@Html.TextBoxFor(model => model.Item.POPUP_END, new { @id = "POPUP_END" })
+								</label>
+							</section>
+						</div>
+				</fieldset>
+				<fieldset>
+					<section>
+						<div id="collapseOne-1" class="panel-collapse collapse in">
+							<p>내용(KR)</p>
+							@Html.TextAreaFor(model => model.Item.CONTENTS_KR, new { @id = "CONTENTS_KR", @class = "custom-scroll", @cols = "100", @ROWS = "8" })
+							@Html.ValidationMessageFor(model => model.Item.CONTENTS_KR)
+
+						</div>
+					</section>
+					<section>
+						<div id="collapseOne-2" class="panel-collapse collapse in">
+							<p>내용(CN)</p>
+							@Html.TextAreaFor(model => model.Item.CONTENTS_CN, new { @id = "CONTENTS_CN", @class = "custom-scroll", @cols = "100", @ROWS = "8" })
+							@Html.ValidationMessageFor(model => model.Item.CONTENTS_CN)
+						</div>
+					</section>
+					<section>
+						<div id="collapseOne-3" class="panel-collapse collapse in">
+							<p>내용(EN)</p>
+							@Html.TextAreaFor(model => model.Item.CONTENTS_EN, new { @id = "CONTENTS_EN", @class = "custom-scroll", @cols = "100", @ROWS = "8" })
+							@Html.ValidationMessageFor(model => model.Item.CONTENTS_EN)
+						</div>
+					</section>
+				</fieldset>
+				}
+			</div>
+		</div>
+	</div>
+</article>
+
+
+@section pagespecific {
+<script type="text/javascript">
+	function formSubmit() {
+		$('#view_form').submit();
+	}
+
+	$(function () {
+		$("#POPUP_START, #POPUP_END").datepicker({
+			dateFormat: 'yymmdd'
+		});
+	});
+
+	//데이터 피커 생성자
+	$(function () {
+		$("#schSdt, #schEdt").datepicker({
+			dateFormat: 'yy-mm-dd'
+		});
+	});
+	
+
+	// 등록/수정
+	function act_ifarame() {
+		var ifra = document.getElementById('viewIframe').contentWindow;
+		ifra.formSubmit();
+	}
+
+
+	
+</script>
+}

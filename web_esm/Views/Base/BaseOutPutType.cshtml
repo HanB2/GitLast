@@ -1,0 +1,154 @@
+﻿@model web_esm.Models_Act.Base.BaseOutPutTypeModels
+
+<div id="content" style="max-width:1000px;">
+	@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+	{
+		@Html.HiddenFor(model => model.act_type)
+		@Html.HiddenFor(model => model.act_key)
+		<fieldset style="border:1px solid #C2C2C2">
+			<div class="row">
+				<label class="label col col-2"><b>국가별 검색</b></label>
+				<section class="col col-10">
+					<label class="select">
+						@Html.DropDownList("schType", new SelectList(Model.nationArray, "opt_key", "opt_value"), "전체", new { onchange = "this.form.submit()" }) <i></i>
+					</label>
+				</section>
+			</div>
+		</fieldset>
+	}
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<div class="jarviswidget-ctrls" role="menu">
+							<a onclick="javascript:callAdd();" href="#" class="button-icon" data-toggle="modal" data-target="#myModal">
+								<i class="fa fa-plus"></i>
+							</a>
+						</div>
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>출고 타입 정보</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:6%;"></th>
+											<th style="width:5%;">국가</th>
+											<th style="width:10%;">출고타입</th>
+											<th style="width:10%;">출고타입 코드</th>
+											<th style="width:10%;">출고타입 설명</th>
+											<th style="width:5%;">기호</th>
+											<th style="width:5%;">사용</th>
+											<th style="width:12%;">요율표 보기</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model.Items) { 
+										<tr>
+											<td>
+												<a onclick="javascript:callEdit('@item.SEQNO');" href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a onclick="javascript:callDelete('@item.SEQNO');" href="#" class="btn btn-default btn-xs">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</td>
+											<td>@item.NATION_CODE</td>
+											<td>@item.RELEASE_NAME</td>
+											<td>@item.RELEASE_CODE</td>
+											<td>@item.MEMO</td>
+											<td>@item.DELV_CODE</td>
+											<td>사용</td><!--사용 미사용에 대한 테이블 없음-->
+											<td>
+												<a href="@Url.Action("BaseOutPutRate", "Base", new { seqNo = @item.SEQNO ,  schType = @Model.schType})" class="btn btn-default btn-xs">
+													[요율표 수정]
+												</a>
+											</td>
+										</tr>
+										}			
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</article>
+		</div>
+	</section>
+
+</div>
+
+<!--Modal-->
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">출고타입 정보 상세</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<iframe width="100%" height="400px;" scrolling="no" frameborder="0" id="viewIframe" src="/Base/BaseOutPutTypeView"></iframe>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button onclick="javascript:act_ifarame();" id="modal_act" type="button" class="btn btn-default">
+					등록
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					닫기
+				</button>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+@section pagespecific{
+	<script type="text/javascript">
+		// 등록/수정
+		function act_ifarame() {
+			var ifra = document.getElementById('viewIframe').contentWindow;
+			ifra.formSubmit();
+		}
+
+
+		//삭제
+		function callDelete(seqno) {
+			var msg = "삭제하시겠습니까?";
+			if (confirm(msg)) {
+				$('#act_type').val('del');
+				$('#act_key').val(seqno);
+				$('#listForm').submit();
+			}
+		}
+		//등록 팝업창 호출
+		function callAdd() {
+			$("#modal_act").html('등록');
+			$('#viewIframe').attr('src', '/Base/BaseOutPutTypeView');
+		}
+
+		//수정 팝업창 호출
+		function callEdit(seqno) {
+			$("#modal_act").html('수정');
+			$('#viewIframe').attr('src', '/Base/BaseOutPutTypeView?seqNo=' + seqno);
+		}
+
+	</script>
+
+}

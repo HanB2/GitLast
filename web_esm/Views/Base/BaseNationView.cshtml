@@ -1,0 +1,90 @@
+﻿@model web_esm.Models_Act.Base.BaseNationModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+			<article class="col-sm-12 col-md-12 col-lg-12" style="height:400px; padding:0px;">
+				<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>배송가능 국가 추가 / 수정</h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.Item.SEQNO)
+								@Html.AntiForgeryToken()
+								<fieldset>
+
+									<div class="row">
+										<label class="label col col-2">국가명</label>
+										<section class="col col-10">
+											<label class="select">
+												@Html.DropDownList("schType", new SelectList(Model.nationArray, "opt_key", "opt_value", Model.Item.NATION_CODE), new { onchange = "setNATIONCODE(this.value)" }) <i></i>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<fieldset>
+									
+									
+									
+									<div class="row">								
+										<section class="col col-4">
+											<label>국가코드</label>
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.Item.NATION_CODE, new { @id = "NATION_CODE" , @readonly = "readonly" })
+												@Html.ValidationMessageFor(model => model.Item.NATION_CODE)
+											</label>
+										</section>
+										<section class="col col-4">
+											<label>화폐단위</label>
+											<label class="select">
+												@Html.DropDownList("CURRENCY_UNIT", new SelectList(Model.currencyArray, "opt_value", "opt_key", Model.Item.CURRENCY_UNIT)) <i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label>무게단위</label>
+											<label class="select">
+												<label class="select">
+													@Html.DropDownList("WEIGHT_UNIT", new SelectList(Model.weightArray, "opt_value", "opt_key", Model.Item.WEIGHT_UNIT)) <i></i>
+												</label>
+											</label>
+										</section>
+									</div>
+
+								</fieldset>
+
+								}
+
+						</div>
+					</div>
+				</div>
+			</article>
+	
+
+
+
+
+
+@section pagespecific {
+	<script type="text/javascript">
+		function formSubmit() {
+			$('#view_form').submit();
+		}
+
+		function setNATIONCODE(code) {
+			//alert(tmp.text);
+			$("#NATION_CODE").val(code);
+			//$("#nation_name_tmp").val(name);
+		}
+
+	</script>
+
+}

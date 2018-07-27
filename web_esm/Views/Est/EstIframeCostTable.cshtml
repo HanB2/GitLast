@@ -1,0 +1,179 @@
+﻿@model web_esm.Models_Act.Est.EstIframeCostModels
+
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+<div id="content">
+
+	<!--국가별 요율표 조회-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>국가별 요율표 조회 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+							{
+								<fieldset>
+									@Html.HiddenFor(model => model.act_type)
+									@Html.HiddenFor(model => model.act_key)
+									@Html.HiddenFor(model => model.sortKey)
+									@Html.HiddenFor(model => model.viewEstCode)
+								
+
+									<!--STATION, 도착국가-->
+									<div class="row">
+										<label class="label col col-2">STATION</label>
+										<section class="col col-4">
+											<label class="select">
+											    @Html.DropDownList("station", new SelectList(Model.stationArray, "opt_key", "opt_value"))
+											</label>
+										</section>
+										<label class="label col col-2">도착국가</label>
+										<section class="col col-4">
+											<label class="select">
+												@Html.DropDownList("nation", new SelectList(Model.nationArray, "opt_key", "opt_value"), "선택", new { onchange = "javascript:callType(this.value);" }) <i></i>
+											</label>
+										</section>
+									</div>
+									<!--출고타입-->
+									<div class="row">
+										<label class="label col col-2">출고타입</label>
+										<section class="col col-10">
+											<label class="select">
+												@Html.DropDownList("type", new SelectList(Model.typeArray, "opt_key", "opt_value"), "출고타입 선택") <i></i>
+											</label>
+										</section>	
+									</div>
+
+								</fieldset>
+
+								<!--Submit 부분-->
+								<footer>
+									<button type="submit" class="btn btn-primary">
+										배송 요금표 조회
+									</button>
+								</footer>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--배송 요금표-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" >
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>배송 요금표</h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:25%;">무게(KG)</th>
+											<th style="width:25%;">출고타입</th>
+											<th style="width:25%;">일반배송 </th>
+											<th style="width:25%;">보관배송</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										@foreach (var item in Model.Items)
+										{
+											<tr>
+												<td>@item.WEIGHT</td>	<!--무게(KG)-->
+												<td>@item.RELEASE_CODE</td>	<!--출고타입-->
+												<td>@item.SHIPPING_FEE_NOR</td>	<!--일반배송-->
+												<td>@item.SHIPPING_FEE_STC</td>	<!--보관배송-->
+											</tr>
+										}
+
+
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>			
+			</article>
+		</div>
+	</section>
+
+
+
+
+</div>
+
+
+
+	@section pagespecific {
+
+
+		<script type="text/javascript">
+		//배송 요금표 조회
+			function callType(val) {
+			if (val != "") {
+				$.ajax({
+					type: "POST",
+					url: '/Est/GetRate',
+					datatype: "json",
+					data: {
+						station: $('#station').val(),
+						nation: val
+					},
+					success: function (data) {
+						$('#type').empty();
+						if (data.length >= 1) {
+							for (var i = 0; i < data.length; i++) {
+								var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+								$('#type').append(option);
+							}
+						} else {
+							var option = $("<option value=''>출고타입 선택</option>");
+							$('#type').append(option);
+						}
+					}
+				});
+			}
+		}
+		//환율 가져오기
+
+		
+		function get_AMNT() {
+			var msg = "환율을 가져오시겠습니까?";
+			if (confirm(msg)) {
+				$.ajax({
+					type: "POST",
+					url: '/Base/GetExchangeRate',
+					datatype: "json",
+					success: function (data) {
+						for (var i = 0; i < data.length; i++) {
+							$('#' + data[i].SEQNO).val(data[i].AMNT);
+						}
+						alert("확인 후 환율 일괄저장 버튼을 클릭해야 적용 됩니다.");
+
+					}
+				});
+			}
+		}
+		
+		</script>
+
+
+	}

@@ -1,0 +1,270 @@
+﻿@model web_ese.Models_Act.Ese.EseManagerModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+<article class="col-sm-12 col-md-12 col-lg-6" style="height:480px; padding:0px;">
+
+	<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+			<h2> @comm_global.Language.Resources.ESE_Comm_ViewInfo  </h2>
+		</header>
+
+		<div role="content">
+			<!-- widget content -->
+			<div class="widget-body no-padding">
+
+				@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+				{
+					@Html.HiddenFor(model => model.act_type)
+					@Html.HiddenFor(model => model.act_key)
+					@Html.HiddenFor(model => model.schTxt2)
+					@Html.HiddenFor(model => model.Item.SEQNO)
+
+					@Html.AntiForgeryToken()
+
+					<fieldset>
+						<!--계정 ID-->
+						@if (Model.act_type == "updt")
+						{
+							<div class="row">
+								<label class="label col col-2">@comm_global.Language.Resources.ESE_EseManagerView_Email</label>
+								<section class="col col-10">
+									<label class="label col col-12" style="padding-left: 0px;">@Model.Item.EMAIL  &nbsp;</label>
+									@Html.ValidationMessageFor(model => model.Item.EMAIL)
+								</section>
+							</div>
+						}
+						else
+						{
+							<div class="row">
+								<label class="label col col-2">@comm_global.Language.Resources.ESE_EseManagerView_Email</label>
+								<section class="col col-10">
+									<label class="input">
+										@Html.TextBoxFor(model => model.Item.EMAIL)
+										@Html.ValidationMessageFor(model => model.Item.EMAIL)
+									</label>
+								</section>
+							</div>
+
+						<!--비밀번호-->
+							<div class="row">
+								<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_PASSWD</label>
+								<section class="col col-10">
+									<label class="input">
+										@Html.TextBoxFor(model => model.Item.PASSWD)
+										@Html.ValidationMessageFor(model => model.Item.PASSWD)
+									</label>
+								</section>
+							</div>
+
+						<!--비밀번호 확인-->
+							<div class="row">
+								<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfoMy_UserPasswordCheck</label>
+								<section class="col col-10">
+									<label class="input">
+										@Html.TextBoxFor(model => model.Item.PASSWD_CHK)
+										@Html.ValidationMessageFor(model => model.Item.PASSWD_CHK)
+									</label>
+								</section>
+							</div>
+						}
+
+
+						@if (Model.act_type == "updt" && Model.Item.GROUP_ID == 0)
+						{
+							<input type="hidden" id="GroupId" name="GroupId" value="@Model.Item.GROUP_ID" />
+							<input id="RadioBoxPop" name="RadioBoxPop" type="hidden" value="false">
+						}
+						else
+						{
+
+							<!--상태-->
+							<div class="row">
+								<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_STATUS</label>
+								<section class="col col-10">
+									<div class="inline-group">
+										<label class="radio">
+											@Html.RadioButtonFor(m => m.RadioBoxPop, "false")
+											<i></i>@comm_global.Language.Resources.ESE_Comm_Use
+										</label>
+										<label class="radio">
+											@Html.RadioButtonFor(m => m.RadioBoxPop, "true")
+											<i></i>@comm_global.Language.Resources.ESE_Comm_PostPone
+										</label>
+									</div>
+								</section>
+							</div>
+
+							<!--그룹 ID-->
+							<div class="row">
+								<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_GroupId</label>
+								<section class="col col-10">
+									<label class="select">
+										@Html.DropDownList("GroupId", new SelectList(Model.GroupIdArray, "opt_key", "opt_value", Model.Item.GROUP_ID)) <i></i>
+									</label>
+								</section>
+							</div>
+						}
+						<!--부서-->
+						<div class="row">
+							<label class="label col col-2">@comm_global.Language.Resources.ESE_EseManagerView_DEPARTMENT</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.DEPARTMENT)
+								</label>
+							</section>
+						</div>
+
+						<!--직급-->
+						<div class="row">
+							<label class="label col col-2">@comm_global.Language.Resources.ESE_EseManagerView_POSITION</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.POSITION)
+								</label>
+							</section>
+						</div>
+
+						<!--메모-->
+						<div class="row">
+							<label class="label col col-2">@comm_global.Language.Resources.ESE_EseInfo_MEMO</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.MEMO)
+								</label>
+							</section>
+						</div>
+
+
+						<!--사용자 명-->
+						<div class="row">
+							<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_UserName</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.USERNAME)
+								</label>
+							</section>
+						</div>
+
+						<!--사용자 전화번호-->
+						<div class="row">
+							<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_UserTelNo</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.TELNO)
+								</label>
+							</section>
+						</div>
+					</fieldset>
+
+				}
+			</div>
+		</div>
+	</div>
+</article>
+
+
+@section pagespecific {
+	<script type="text/javascript">
+
+
+		var settingForm = [];
+
+		$(document).ready(function () {
+			formSettingValue();
+			formSetting();
+		});
+
+		function formSettingValue() {
+			//id		클래스		길이		콤보박스
+
+			settingForm.push(['Item_EMAIL', 'no', '50', '0']); //계정 ID
+			settingForm.push(['Item_PASSWD', 'no', '255', '0']); // 비밀번호
+			settingForm.push(['Item_PASSWD_CHK', 'no', '255', '0']); // 비밀번호 확인
+			settingForm.push(['Item_DEPARTMENT', 'no', '30', '0']); // 부서
+			settingForm.push(['Item_POSITION', 'no', '30', '0']); // 직급
+			settingForm.push(['Item_MEMO', 'no', '100', '0']); // 메모
+			settingForm.push(['Item_USERNAME', 'no', '30', '0']); // 사용자 명
+			settingForm.push(['Item_TELNO', 'no', '20', '0']); // 사용자 전화번호
+
+		}
+
+
+		function formSetting() {
+
+			for (i = 0; i < settingForm.length; i++) {
+				tmp_id = settingForm[i][0];	//id
+				tmp_class = settingForm[i][1];	//class
+				tmp_maxLeng = settingForm[i][2]; //길이제한 max
+
+
+				if (tmp_class != 'no')
+					$('#' + tmp_id).addClass(tmp_class);
+
+				if (tmp_maxLeng != 'no')
+					$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+
+
+			}
+
+		}
+
+		function formSubmit() {
+
+
+
+			if ($("#Item_EMAIL").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_EseManagerView_Email" + "]");
+				$("#Item_EMAIL").focus();
+				return false;
+			}
+
+			if ($("#Item_PASSWD").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_CurrentPassword" + "]");
+				$("#Item_PASSWD").focus();
+				return false;
+			}
+
+
+			if ($("#Item_PASSWD_CHK").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_NewPassword" + "]");
+				$("#Item_PASSWD_CHK").focus();
+				return false;
+			}
+
+
+			if ($("#Item_PASSWD").val().length < 8) {
+				alert("@comm_global.Language.Resources.Script_PasswordAtleastEight");
+				$("#Item_PASSWD").focus();
+				return false;
+			}
+
+			if (!$("#Item_PASSWD").val().match(/([a-zA-Z0-9])|([a-zA-Z0-9])|[!,#,$,%,^,&,*,?,_,~]/)) {
+				alert("@comm_global.Language.Resources.Script_PasswordRegExp");
+				$("#Item_PASSWD").focus();
+				return false;
+			}
+
+			if ($("#Item_PASSWD").val() != $("#Item_PASSWD_CHK").val()) {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_passwordComparison" + "]");
+				$("#Item_PASSWD_CHK").focus();
+				return false;
+			}
+
+
+
+
+
+
+			$('#view_form').submit();
+		}
+
+	</script>
+}
+
+
+
+

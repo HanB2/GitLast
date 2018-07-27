@@ -1,0 +1,91 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web_admin", "web_admin\web_admin.csproj", "{CF509CA4-623F-4B02-85F4-DEA9659679EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm_global", "comm_global\comm_global.csproj", "{2ACD9156-1C5D-4BFA-8CD2-EDBC2FB13C09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm_dbconn", "comm_dbconn\comm_dbconn.csproj", "{BF5D219B-38FA-4A5B-94B8-76B08825A140}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm_model", "comm_model\comm_model.csproj", "{F1E2822A-BB38-4E53-85BB-89B95C13D916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm_label", "comm_label\comm_label.csproj", "{F6A49349-9418-4246-9AEC-CF465F575E91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Ref", "_Ref", "{A81951F5-4B4A-480C-8100-A6E05DAA02FB}"
+	ProjectSection(SolutionItems) = preProject
+		_Ref\BarcodeLib.dll = _Ref\BarcodeLib.dll
+		_Ref\EPPlus.dll = _Ref\EPPlus.dll
+		_Ref\Gma.QrCodeNet.Encoding.dll = _Ref\Gma.QrCodeNet.Encoding.dll
+		_Ref\iTextAsian.dll = _Ref\iTextAsian.dll
+		_Ref\itextsharp.dll = _Ref\itextsharp.dll
+		_Ref\MySql.Data.dll = _Ref\MySql.Data.dll
+		_Ref\NPOI.dll = _Ref\NPOI.dll
+		_Ref\NPOI.OOXML.dll = _Ref\NPOI.OOXML.dll
+		_Ref\NPOI.OpenXml4Net.dll = _Ref\NPOI.OpenXml4Net.dll
+		_Ref\NPOI.OpenXmlFormats.dll = _Ref\NPOI.OpenXmlFormats.dll
+		_Ref\System.Net.Json.dll = _Ref\System.Net.Json.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web_est", "web_est\web_est.csproj", "{24CA74F5-6AF8-4C67-AC79-3E648ECBEA68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web_ese_old", "web_ese_old\web_ese_old.csproj", "{4ECBA29E-3DDB-4D16-8742-699D3BE9CDFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web_ese", "web_ese\web_ese.csproj", "{93CFBE89-FC75-4F00-B1D5-1D283406BB75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web_esm", "web_esm\web_esm.csproj", "{C01B6038-87B5-46FD-A49A-082C4D199A89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm_delvapi", "comm_delvapi\comm_delvapi.csproj", "{EA1CC115-F1A8-4A24-8E92-430E7A06B519}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF509CA4-623F-4B02-85F4-DEA9659679EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF509CA4-623F-4B02-85F4-DEA9659679EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF509CA4-623F-4B02-85F4-DEA9659679EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF509CA4-623F-4B02-85F4-DEA9659679EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ACD9156-1C5D-4BFA-8CD2-EDBC2FB13C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ACD9156-1C5D-4BFA-8CD2-EDBC2FB13C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ACD9156-1C5D-4BFA-8CD2-EDBC2FB13C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ACD9156-1C5D-4BFA-8CD2-EDBC2FB13C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5D219B-38FA-4A5B-94B8-76B08825A140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5D219B-38FA-4A5B-94B8-76B08825A140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5D219B-38FA-4A5B-94B8-76B08825A140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5D219B-38FA-4A5B-94B8-76B08825A140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1E2822A-BB38-4E53-85BB-89B95C13D916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E2822A-BB38-4E53-85BB-89B95C13D916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E2822A-BB38-4E53-85BB-89B95C13D916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E2822A-BB38-4E53-85BB-89B95C13D916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6A49349-9418-4246-9AEC-CF465F575E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6A49349-9418-4246-9AEC-CF465F575E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6A49349-9418-4246-9AEC-CF465F575E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6A49349-9418-4246-9AEC-CF465F575E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24CA74F5-6AF8-4C67-AC79-3E648ECBEA68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24CA74F5-6AF8-4C67-AC79-3E648ECBEA68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24CA74F5-6AF8-4C67-AC79-3E648ECBEA68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24CA74F5-6AF8-4C67-AC79-3E648ECBEA68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ECBA29E-3DDB-4D16-8742-699D3BE9CDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ECBA29E-3DDB-4D16-8742-699D3BE9CDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ECBA29E-3DDB-4D16-8742-699D3BE9CDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ECBA29E-3DDB-4D16-8742-699D3BE9CDFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93CFBE89-FC75-4F00-B1D5-1D283406BB75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93CFBE89-FC75-4F00-B1D5-1D283406BB75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93CFBE89-FC75-4F00-B1D5-1D283406BB75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93CFBE89-FC75-4F00-B1D5-1D283406BB75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C01B6038-87B5-46FD-A49A-082C4D199A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C01B6038-87B5-46FD-A49A-082C4D199A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C01B6038-87B5-46FD-A49A-082C4D199A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C01B6038-87B5-46FD-A49A-082C4D199A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA1CC115-F1A8-4A24-8E92-430E7A06B519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA1CC115-F1A8-4A24-8E92-430E7A06B519}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA1CC115-F1A8-4A24-8E92-430E7A06B519}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA1CC115-F1A8-4A24-8E92-430E7A06B519}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

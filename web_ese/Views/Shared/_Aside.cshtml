@@ -1,0 +1,173 @@
+﻿    <!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    @{ Html.RenderPartial("_CurrentUser"); }
+    <!-- end user info -->
+
+    <nav>
+
+        <ul>
+			<!--메인-->
+            <li class="@Html.RouteIf("Index", "active")">
+                <a href="@Url.Action("Index", "Home")" title="Home"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Home</span></a>
+            </li>
+			<!--상품 관리-->
+			<li class="@Html.RouteIf("Prod", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-cube"></i><span class="menu-item-parent">@comm_global.Language.Resources.ESEMENU_Prod</span></a>
+				<ul>
+					<!--상품 등록-->
+					<li class="@Html.RouteIf("ProdAdd", "active")">
+						<a href="@Url.Action("ProdAdd", "Prod")">@comm_global.Language.Resources.ESEMENU_ProdAdd</a>
+					</li>
+					<!--등록 상품 조회-->
+					<li class="@Html.RouteIf("ProdList", "active")">
+						<a href="@Url.Action("ProdList", "Prod")"> @comm_global.Language.Resources.ESEMENU_ProdList</a>
+					</li>
+
+				</ul>
+			</li>
+			<!--보관 관리-->
+			<li class="@Html.RouteIf("Stoc", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-cubes"></i><span class="menu-item-parent">@comm_global.Language.Resources.ESEMENU_Stoc</span></a>
+				<ul>
+					<!--보관 신청-->
+					<li class="@Html.RouteIf("StocReq", "active")">
+						<a href="@Url.Action("StocReq", "Stoc")">@comm_global.Language.Resources.ESEMENU_StocReq</a>
+					</li>
+					<!--보관 신청 현황 조회-->
+					<li class="@Html.RouteIf("StocReqList", "active")">
+						<a href="@Url.Action("StocReqList", "Stoc")">@comm_global.Language.Resources.ESEMENU_StocReqList</a>
+					</li>
+					<!--재고 조회-->
+					<li class="@Html.RouteIf("StocList", "active")">
+						<a href="@Url.Action("StocList", "Stoc")">@comm_global.Language.Resources.ESEMENU_StocList</a>
+					</li>
+					<!--입출고 내역 조회-->
+					<li class="@Html.RouteIf("StocInOut", "active")">
+						<a href="@Url.Action("StocInOut", "Stoc")">@comm_global.Language.Resources.ESEMENU_StocInOut</a>
+					</li>
+
+				</ul>
+			</li>
+			<!--픽업 관리-->
+			<li class="@Html.RouteIf("Pick", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-truck"></i><span class="menu-item-parent">@comm_global.Language.Resources.ESEMENU_Pick</span></a>
+				<ul>
+					<!--픽업 신청-->
+					<li class="@Html.RouteIf("PickReq", "active")">
+						<a href="@Url.Action("PickReq", "Pick")">@comm_global.Language.Resources.ESEMENU_PickReq</a>
+					</li>
+					<!--픽업 신청 조회-->
+					<li class="@Html.RouteIf("PickList", "active")">
+						<a href="@Url.Action("PickList", "Pick")">@comm_global.Language.Resources.ESEMENU_PickList</a>
+					</li>
+
+				</ul>
+			</li>
+			<!--배송-->
+			<li class="@Html.RouteIf("Ets", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-envelope"></i><span class="menu-item-parent">@comm_global.Language.Resources.ESEMENU_Ets</span></a>
+				<ul>
+					<!--일반 배송 신청-->
+					<li class="@Html.RouteIf("EtsReq", "active")">
+						<a href="@Url.Action("EtsReq", "Ets")">@comm_global.Language.Resources.ESEMENU_EtsReq</a>
+					</li>
+					<!--대량 배송 신청-->
+					<li class="@Html.RouteIf("EtsReqExcel", "active")">
+						<a href="@Url.Action("EtsReqExcel", "Ets")">@comm_global.Language.Resources.ESEMENU_EtsReqExcel</a>
+					</li>
+					<!--배송 라벨 출력-->
+					<li class="@Html.RouteIf("EtsLabel", "active")">
+						<a href="@Url.Action("EtsLabel", "Ets")">@comm_global.Language.Resources.ESEMENU_EtsLabel</a>
+					</li>
+					<!--배송 상태 조회-->
+					<li class="@Html.RouteIf("EtsList", "active")">
+						<a href="@Url.Action("EtsList", "Ets")">@comm_global.Language.Resources.ESEMENU_EtsList</a>
+					</li>
+
+				</ul>
+			</li>
+			<!--배송요금-->
+			<li class="@Html.RouteIf("Cost", "active")">
+				<a href="@Url.Action("CostIndex", "Cost")"title="Cost" ><i class="fa fa-lg fa-fw fa-usd"></i> <span class="menu-item-parent">@comm_global.Language.Resources.ESEMENU_CostIndex</span></a>
+			</li>
+			<!--계정 관리-->
+			<li class="@Html.RouteIf("Ese", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-user"></i><span class="menu-item-parent">@comm_global.Language.Resources.ESEMENU_Ese</span></a>
+				<ul>
+					<!--계정 정보-->
+					<li class="@Html.RouteIf("EseInfo", "active")">
+						<a href="@Url.Action("EseInfo", "Ese")">@comm_global.Language.Resources.ESEMENU_EseInfo	</a>
+					</li>
+					<!--계좌 관리-->
+					<li class="@Html.RouteIf("EseAccount", "active")">
+						<a href="@Url.Action("EseAccount", "Ese")">@comm_global.Language.Resources.ESEMENU_EseAccount	</a>
+					</li>
+					<!--내 계정관리-->
+					<li class="@Html.RouteIf("EseInfoMy", "active")">
+						<a href="@Url.Action("EseInfoMy", "Ese")">@comm_global.Language.Resources.ESEMENU_EseInfoMy	</a>
+					</li>
+
+					<!--계정 등급 관리-->
+					<li class="@Html.RouteIf("EseGrade", "active")">
+						<a href="@Url.Action("EseGrade", "Ese")">@comm_global.Language.Resources.ESEMENU_EseGrade </a>
+					</li>
+					<!--계정 관리-->
+					<li class="@Html.RouteIf("EseManager", "active")">
+						<a href="@Url.Action("EseManager", "Ese")">@comm_global.Language.Resources.ESEMENU_EseManager </a>
+					</li>
+				</ul>
+			</li>
+			<!--Mar-->
+			<li class="@Html.RouteIf("Mar", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-maxcdn"></i><span class="menu-item-parent">@comm_global.Language.Resources.ESEMENU_Mar	</span></a>
+				<ul>
+					<!--MAR 충전(PG)-->
+					<li class="@Html.RouteIf("MarReqPg", "active")">
+						<a href="@Url.Action("MarReqPg", "Mar")">@comm_global.Language.Resources.ESEMENU_MarReqPg	</a>
+					</li>
+					<!--MAR 충전(이체)-->
+					<li class="@Html.RouteIf("MarReq", "active")">
+						<a href="@Url.Action("MarReq", "Mar")">@comm_global.Language.Resources.ESEMENU_MarReq	 </a>
+					</li>
+					<!--MAR 충전/사용 이력-->
+					<li class="@Html.RouteIf("MarInOut", "active")">
+						<a href="@Url.Action("MarInOut", "Mar")">@comm_global.Language.Resources.ESEMENU_MarInOut	</a>
+					</li>
+					<!--MAR 환불 신청-->
+					<li class="@Html.RouteIf("MarOutReq", "active")">
+						<a href="@Url.Action("MarOutReq", "Mar")">@comm_global.Language.Resources.ESEMENU_MarOutReq	 </a>
+					</li>
+
+				</ul>
+			</li>
+			<!--고객센터-->
+			<li class="@Html.RouteIf("Cs", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-volume-up"></i><span class="menu-item-parent">@comm_global.Language.Resources.ESEMENU_Cs	</span></a>
+				<ul>
+					<!--ETOMARS 공지-->
+					<li class="@Html.RouteIf("CsEsmNotice", "active")">
+						<a href="@Url.Action("CsEsmNotice", "Cs")">@comm_global.Language.Resources.ESEMENU_CsEsmNotice	</a>
+					</li>
+					<!--STATION 공지-->
+					<li class="@Html.RouteIf("CsEstNotice", "active")">
+						<a href="@Url.Action("CsEstNotice", "Cs")">@comm_global.Language.Resources.ESEMENU_CsEstNotice </a>
+					</li>
+					<!--1:1 문의-->
+					<li class="@Html.RouteIf("CsQna", "active")">
+						<a href="@Url.Action("CsQna", "Cs")">@comm_global.Language.Resources.ESEMENU_CsQna	</a>
+					</li>
+					
+
+				</ul>
+			</li>
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+
+</aside>
+<!-- END NAVIGATION -->

@@ -1,0 +1,1422 @@
+﻿@model web_ese.Models_Act.Ets.EtsReqModels
+
+
+
+<div id="content">
+
+	<div class="alert alert-block alert-success" style="max-width:1000px;">
+		<h4 class="alert-heading"><i class="fa fa-check-square-o"></i> 개별 일반 배송 신청서 작성</h4>
+	</div>
+	
+
+	<section id="widget-grid" class="" style="max-width:1000px; margin:0 0 30px;">
+		<div class="row">
+			<article class="col-sm-12">
+				<a class="btn btn-default" href="javascript:setGoodsTable('nomal');"> 일반 배송</a>
+				<a class="btn btn-default" href="javascript:setGoodsTable('stoc');"> 보관 배송</a>
+			</article>
+		</div>
+	</section>
+
+
+
+	<!--상품 바코드 스캔-->
+	<section id="bacordScanDiv" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2>상품 바코드 스캔 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+								<fieldset>
+									<div class="row">
+										<label class="label col col-2">바코드</label>
+										<section class="col col-10">
+											<label for="barcodeChk" class="input">
+												<input type="text" name="barcodeChk" id="barcodeChk" placeholder="이 곳에 커서를 활성화 하신 후 바코드를 스캔해 주세요" onkeypress="if(event.keyCode==13) {goodsTableAdd_Stock(this.value); return false;}" >
+											</label>
+										</section>
+									</div>
+									<section class="col col-12">
+										<p> 등록된 상품의 경우 바코드 스캔으로 상품정보를 입력하실수 있습니다. </p>
+										<p id="barcodeResult"> 바코드 입력 결과 출력 부분 </p>
+									</section>
+								</fieldset>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+
+
+
+
+	<!--배송 신청 선택 상품-->
+	<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="max-width:1000px; margin:0px;">
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<h2>배송 신청 선택 상품</h2>
+			<div class="jarviswidget-ctrls" role="menu">   
+				<a href="javascript:goodsTableAdd();" class="button-icon " ><i class="fa fa-plus"></i></a>
+			</div>
+		</header>
+		<div role="content">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">
+					<form id="goods_list">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th style="width:5%;" rowspan="2"></th>
+									<th style="width:15%;">바코드</th>
+									<th>대표상품명</th>
+									<th style="width:20%;">브랜드</th>
+									<th style="width:20%;">단가</th>
+								</tr>
+								<tr>
+									<th>HSCODE</th>
+									<th colspan="2">구매 URL</th>
+									<th>수량</th>
+								</tr>
+							</thead>
+							<tbody id="goodsRow">
+
+								@foreach (var item in Model.Items)
+								{
+									<tr>
+										<td rowspan="2"><input type="checkbox" name="goods_chk"></td>
+										<td><input type="text" name="lst_goods_barcode" class="form-control lst_goods_barcode"  value="@item.BARCODE" /></td>
+										<td><input type="text" name="lst_goods_goodsNm" class="form-control lst_goods_goodsNm" value="@item.GOODS_NAME" /></td>
+										<td><input type="text" name="lst_goods_brand" class="form-control lst_goods_brand"  value="@item.BRAND" /></td>
+										<td><input type="text" name="lst_goods_cost" class="form-control lst_goods_cost" value="@item.PRICE" onkeyup="this.value=this.value.replace(/[^0-9]/g,''); calcTotalCost();" /></td>
+									</tr>
+									<tr>
+										<td ><input type="text" name="lst_goods_hscode" class="form-control lst_goods_hscode" value="@item.HSCODE" /></td>
+										<td colspan="3"><input type="text" name="lst_goods_url" class="form-control lst_goods_url" value="@item.PURCHASE_URL" /></td>
+										<td>
+											<input type="text" name="lst_goods_cnt" class="form-control lst_goods_cnt" value="@item.QTY" onkeyup="this.value=this.value.replace(/[^0-9]/g,''); calcTotalCost();" />
+										</td>
+									</tr>
+								}
+
+
+							</tbody>
+						</table>
+					</form>
+					<div class="dt-toolbar-footer">
+
+						<div class="col-xs-12 col-sm-6">
+
+							<div class="dataTables_length" id="dt_basic_length">
+
+								@Html.DropDownList("CURRENCY_GOODS", new SelectList(Model.arrayCurrencyGoods, "opt_key", "opt_value"), new {@class = "form-control input" }) <i></i>
+							</div>
+							<div class="dataTables_info" >상품 합계 금액 : <b id="etoTotalCost">0</b></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end widget content -->
+
+		</div>
+		<!-- end widget div -->
+
+	</div>
+
+
+	<section id="widget-grid" class="" style="max-width:1000px; margin:0 0 30px;">
+		<div class="row">
+			<article class="col-sm-12">
+				<a class="btn btn-default" href="javascript:goodsTableDel();"><i class="fa fa-trash-o"></i> 선택 삭제</a>
+				<a class="btn btn-default" href="javascript:goodsTableDelAll();"><i class="fa fa-trash-o"></i> 전체 삭제</a>
+
+
+				<a class="btn btn-default" href="javascript:goodsTableAdd();" style="float:right" id="prod_add"><i class="fa fa-trash-o"></i> 상품 추가</a>
+				<a class="btn btn-default" href="#" data-toggle="modal" data-target="#myModalSelect" style="float:right" id="prod_select"><i class="fa fa-trash-o"></i> 상품 선택</a>
+			</article>
+		</div>
+	</section>
+
+
+
+	<!-- 발송인 / 수취인 정보 -->
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> 발송인 정보 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<fieldset style="height:423px;">
+									<section>
+										<div class="inline-group">
+											<label class="radio">
+												<input type="radio" name="radio-inline" checked="checked" onclick="javascript: setEseInfo('')">
+												<i></i>수기입력
+											</label>
+											<label class="radio">
+												<input type="radio" name="radio-inline" onclick="javascript: setEseInfo('info')">
+												<i></i>회원 정보와 동일
+											</label>
+										</div>
+									</section>
+									<div class="row">
+										<label class="label col col-3 necessary"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_DEP_NATION_CODE</label>
+										<section class="col col-9">
+											<label class="select">
+												@Html.DropDownList("DEP_NATION_CODE", new SelectList(Model.arraySNation, "opt_key", "opt_value"), new { onchange = "javascript:callStation(this.value);" }) <i></i>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_EST_CODE	</label>
+										<section class="col col-9">
+											<label class="select">
+												@Html.DropDownList("EST_CODE", new SelectList(Model.arrayStation, "opt_key", "opt_value"), new { onchange = "javascript:callType('station');" }) <i></i>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_ORDERNO1	</label>
+										<section class="col col-9">
+											<label for="ORDERNO1" class="input">
+												<input type="text" name="ORDERNO1" id="ORDERNO1" value="@Model.Item.ORDERNO1" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_SENDER_NAME	</label>
+										<section class="col col-9">
+											<label for="SENDER_NAME" class="input">
+												<input type="text" name="SENDER_NAME" id="SENDER_NAME" value="@Model.Item.SENDER_NAME" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_SENDER_TELNO	</label>
+										<section class="col col-9">
+											<label for="SENDER_TELNO" class="input">
+												<input type="text" name="SENDER_TELNO" id="SENDER_TELNO" value="@Model.Item.SENDER_TELNO" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_SENDER_ADDR	</label>
+										<section class="col col-9">
+											<label for="SENDER_ADDR" class="input">
+												<input type="text" name="SENDER_ADDR" id="SENDER_ADDR" value="@Model.Item.SENDER_ADDR" placeholder="">
+											</label>
+										</section>
+									</div>
+								</fieldset>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+
+
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> 수취인 정보 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<fieldset>
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_RECEIVER_NAME	</label>
+										<section class="col col-9">
+											<label for="RECEIVER_NAME" class="input">
+												<input type="text" name="RECEIVER_NAME" id="RECEIVER_NAME" value="@Model.Item.RECEIVER_NAME" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_RECEIVER_TELNO	</label>
+										<section class="col col-9">
+											<label for="RECEIVER_TELNO" class="input">
+												<input type="text" name="RECEIVER_TELNO" id="RECEIVER_TELNO" value="@Model.Item.RECEIVER_TELNO" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ETS_RECEIVER_CPHONENO	</label>
+										<section class="col col-9">
+											<label for="RECEIVER_CPHONENO" class="input">
+												<input type="text" name="RECEIVER_CPHONENO" id="RECEIVER_CPHONENO" value="@Model.Item.RECEIVER_CPHONENO" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_SOCIALNO_BIZNO	</label>
+										<section class="col col-9">
+											<label for="SOCIALNO_BIZNO" class="input">
+												<input type="text" name="SOCIALNO_BIZNO" id="SOCIALNO_BIZNO" value="@Model.Item.SOCIALNO_BIZNO" placeholder="">
+											</label>
+										</section>
+									</div>
+									
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ETS_RECEIVER_EMAIL	</label>
+										<section class="col col-9">
+											<label for="RECEIVER_EMAIL" class="input">
+												<input type="email" name="RECEIVER_EMAIL" id="RECEIVER_EMAIL" value="@Model.Item.RECEIVER_EMAIL" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_NATION_CODE	</label>
+										<section class="col col-9">
+											<label class="select">
+												@Html.DropDownList("NATION_CODE", new SelectList(Model.arrayENation, "opt_key", "opt_value"),"선택", new { onchange = "javascript:callType('nation');" }) <i></i>
+											</label>
+										</section>
+									</div>
+
+									<!-- 한국 주소 관련 영역================================================================================================================-->
+									<div class="row KR_div">
+										<label class="label col col-3">@comm_global.Language.Resources.ETS_RECEIVERTYPE	</label>
+										<section class="col col-9">
+											<label class="select">
+												<select id="RECEIVERTYPE" name="RECEIVERTYPE" >
+													<option value="1">개인</option>
+													<option value="2">사업자</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+
+									<div class="row KR_div">
+										<label class="label col col-3">@comm_global.Language.Resources.ETS_CLEAR_PDT_CODE	</label>
+										<section class="col col-9">
+											<label class="select">
+												<select id="CLEAR_PDT_CODE" name="CLEAR_PDT_CODE">
+													<option value="0">목록</option>
+													<option value="1">일반</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+
+									<div class="row KR_div">
+										<label class="label col col-3"></label>
+
+										<section class="col col-9" id="postKrButton" >
+											<a class="btn btn-primary" href="javascript:sample3_execDaumPostcode();" style="padding:5px 22px; "> 주소검색</a>
+										</section>
+
+										
+									</div>
+									<div class="row KR_div">
+										<label class="label col col-3"></label>
+
+										<label class="label col col-9">
+											<div id="address_search_korea" style="border:1px solid;width:100%;height:400px;margin:5px 0;position:relative;-webkit-overflow-scrolling:touch;">
+											</div>
+										</label>
+
+									</div>
+
+									
+
+									<!-- 중국 주소 관련 영역================================================================================================================-->
+									<div class="row CN_div">
+										<label class="label col col-3"></label>
+										<label class="label col col-3">@comm_global.Language.Resources.ETS_RECEIVER_STATE</label>
+										<label class="label col col-3">@comm_global.Language.Resources.ETS_RECEIVER_CITY</label>
+										<label class="label col col-3">@comm_global.Language.Resources.ETS_RECEIVER_DISTRICT</label>
+									</div>
+
+									<div class="row CN_div">
+										<label class="label col col-3"></label>
+
+										<section class="col col-3">
+											<label class="select">
+												@Html.DropDownList("BaseCnAddr", new SelectList(Model.arrayCnAddr1, "opt_key", "opt_value"), "선택", new { onchange = "javascript:postCn('1', this.value);" }) <i></i>
+											</label>
+										</section>
+
+										<section class="col col-3">
+											<label class="select">
+												@Html.DropDownList("BaseCnAddr1", new SelectList(Model.arrayCnAddr2, "opt_key", "opt_value"), "선택", new { onchange = "javascript:postCn('2', this.value);" }) <i></i>
+											</label>
+										</section>
+
+										<section class="col col-3">
+											<label class="select">
+												@Html.DropDownList("BaseCnAddr2", new SelectList(Model.arrayCnAddr3, "opt_key", "opt_value"), "선택", new { onchange = "javascript:postCnAdd();" }) <i></i>
+											</label>
+										</section>
+
+									</div>
+									<!-- 미국 주소 관련 영역================================================================================================================-->
+									<div class="row EN_div">
+										<label class="label col col-3"></label>
+										<label class="label col col-4">주(States)</label>
+										<label class="label col col-1"></label>
+										<label class="label col col-4">도시(Cities)</label>
+									</div>
+									<div class="row EN_div">
+										<label class="label col col-3"></label>
+										<section class="col col-4">
+											<label class="select">
+												@Html.DropDownList("BaseUsAddr", new SelectList(Model.arrayUsAddr1, "opt_key", "opt_value"), "선택", new { onchange = "javascript:postUs('1', this.value);" }) <i></i>
+											</label>
+										</section>
+										<label class="label col col-1"></label>
+										<section class="col col-4">
+											<label class="select">
+												@Html.DropDownList("BaseUsAddr1", new SelectList(Model.arrayUsAddr2, "opt_key", "opt_value"), "선택", new { onchange = "javascript:postUsAdd();" }) <i></i>
+											</label>
+										</section>
+									</div>
+
+
+
+
+
+
+
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_RECEIVER_ZIPCODE</label>
+										<section class="col col-9">
+											<label for="RECEIVER_ZIPCODE" class="input">
+												<input type="text" name="RECEIVER_ZIPCODE" id="RECEIVER_ZIPCODE" value="@Model.Item.RECEIVER_ZIPCODE" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_RECEIVER_ADDR1</label>
+										<section class="col col-9">
+											<label for="RECEIVER_ADDR1" class="input">
+												<input type="text" name="RECEIVER_ADDR1" id="RECEIVER_ADDR1" value="@Model.Item.RECEIVER_ADDR1" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_RECEIVER_ADDR2</label>
+										<section class="col col-9">
+											<label for="RECEIVER_ADDR2" class="input">
+												<input type="text" name="RECEIVER_ADDR2" id="RECEIVER_ADDR2" value="@Model.Item.RECEIVER_ADDR2" placeholder="">
+											</label>
+										</section>
+									</div>
+
+								</fieldset>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+		</div>
+	</section>
+
+
+
+	<!-- 기타 정보 -->
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> 기타 정보 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<fieldset>
+
+
+									<div class="row">
+										<label class="label col col-2"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_DIM_WIDTH (@Model.BaseReleaseDimUnit)</label>
+										<label class="label col col-2"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_DIM_LENGTH (@Model.BaseReleaseDimUnit)</label>
+										<label class="label col col-2"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_DIM_HEIGHT (@Model.BaseReleaseDimUnit)</label>
+
+										<label class="label col col-2"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_DELV_CODE</label>
+										<section class="col col-4">
+											<label class="select">
+												@Html.DropDownList("DELV_CODE", new SelectList(Model.arrayCost, "opt_key", "opt_value"), "======", new { onchange = "javascript:callCost();" }) <i></i>
+											</label>
+										</section>
+									</div>
+
+
+
+									<div class="row">
+										<section class="col col-2">
+											<label for="DIM_WIDTH" class="input">
+												<input type="text" name="DIM_WIDTH" id="DIM_WIDTH" value="@Model.Item.DIM_WIDTH" onkeyup="javascript: calcCost();">
+											</label>
+										</section>
+										<section class="col col-2">
+											<label for="DIM_LENGTH" class="input">
+												<input type="text" name="DIM_LENGTH" id="DIM_LENGTH" value="@Model.Item.DIM_LENGTH" onkeyup="javascript: calcCost();">
+											</label>
+										</section>
+										<section class="col col-2">
+											<label for="DIM_HEIGHT" class="input">
+												<input type="text" name="DIM_HEIGHT" id="DIM_HEIGHT" value="@Model.Item.DIM_HEIGHT" onkeyup="javascript: calcCost();">
+											</label>
+										</section>
+
+										<label class="label col col-2"><i class="fa fa-exclamation txt-color-red"></i> @comm_global.Language.Resources.ETS_QTY_BOX</label>
+										<section class="col col-4">
+											<label for="QTY_BOX" class="input">
+												<input type="text" name="QTY_BOX" id="QTY_BOX" value="@Model.Item.QTY_BOX" placeholder="" >
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-6"></label>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ETS_SDATA1 </label>
+										<section class="col col-4">
+											<label for="SDATA1" class="input">
+												<input type="text" name="SDATA1" id="SDATA1" value="@Model.Item.SDATA1" placeholder="">
+											</label>
+										</section>
+									</div>
+
+
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ETS_REALVOLUME (@Model.BaseReleaseWeightUnit)</label>
+										<label class="label col col-2">@comm_global.Language.Resources.ETS_REALWEIGHT (@Model.BaseReleaseWeightUnit)</label>
+										<label class="label col col-2">@comm_global.Language.Resources.ETS_CHARGEABLE_WEIGHT (@Model.BaseReleaseWeightUnit)</label>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ETS_SDATA2 </label>
+										<section class="col col-4">
+											<label for="SDATA2" class="input">
+												<input type="text" name="SDATA2" id="SDATA2" value="@Model.Item.SDATA2" placeholder="">
+											</label>
+										</section>
+									</div>
+
+
+									<div class="row">
+										<section class="col col-2">
+											<label for="REALVOLUME" class="input">
+												<input type="text" name="REALVOLUME" id="REALVOLUME" value="@Model.Item.REALVOLUME" placeholder="" readonly>
+											</label>
+										</section>
+										<section class="col col-2">
+											<label for="REALWEIGHT" class="input">
+												<input type="text" name="REALWEIGHT" id="REALWEIGHT" value="@Model.Item.REALWEIGHT"  onkeyup="javascript: calcCost();">
+											</label>
+										</section>
+										<section class="col col-2">
+											<label for="CHARGEABLE_WEIGHT" class="input">
+												<input type="text" name="CHARGEABLE_WEIGHT" id="CHARGEABLE_WEIGHT" value="@Model.Item.CHARGEABLE_WEIGHT" placeholder="" readonly>
+											</label>
+										</section>
+
+										<label class="label col col-2">@comm_global.Language.Resources.ETS_SDATA3 </label>
+										<section class="col col-4">
+											<label for="SDATA3" class="input">
+												<input type="text" name="SDATA3" id="SDATA3" value="@Model.Item.SDATA3" placeholder="">
+											</label>
+										</section>
+									</div>
+
+
+									<div class="row">
+										<label class="label col col-6">@comm_global.Language.Resources.ETS_MESSAGE_DELV </label>
+										<label class="label col col-2">@comm_global.Language.Resources.ETS_TEMPCOST (MAR)</label>
+										<section class="col col-4">
+											<label for="tmpCalcCost" class="input">
+												<input type="text" name="tmpCalcCost" id="tmpCalcCost" placeholder="배송타입을 선택해 주세요." readonly>
+											</label>
+										</section>
+									</div>
+
+									<section>
+										<label class="textarea textarea-resizable">
+											<textarea rows="3" class="custom-scroll">@Model.Item.SDATA3</textarea>
+										</label>
+									</section>
+								</fieldset>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+		</div>
+		<a class="btn btn-primary btn-lg" href="javascript:callSubmit();" style="float:right;"> 배송 신청</a>
+	</section>
+
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+
+<!--상품 선택-->
+<div class="modal fade in" id="myModalSelect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:900px; ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">상품 선택</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<iframe width="100%" height="900px;" scrolling="no" frameborder="0" id="viewIframe" src="~/Stoc/StocReqSelect"></iframe>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button onclick="javascript:chkPopupStocGoods();" id="modal_act" type="button" class="btn btn-default">
+					선택
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">
+					닫기
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+	@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+	{
+		@Html.HiddenFor(model => model.act_type)
+		@Html.HiddenFor(model => model.act_key)
+		//@Html.HiddenFor(model => model.Item.ESE_CODE)			//< !--varchar(8)          SENDER 코드       -->
+		@Html.HiddenFor(model => model.Item.DEP_NATION_CODE)	// < !--char(2)         출발국가 코드  -->
+		@Html.HiddenFor(model => model.Item.NATION_CODE)		// < !--char(2)         도착국가코드-- >
+		@Html.HiddenFor(model => model.Item.EST_CODE)			//< !--varchar(5)          STATION 코드      -->
+		@Html.HiddenFor(model => model.Item.ORDERNO1)			// < !--varchar(30)         주문번호1-- >
+		@Html.HiddenFor(model => model.Item.SENDER_NAME)		// < !--varchar(50)         보내는사람 이름  -->
+		@Html.HiddenFor(model => model.Item.SENDER_TELNO)		// < !--varchar(20)         보내는사람 전화번호  -->
+		@Html.HiddenFor(model => model.Item.SENDER_ADDR)		// < !--varchar(100)        보내는사람 주소  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_NAME)		// < !--varchar(50)         받는사람 이름  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_TELNO)		// < !--varchar(20)         받는사람 전화번호  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_CPHONENO)	// < !--varchar(20)         받는사람 휴대폰번호  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_ZIPCODE)	// < !--varchar(10)         받는사람 우편번호  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_STATE)		// < !--varchar(30)         받는사람 성  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_CITY)		// < !--varchar(30)         받는사람 시  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_DISTRICT)	// < !--varchar(30)         받는사람 구  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_ADDR1)		// < !--varchar(100)        받는사람 주소1  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_ADDR2)		// < !--varchar(100)        받는사람 주소2  -->
+		@Html.HiddenFor(model => model.Item.RECEIVER_EMAIL)		// < !--varchar(50)         받는사람 이메일  -->추가
+		@Html.HiddenFor(model => model.Item.SOCIALNO_BIZNO)		// < !--varchar(20)         받는사람 신분증번호  -->
+		@Html.HiddenFor(model => model.Item.DIM_WIDTH)			// < !--double 박스가로길이-- >
+		@Html.HiddenFor(model => model.Item.DIM_LENGTH)			// < !--double 박스세로길이-- >
+		@Html.HiddenFor(model => model.Item.DIM_HEIGHT)			// < !--double 박스높이-- >
+		@Html.HiddenFor(model => model.Item.REALVOLUME)			// < !--double 부피무게-- >
+		@Html.HiddenFor(model => model.Item.REALWEIGHT)			// < !--double 실제무게-- >
+		@Html.HiddenFor(model => model.Item.CHARGEABLE_WEIGHT)	// < !--double 적용무게-- >
+		@Html.HiddenFor(model => model.Item.DELV_CODE)			// < !--char(1)         출고타입 기호(A~Z)  -->
+		@Html.HiddenFor(model => model.Item.QTY_BOX)			// < !--smallint(5)         박스갯수-- >
+		@Html.HiddenFor(model => model.Item.MESSAGE_DELV)		// < !--varchar(200)            배송메세지-- >
+		@Html.HiddenFor(model => model.Item.CURRENCY_GOODS)		// < !--char(3)         상품금액 화폐단위  --		입력 박스 추가 우측에 합계 금액
+		@Html.HiddenFor(model => model.Item.WEIGHT_UNIT)		// < !--char(2)         무게단위(KG, LB)-- >		스테이션 기본설정
+		@Html.HiddenFor(model => model.Item.DIM_UNIT)			// < !--varchar(10)     박스치수단위(cm, inch)-- > 스테이션 기본설정
+		@Html.HiddenFor(model => model.Item.RECEIVERTYPE)       // < !--varchar(10)         받는이 구분(1 = 개인, 2 = 사업자)-- >
+		@Html.HiddenFor(model => model.Item.CLEAR_PDT_CODE)     // < !--tinyint(4)          신청타입(0:목록,1:일반) => 배송국가 한국  -->
+		@Html.HiddenFor(model => model.Item.SDATA1)             // < !--varchar(30)         기타데이터-- >
+		@Html.HiddenFor(model => model.Item.SDATA2)             // < !--varchar(30)         기타데이터-- >
+		@Html.HiddenFor(model => model.Item.SDATA3)             // < !--varchar(30)         기타데이터-- >
+		@Html.HiddenFor(model => model.Item.ORDERTYPE)          // < !--tinyint(4)          0 = 일반배송신청, 1 = 보관배송신청-- >
+
+		@Html.HiddenFor(model => model.goodsLst)          // < !--tinyint(4)          0 = 일반배송신청, 1 = 보관배송신청-- >
+														  
+
+	}
+
+
+
+
+
+
+
+
+
+
+@section pagespecific {
+
+
+<script type="text/javascript">
+
+	//배송 타입 선택 시 요금표 정보
+	var SETTING_COST_TABLE = "";
+
+	var EST_SET_WEIGHT_KG = "@Model.BaseWeightDivide_KG";
+	var EST_SET_WEIGHT_LB = "@Model.BaseWeightDivide_LB";
+
+	var BaseEseName = "@Model.BaseEseName";
+	var BaseEseAddr = "@Model.BaseEseAddr";
+	var BaseEseTel = "@Model.BaseEseTel";
+
+
+
+	//요금표 JSON 형식 저장 변수
+	var delCost = [];
+
+	var settingForm = [];
+
+
+
+	$(document).ready(function () {
+		formSettingValue();
+		formSetting();
+		$('#bacordScanDiv').hide();	//바코드 스캔 영역
+		$('#prod_select').hide();	//상품 선택 팝업 버튼
+		$('#prod_add').show();		//상품 추가 버튼
+		$(".KR_div").hide();
+		$(".CN_div").hide();
+		$(".EN_div").hide();
+
+		$('#Item_ORDERTYPE').val('0');
+	});
+
+
+	//회원정보 가져오기
+	function setEseInfo(type) {
+
+
+		$('#SENDER_NAME').val('');
+		$('#SENDER_TELNO').val('');
+		$('#SENDER_ADDR').val('');
+
+		if (type == 'info') {
+			$('#SENDER_NAME').val(BaseEseName);
+			$('#SENDER_ADDR').val(BaseEseAddr);
+			$('#SENDER_TELNO').val(BaseEseTel);
+		}
+	}
+
+
+
+
+
+	//배송 타입에 따라 테이블 상태 세팅
+	function setGoodsTable(type) {
+		goodsTableDelAll();
+		if (type == 'nomal') {
+
+			$('#Item_ORDERTYPE').val('0');
+			$('#bacordScanDiv').hide();	//바코드 스캔 영역
+			$('#prod_select').hide();	//상품 선택 팝업 버튼
+			$('#prod_add').show();		//상품 추가 버튼
+
+			if (delCost.length > 0) {
+				calcCost();
+			}
+
+		}
+
+		if (type == 'stoc') {
+			$('#Item_ORDERTYPE').val('1');
+			$('#bacordScanDiv').show();	//바코드 스캔 영역
+			$('#prod_select').show();	//상품 선택 팝업 버튼
+			$('#prod_add').hide();		//상품 추가 버튼
+
+			if (delCost.length > 0) {
+				calcCost();
+			}
+		}
+	}
+
+
+
+
+	//상품 테이블 추가 삭제 관련
+	//상품 추가
+	function goodsTableAdd() {
+		var addRow = '<tr>'
+			+ ' <td rowspan="2"><input type="checkbox" name="goods_chk"></td> '
+			+ '		<td><input type="text" name="lst_goods_barcode" class="form-control lst_goods_barcode" value="" /></td> '
+			+ '		<td><input type="text" name="lst_goods_goodsNm" class="form-control lst_goods_goodsNm" value="" /></td> '
+			+ '		<td><input type="text" name="lst_goods_brand" class="form-control lst_goods_brand" value="" /></td> '
+			+ '		<td><input type="text" name="lst_goods_cost" class="form-control lst_goods_cost" value="0"  onkeyup="this.value=this.value.replace(/[^0-9]/g,\'\'); calcTotalCost();" /></td> '
+			+ '	</tr> '
+			+ '	<tr> '
+			+ '		<td ><input type="text" name="lst_goods_hscode" class="form-control lst_goods_hscode" value="" /></td> '
+			+ '		<td colspan="2"><input type="text" name="lst_goods_url" class="form-control lst_goods_url" value="" /></td> '
+			+ '		<td><input type="text" name="lst_goods_cnt" class="form-control lst_goods_cnt" value="0" onkeyup="this.value=this.value.replace(/[^0-9]/g,\'\'); calcTotalCost();"  />'
+			+ '	</tr> ';
+
+		$('#goodsRow').append(addRow);
+
+		calcTotalCost();
+	}
+
+	//상품 삭제
+	function goodsTableDel() {
+
+		if ($("input[name='goods_chk']").is(":checked")) {
+			if (confirm("삭제 하시겠습니까?")) {
+				$("[name='goods_chk']:checked").parents("tr").next().remove();
+				$("[name='goods_chk']:checked").parents("tr").remove();
+			}
+
+		} else {
+			alert("선택된 데이터가 없습니다.");
+		}
+	}
+
+	//상품 삭제
+	function goodsTableDelAll() {
+
+		$('#goodsRow').empty();
+	}
+
+
+
+	//보관 상품 추가 기능=====================================================
+
+
+	//보관 상품 추가 팝업 오픈
+	function chkPopupStocGoods() {
+		var ifra = document.getElementById('viewIframe').contentWindow;
+		var data = ifra.callChkSelect();
+
+		var leng = data.length;
+
+		if (leng > 0) {
+			var jbSplit = data.split(',');
+			for (var i in jbSplit) {
+				goodsTableAdd_Stock(jbSplit[i])
+			}
+			$("#closeModal").click();
+		}
+	}
+
+	//보관 상품 추가 팝업에서 선택 시 상품 테이블 추가
+	function stocGoodsPopupAdd() {
+		//배열로 넘어온 바코드를 반복문을 돌려  goodsAjaxAdd_Stock(bacord) 를 실행
+	}
+
+	//보관 상품 추가
+	function goodsTableAdd_Stock(barcode) {
+
+		var tmp_length = barcode.length
+
+		//입력된 바코드가 13자리 일 경우에만 동작 길이로 체크 안될시 AJAX 처리... 매번???
+		//if (tmp_length == 8 || tmp_length == 12 || tmp_length == 13 || tmp_length == 14) {
+		if (1 == 1) {
+
+			if (chkDuplBarcode(barcode)) {	//바코드 번호 중복 시 cnt 증가
+				$('#barcodeChk').val('');
+				$('#barcodeResult').text('중복된 상품 입니다.');
+
+			} else {
+				var estCode = '00001';	//select 박스에서 추출로 변경 필요
+
+				$.ajax({
+					type: "POST",
+					url: '/Ets/EtsReqChkBarcode',
+					datatype: "json",
+					data: {
+						AjaxEstCode: estCode,
+						AjaxBarCode: barcode
+					},
+					success: function (data) {
+						if (data.BARCODE != null) {
+							var i = 1;
+							if ($('.lst_goods_num').length) {
+								i = ($('.lst_goods_num').last().val() * 1) + 1;
+							}
+							var addRow = '<tr>'
+								+ ' <td rowspan="2"><input type="checkbox" name="goods_chk"></td> '
+								+ '		<td><input type="text" name="lst_goods_barcode" class="form-control lst_goods_barcode"  value="' + data.BARCODE + '" /></td> '
+								+ '		<td><input type="text" name="lst_goods_goodsNm" class="form-control lst_goods_goodsNm"  value="' + data.GOODS_NAME + '" /></td> '
+								+ '		<td><input type="text" name="lst_goods_brand" class="form-control lst_goods_brand"  value="' + data.BRAND + '" /></td> '
+								+ '		<td><input type="text" name="lst_goods_cost" class="form-control lst_goods_cost"  value="0"  onkeyup="this.value=this.value.replace(/[^0-9]/g,\'\'); calcTotalCost();"   /></td> '
+								+ '	</tr> '
+								+ '	<tr> '
+								+ '		<td ><input type="text" name="lst_goods_hscode" class="form-control lst_goods_hscode" value="" /></td> '
+								+ '		<td colspan="2"><input type="text" name="lst_goods_url" class="form-control lst_goods_url" value="' + data.PURCHASE_URL + '" /></td> '
+								+ '		<td>'
+								+ '			<input type="text" name="lst_goods_cnt" class="form-control lst_goods_cnt" value="0"  onkeyup="this.value=this.value.replace(/[^0-9]/g,\'\'); calcTotalCost();"   />';
+							+ '			<p>재고 : ' + data.stoc_cnt + '</p>';
+							+ '		</td> '
+							+ '	</tr> ';
+
+							$('#goodsRow').append(addRow);
+
+							calcTotalCost();
+							$('#barcodeChk').val('');
+							$('#barcodeResult').text('상품이 리스트에 추가 되었습니다.');
+						} else {
+							$('#barcodeChk').val('');
+							$('#barcodeResult').text('유효하지 않은 바코드 입니다.');
+						}
+					}
+				});
+
+			}
+
+		} else {
+			$('#barcodeResult').text('유효하지 않은 바코드 입니다.');
+		}
+	}
+
+
+	//바코드 번호 중복 체크
+	function chkDuplBarcode(barcode) {
+		var result = false;
+
+		$(".lst_goods_barcode").each(function () {
+			if ($(this).val() == barcode) {
+
+				//상품 카운트 증가 로직
+				//var tmpKey = $(this).attr("data");
+				//var tmpCnt = $("#lst_goods_cnt_" + tmpKey).val();
+				//$("#lst_goods_cnt_" + tmpKey).val((tmpCnt * 1 ) + 1);
+				result = true;
+			}
+		});
+
+		return result;
+	}
+
+	function callStation(val) {
+		var defaultStation = '';
+		$.ajax({
+			type: "POST",
+			url: '/Ets/EtsReqChkStation',
+			datatype: "json",
+			data: {
+				AjaxNationCode: val
+			},
+			success: function (data) {
+				$('#EST_CODE').empty();
+				if (data.length >= 1) {
+					for (var i = 0; i < data.length; i++) {
+						var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+						$('#EST_CODE').append(option);
+
+						callType('station');
+					}
+				} else {
+					var option = $("<option value=''>=============</option>");
+					$('#EST_CODE').append(option);
+				}
+			}
+		});
+	}
+
+	function callType(type) {
+
+		var NationCode = $("#NATION_CODE option:selected").val();
+		var EST_CODE = $("#EST_CODE option:selected").val();
+
+
+		if (type == 'nation') {
+
+			$(".EN_div").hide();
+			$(".KR_div").hide();
+			$(".CN_div").hide();
+			//$("#RECEIVER_ZIPCODE").attr("readonly", false); //해제
+			//$("#RECEIVER_ADDR1").attr("readonly", false); //해제
+			$("#RECEIVER_ZIPCODE").val('');
+			$("#RECEIVER_ADDR1").val('');
+			if (NationCode == 'CN') {
+				$(".EN_div").hide();
+				$(".KR_div").hide();
+				$(".CN_div").show();
+				//$("#RECEIVER_ZIPCODE").attr("readonly", true);
+				//$("#RECEIVER_ADDR1").attr("readonly", true);
+			}
+			if (NationCode == 'KR') {
+				$(".EN_div").hide();
+				$(".KR_div").show();
+				$(".CN_div").hide();
+				sample3_execDaumPostcode();
+				//$("#RECEIVER_ZIPCODE").attr("readonly", true);
+				//$("#RECEIVER_ADDR1").attr("readonly", true);
+			}
+
+			if (NationCode == 'US') {
+				$(".EN_div").show();
+				$(".KR_div").hide();
+				$(".CN_div").hide();
+				//$("#RECEIVER_ZIPCODE").attr("readonly", true);
+				//$("#RECEIVER_ADDR1").attr("readonly", true);
+			}
+		}
+
+
+		if (NationCode != "" && EST_CODE != "") {
+
+
+			$('#DELV_CODE').empty();
+			var option = $("<option value=''>======</option>");
+			$('#DELV_CODE').append(option);
+
+			$.ajax({
+				type: "POST",
+				url: '/Ets/EtsReqChkReleaseCode',
+				datatype: "json",
+				data: {
+					AjaxNationCode: NationCode,
+					AjaxEstCode: EST_CODE
+				},
+				success: function (data) {
+					if (data.length >= 1) {
+						$('#DELV_CODE').empty();
+						var option = $("<option value=''>선택</option>");
+						$('#DELV_CODE').append(option);
+						for (var i = 0; i < data.length; i++) {
+							var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+							$('#DELV_CODE').append(option);
+						}
+					}
+				}
+			});
+		}
+	}
+
+	function callCost() {
+
+		var NationCode = $("#NATION_CODE option:selected").val();
+		var EST_CODE = $("#EST_CODE option:selected").val();
+		var DELV_CODE = $("#DELV_CODE option:selected").val();
+
+
+		if (NationCode != "" && EST_CODE != "" && DELV_CODE != "") {
+			$.ajax({
+				type: "POST",
+				url: '/Ets/EtsReqChkCost',
+				datatype: "json",
+				data: {
+					AjaxNationCode: NationCode,
+					AjaxReleaseCode: DELV_CODE,
+					AjaxEstCode: EST_CODE
+				},
+				success: function (data) {
+					if (data.length >= 1) {
+						for (var i = 0; i < data.length; i++) {
+
+							delCost.push({
+								WEIGHT: data[i].WEIGHT,
+								SHIPPING_FEE_NOR: data[i].SHIPPING_FEE_NOR,
+								SHIPPING_FEE_STC: data[i].SHIPPING_FEE_STC
+							});
+
+						}
+						calcCost();
+
+
+					} else {
+						alert('요금표가 설정되지 않았습니다. STATION에 문의해주세요.');
+					}
+				}
+			});
+		}
+	}
+
+	//예상 배송비 계산
+	function calcCost() {
+
+		if (delCost.length == 0) {
+			$('#DIM_WIDTH').val('0');
+			$('#DIM_LENGTH').val('0');
+			$('#DIM_HEIGHT').val('0');
+			$('#REALVOLUME').val('0');
+			$('#REALWEIGHT').val('0');
+			$('#CHARGEABLE_WEIGHT').val('0');
+			alert("배송타입을 먼저 선택해 주세요.");
+			return;
+		}
+
+		var chk_WEIGHT_TYPE = 'KG';
+		var DIM_WIDTH = $('#DIM_WIDTH').val();		//가로
+		var DIM_LENGTH = $('#DIM_LENGTH').val();	//세로
+		var DIM_HEIGHT = $('#DIM_HEIGHT').val();	//높이
+		var REALVOLUME = $('#REALVOLUME').val();	//부피무게
+		var REALWEIGHT = $('#REALWEIGHT').val();	//실제무게
+		var CHARGEABLE_WEIGHT = $('#CHARGEABLE_WEIGHT').val();	//적용무게
+
+		//무게 단위 별 변수 세팅
+		var chk_WEIGHT = this.EST_SET_WEIGHT_LB;
+		if ('@Model.BaseReleaseWeightUnit' == 'KG') {
+			chk_WEIGHT = this.EST_SET_WEIGHT_KG;
+		}
+
+		//부피 무게 계산
+		REALVOLUME = (DIM_WIDTH * DIM_LENGTH * DIM_HEIGHT) / chk_WEIGHT;
+		REALVOLUME = REALVOLUME.toFixed(3);
+		$('#REALVOLUME').val(REALVOLUME);
+
+		//적용 무게 세팅
+		CHARGEABLE_WEIGHT = REALWEIGHT;
+
+		if (parseFloat(REALVOLUME) >= parseFloat(REALWEIGHT))
+			CHARGEABLE_WEIGHT = REALVOLUME;
+
+		if (REALWEIGHT == "")
+			CHARGEABLE_WEIGHT = REALWEIGHT;
+
+
+		$('#CHARGEABLE_WEIGHT').val(CHARGEABLE_WEIGHT);
+
+		//예상 배송비(MAR) 계산
+		if (CHARGEABLE_WEIGHT > 0) {
+			for (i = 0; i < delCost.length; i++) {
+				if (CHARGEABLE_WEIGHT <= delCost[i].WEIGHT) {
+					if ($('#Item_ORDERTYPE').val() == 0) {
+						$('#tmpCalcCost').val(delCost[i].SHIPPING_FEE_NOR);
+					} else {
+						$('#tmpCalcCost').val(delCost[i].SHIPPING_FEE_STC);
+					}
+					break;
+				}
+			}
+		}
+	}
+
+
+
+	function callSubmit() {
+
+		var lst_goods_barcode = '';
+		var lst_goods_goodsNm = '';
+		var lst_goods_brand = '';
+		var lst_goods_cost = '';
+		var lst_goods_url = '';
+		var lst_goods_cnt = '';
+
+		var goodsLst = "";
+
+		//배송 신청 상품 갯수 확인
+		if ($("input[name=lst_goods_barcode]").length == 0) {
+			alert('상품이 없습니다.');
+			return false;
+		} else {	//베송 신청 상품 유효성 확인
+			$("input[name=lst_goods_barcode]").each(function (idx) {
+				lst_goods_barcode = $("input[name=lst_goods_barcode]:eq(" + idx + ")").val();
+				lst_goods_goodsNm = $("input[name=lst_goods_goodsNm]:eq(" + idx + ")").val();
+				lst_goods_brand = $("input[name=lst_goods_brand]:eq(" + idx + ")").val();
+				lst_goods_cost = $("input[name=lst_goods_cost]:eq(" + idx + ")").val();
+				lst_goods_url = $("input[name=lst_goods_url]:eq(" + idx + ")").val();
+				lst_goods_cnt = $("input[name=lst_goods_cnt]:eq(" + idx + ")").val();
+				lst_goods_hscode = $("input[name=lst_goods_hscode]:eq(" + idx + ")").val();
+
+
+				goodsLst += lst_goods_barcode + "^|^" + lst_goods_goodsNm + "^|^" + lst_goods_brand + "^|^" + lst_goods_cost + "^|^" + lst_goods_cnt + "^|^" + lst_goods_url + "^|^" + lst_goods_hscode + "^||^";
+			});
+		}
+
+		$('#goodsLst').val(goodsLst);
+
+		var chkVal = "";
+		//필수값 체크
+		for (i = 0; i < settingForm.length; i++) {
+			tmp_id = settingForm[i][0];	
+			chkClass = settingForm[i][1]; 
+			chkCombo = settingForm[i][3]; 
+			chkReq = settingForm[i][4];
+			fieldName = settingForm[i][5];
+
+			//인풋 타입에 따라 값을 가져옴
+			if (chkCombo == '0') {
+				chkVal = $("#" + tmp_id).val();
+			} else {
+				chkVal = $("#" + tmp_id + " option:selected").val();
+			}
+
+			//필수 체크 항목인 경우
+			if (chkReq == '1') {
+				if (chkVal == '') {
+					alert('누락된 항목이 있습니다.' + '[' + fieldName + ']');
+					$("#" + tmp_id).focus();
+					return false;
+				}
+			}
+
+			//정상적인 서브밋 시 로직을 타지 않음 단순예외처리용
+			if (chkClass == "etoINt" || chkClass == "etoDouble") {
+				if (!$.isNumeric(chkVal)) {
+					$("#" + tmp_id).val('0');
+					alert('숫자만 입력해 주세요.');
+					$("#" + tmp_id).focus();
+					return false;
+
+				}
+			}
+		}
+
+		//모든 유효성 검사 성공 시
+		for (i = 0; i < settingForm.length; i++) {
+			tmp_id = settingForm[i][0];	//id
+			chkCombo = settingForm[i][3]; //콤보박스
+
+			if (chkCombo == '0') {
+				$("#Item_" + tmp_id).val($("#" + tmp_id).val());
+			} else {
+				$("#Item_" + tmp_id).val($("#" + tmp_id + " option:selected").val());
+			}
+
+
+			//console.log(tmp_id + " : " + $("#Item_" + tmp_id).val());
+		}
+
+		$("#Item_RECEIVER_STATE").val('');
+		$("#Item_RECEIVER_CITY").val('');
+		$("#Item_RECEIVER_DISTRICT").val('');
+
+		var nCode = $("#NATION_CODE option:selected").val();
+
+		if (nCode == "CN") {
+			$("#Item_RECEIVER_STATE").val($("#BaseCnAddr option:selected").val());
+			$("#Item_RECEIVER_CITY").val($("#BaseCnAddr1 option:selected").val());
+			$("#Item_RECEIVER_DISTRICT").val($("#BaseCnAddr2 option:selected").val());
+		}
+
+		if (nCode == "US") {
+			$("#Item_RECEIVER_STATE").val($("#BaseUsAddr option:selected").val());
+			$("#Item_RECEIVER_CITY").val($("#BaseUsAddr1 option:selected").val());
+		}
+
+		$('#view_form').submit();
+
+	}
+
+	//입력폼의 유효성조건을 지정
+	function formSettingValue() {
+		//id		클래스		길이		콤보박스		필수		필드 명
+		settingForm.push(['DEP_NATION_CODE', 'no', 'no', '1', '0', '@comm_global.Language.Resources.ETS_DEP_NATION_CODE']);
+		settingForm.push(['EST_CODE', 'no', 'no', '1', '0', '@comm_global.Language.Resources.ETS_EST_CODE']);
+		settingForm.push(['ORDERNO1', 'no', '30', '0', '1', '@comm_global.Language.Resources.ETS_ORDERNO1']);
+		settingForm.push(['SENDER_NAME', 'no', '25', '0', '1', '@comm_global.Language.Resources.ETS_SENDER_NAME']);
+		settingForm.push(['SENDER_TELNO', 'etoTell', '20', '0', '1', '@comm_global.Language.Resources.ETS_SENDER_TELNO']);
+		settingForm.push(['SENDER_ADDR', 'no', '100', '0', '1', '@comm_global.Language.Resources.ETS_SENDER_ADDR']);
+
+		settingForm.push(['RECEIVER_NAME', 'no', '25', '0', '1', '@comm_global.Language.Resources.ETS_RECEIVER_NAME']);
+		settingForm.push(['RECEIVER_TELNO', 'etoTell', '20', '0', '1', '@comm_global.Language.Resources.ETS_RECEIVER_TELNO']);
+		settingForm.push(['RECEIVER_CPHONENO', 'etoTell', '20', '0', '0', '@comm_global.Language.Resources.ETS_RECEIVER_CPHONENO']);
+
+		settingForm.push(['SOCIALNO_BIZNO', 'etoINt', '20', '0', '1', '@comm_global.Language.Resources.ETS_SOCIALNO_BIZNO']);
+		settingForm.push(['RECEIVER_EMAIL', 'etoMail', '50', '0', '0', '@comm_global.Language.Resources.ETS_RECEIVER_EMAIL']);
+
+		settingForm.push(['NATION_CODE', 'no', 'no', '1', '1', '@comm_global.Language.Resources.ETS_NATION_CODE']);
+		settingForm.push(['RECEIVER_ZIPCODE', 'no', '10', '0', '1', '@comm_global.Language.Resources.ETS_RECEIVER_ZIPCODE']);
+
+		settingForm.push(['RECEIVER_STATE', 'no', 'no', '0', '0', '@comm_global.Language.Resources.ETS_RECEIVER_STATE']);
+		settingForm.push(['RECEIVER_CITY', 'no', 'no', '0', '0', '@comm_global.Language.Resources.ETS_RECEIVER_CITY']);
+		settingForm.push(['RECEIVER_DISTRICT', 'no', 'no', '0', '0', '@comm_global.Language.Resources.ETS_RECEIVER_DISTRICT']);
+
+		settingForm.push(['RECEIVER_ADDR1', 'no', 'no', '0', '1', '@comm_global.Language.Resources.ETS_RECEIVER_ADDR1']);
+		settingForm.push(['RECEIVER_ADDR2', 'no', '100', '0', '1', '@comm_global.Language.Resources.ETS_RECEIVER_ADDR2']);
+
+		settingForm.push(['DIM_WIDTH', 'calc', 'no', '0', '1', '@comm_global.Language.Resources.ETS_DIM_WIDTH']);
+		settingForm.push(['DIM_LENGTH', 'calc', 'no', '0', '1', '@comm_global.Language.Resources.ETS_DIM_LENGTH']);
+		settingForm.push(['DIM_HEIGHT', 'calc', 'no', '0', '1', '@comm_global.Language.Resources.ETS_DIM_HEIGHT']);
+
+		settingForm.push(['REALWEIGHT', 'calc', '100', '0', '1', '@comm_global.Language.Resources.ETS_REALWEIGHT']);
+
+		settingForm.push(['REALVOLUME', 'no', 'no', '0', '1', '@comm_global.Language.Resources.ETS_REALVOLUME']);
+		settingForm.push(['CHARGEABLE_WEIGHT', 'no', 'no', '0', '1', '@comm_global.Language.Resources.ETS_CHARGEABLE_WEIGHT']);
+
+		settingForm.push(['DELV_CODE', 'no', 'no', '1', '1', '@comm_global.Language.Resources.ETS_DELV_CODE']);
+		settingForm.push(['QTY_BOX', 'etoINt', '4', '0', '1', '@comm_global.Language.Resources.ETS_QTY_BOX']);
+		settingForm.push(['MESSAGE_DELV', 'no', '200', '0', '0', '@comm_global.Language.Resources.ETS_MESSAGE_DELV']);
+
+		settingForm.push(['CURRENCY_GOODS', 'no', 'no', '1', '0', '@comm_global.Language.Resources.ETS_CURRENCY_GOODS']);
+		settingForm.push(['RECEIVERTYPE', 'no', 'no', '1', '0', '@comm_global.Language.Resources.ETS_RECEIVERTYPE']);
+		settingForm.push(['CLEAR_PDT_CODE', 'no', 'no', '1', '0', '@comm_global.Language.Resources.ETS_CLEAR_PDT_CODE']);
+		settingForm.push(['SDATA1 ', 'no', '30', '0', '0', '@comm_global.Language.Resources.ETS_SDATA1']);
+		settingForm.push(['SDATA2 ', 'no', '30', '0', '0', '@comm_global.Language.Resources.ETS_SDATA2']);
+		settingForm.push(['SDATA3 ', 'no', '30', '0', '0', '@comm_global.Language.Resources.ETS_SDATA3']);
+
+	}
+
+	//입력폼의 조건을 바인딩
+	function formSetting() {
+
+		for (i = 0; i < settingForm.length; i++) {
+			tmp_id = settingForm[i][0];	//id
+			tmp_class = settingForm[i][1];	//class
+			tmp_maxLeng = settingForm[i][2]; //길이제한
+			tmp_necessary = settingForm[i][4]; //필수 항목
+
+			if (tmp_class != 'no')
+				$('#' + tmp_id).addClass(tmp_class);
+
+			if (tmp_maxLeng != 'no')
+				$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+		}
+
+		$("#Item_WEIGHT_UNIT").val('@Model.BaseReleaseWeightUnit');
+		$("#Item_DIM_UNIT").val('@Model.BaseReleaseDimUnit');
+
+		$(".etoINt").attr("onkeyup", "if(this.value == ''){ this.value='0'; }else{  this.value=this.value.replace(/[^0-9]/g,'') * 1}");
+		$(".etoDouble").attr("onkeyup", "this.value=this.value.replace(/[^0-9_.]/g,'')");
+		$(".etoTell").attr("onkeyup", "this.value=this.value.replace(/[^0-9_-]/g,'')");
+		$(".calc").attr("onkeyup", "this.value=this.value.replace(/[^0-9_.]/g,''); calcCost();");
+
+	}
+
+
+
+	function calcTotalCost() {
+		var totalCost = 0;
+		$("input[name=lst_goods_barcode]").each(function (idx) {
+			lst_goods_cost = $("input[name=lst_goods_cost]:eq(" + idx + ")").val();
+			lst_goods_cnt = $("input[name=lst_goods_cnt]:eq(" + idx + ")").val();
+			$("input[name=lst_goods_cost]:eq(" + idx + ")").val(lst_goods_cost * 1);
+			$("input[name=lst_goods_cnt]:eq(" + idx + ")").val(lst_goods_cnt * 1);
+
+			totalCost += lst_goods_cost * lst_goods_cnt;
+		});
+		$("#etoTotalCost").text(totalCost);
+	}
+
+	function postCn(depth, val) {
+		$.ajax({
+			type: "POST",
+			url: '/Ets/PostCn',
+			datatype: "json",
+			data: {
+				level: depth,
+				selectItem: val
+			},
+			success: function (data) {
+				$('#BaseCnAddr' + depth).empty();
+				var option = $("<option value=''>선택</option>");
+				$('#BaseCnAddr' + (depth)).append(option);
+				if (data.length >= 1) {
+					for (var i = 0; i < data.length; i++) {
+						var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+						$('#BaseCnAddr' + (depth)).append(option);
+					}
+				} else {
+					var option = $("<option value=''>==============</option>");
+					$('#BaseCnAddr' + depth).append(option);
+				}
+			}
+		});
+	}
+
+	function postCnAdd() {
+		var addr1 = $("#BaseCnAddr option:selected").text();
+		var addr2 = $("#BaseCnAddr1 option:selected").text();
+		var addr3 = $("#BaseCnAddr2 option:selected").text();
+		var zipCode = $("#BaseCnAddr2 option:selected").val();
+		$("#RECEIVER_ZIPCODE").val(zipCode);
+		$("#RECEIVER_ADDR1").val(addr1 + " " + addr2 + " " + addr3);
+	}
+
+
+
+	function postUs(depth, val) {
+		$.ajax({
+			type: "POST",
+			url: '/Ets/PostEn',
+			datatype: "json",
+			data: {
+				level: depth,
+				selectItem: val
+			},
+			success: function (data) {
+				$('#BaseUsAddr' + depth).empty();
+				var option = $("<option value=''>선택</option>");
+				$('#BaseUsAddr' + (depth)).append(option);
+				if (data.length >= 1) {
+					for (var i = 0; i < data.length; i++) {
+						var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+						$('#BaseUsAddr' + (depth)).append(option);
+					}
+				} else {
+					var option = $("<option value=''>==============</option>");
+					$('#BaseUsAddr' + depth).append(option);
+				}
+			}
+		});
+	}
+
+	function postUsAdd() {
+		var addr1 = $("#BaseUsAddr1 option:selected").text();
+		var addr2 = $("#BaseUsAddr option:selected").val();
+		var zipCode = $("#BaseUsAddr1 option:selected").val();
+		$("#RECEIVER_ZIPCODE").val(zipCode);
+		$("#RECEIVER_ADDR1").val(addr1 + ", " + addr2);
+	}
+
+
+
+	// 다음 우편번호 찾기 API 참고 사이트  //postcode.map.daum.net/guide
+	var element_wrap = document.getElementById('address_search_korea');
+	function sample3_execDaumPostcode() {
+
+		var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+		new daum.Postcode({
+			oncomplete: function (data) {
+				var fullAddr = '';
+				var extraAddr = '';
+				fullAddr = data.roadAddress;
+				if (data.bname !== '') {
+					extraAddr += data.bname;
+				}
+				if (data.buildingName !== '') {
+					extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+				}
+				fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ') ' : ' ');
+
+				document.getElementById('RECEIVER_ZIPCODE').value = data.zonecode;
+				document.getElementById('RECEIVER_ADDR1').value = fullAddr;
+				document.getElementById('RECEIVER_ADDR1').focus();
+				element_wrap.style.display = 'none';
+				document.body.scrollTop = currentScroll;
+			},
+			onresize: function (size) {
+				element_wrap.style.height = size.height + "px";
+			},
+			width: '100%',
+			height: '100%'
+		}).embed(element_wrap);
+		element_wrap.style.display = 'block';
+		return false;
+	}
+</script>
+
+	
+}

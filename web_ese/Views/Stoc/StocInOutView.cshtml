@@ -1,0 +1,89 @@
+﻿@model web_ese.Models_Act.Stoc.StocInOutModels
+
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+
+<!--입출고 내역 정보-->
+
+			<article class="col-sm-12 col-md-12 col-lg-12" style="height:900px; padding:0px;">
+				<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false"  data-widget-custombutton="false">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_StocList_StockInOutSearchResult</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+
+
+							<div class="table-responsive">
+
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>@comm_global.Language.Resources.ESE_Comm_Category</th>
+											<th>@comm_global.Language.Resources.ESE_Comm_Barcord</th>
+											<th>@comm_global.Language.Resources.ESE_ProdAdd_SKU</th>
+											<th>@comm_global.Language.Resources.ESE_Comm_PRODUCT_NAME</th>
+											<th>@comm_global.Language.Resources.ESE_Comm_Brand</th>
+											<th>@comm_global.Language.Resources.ESE_Comm_STATUS</th>
+											<th style="width:8%;">@comm_global.Language.Resources.ESE_Comm_SelectProdNum</th>
+											<th style="width:12%;">@comm_global.Language.Resources.ESE_StocList_InOutViewDays</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model.Items)
+										{ 
+										<tr>
+											<td>@item.CATE_NAME</td>
+											<td>@item.BARCODE</td>
+											<td>@item.SKU</td>
+											<td>@item.GOODS_NAME</td>
+											<td>@item.BRAND</td>
+											<td>@item.STAT_TXT</td>
+											<td>@item.CNT</td>
+											<td>@item.REG_DT</td>
+										</tr>
+										}
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				@Html.Raw(ViewData["pageing"])
+
+			</article>
+	
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+{
+	@Html.HiddenFor(model => model.sortKey)
+    @Html.HiddenFor(model => model.Paging.page)
+    @Html.HiddenFor(model => model.Paging.pageNum)
+    @Html.HiddenFor(model => model.Paging.pageTotNum)
+}
+
+
+@section pagespecific {
+	
+	<script type="text/javascript">
+
+		//페이징 공통 함수
+		function movPage(page) {
+			$('#Paging_page').val(page);
+			$('#listForm').submit();
+		}
+
+    </script>
+
+
+
+	}

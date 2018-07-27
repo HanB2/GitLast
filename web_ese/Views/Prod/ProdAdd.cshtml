@@ -1,0 +1,572 @@
+﻿@model web_ese.Models_Act.Prod.ProdListModels
+
+
+
+<div id="content">
+
+@if (@Model.act_type == "ins")
+{
+	<!--보관상품 대량 엑셀 등록-->
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-floppy-o"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_ProdAdd_StocProdMassiveExcelAdd </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "file_form", @class = "smart-form", @enctype = "multipart/form-data" }))
+							{
+								@Html.HiddenFor(model => model.act_type, new { @id = "excel_act_type" })
+								@Html.HiddenFor(model => model.schTxt2)
+								<fieldset>
+
+									<div class="row">
+										<section class="col col-9">
+											<label class="select">
+												<select name="file_type">
+													<option value="0" selected="" disabled="">@comm_global.Language.Resources.ESE_Comm_EtormarsForm</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<label class="label col col-3">
+											<a class="btn btn-primary" href="javascript:callExcel();" style="padding:5px 22px; "> @comm_global.Language.Resources.ESE_ProdAdd_ExcelFormDownload</a>
+										</label>
+									</div>
+
+								</fieldset>
+								<fieldset>
+									<div class="row">
+										<section class="col col-9">
+											<div class="input input-file">
+												<span class="button"><input id="Excel_File_FILE" name="Excel.File.FILE" onchange="this.parentNode.nextSibling.value = this.value" type="file">Browse</span><input type="text" placeholder="@comm_global.Language.Resources.ESE_ProdAdd_StocProdMassiveExcelPlaceHolder" readonly="">
+											</div>
+										</section>
+										<label class="label col col-3">
+											<a class="btn btn-primary" href="javascript:act_excel();" style="padding:5px 22px; ">@comm_global.Language.Resources.ESE_ProdAdd_ExcelFormUpload&nbsp;&nbsp;</a>
+										</label>
+									</div>
+
+								</fieldset>
+								<fieldset>
+									<div class="row">
+										<section class="col col-12">
+											<p id="form_chk"></p>
+											@for (int i = 0; i < Model.Excel.errList.Count; i++)
+											{
+												<p>@Model.Excel.errList[i]</p>
+											}
+										</section>
+									</div>
+
+								</fieldset>
+
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--보관상품 개별 등록 창 부분-->
+	<div class="alert alert-block alert-success" style="max-width:1000px;">
+		<h4 class="alert-heading"><i class="fa fa-check-square-o"></i> @comm_global.Language.Resources.ESE_ProdAdd_StocProdIndividualAdd</h4>
+		<p>
+			@comm_global.Language.Resources.ESE_ProdAdd_StocProdIndividualAddExplanation
+		</p>
+	</div>
+
+}
+
+@if (@Model.act_type == "updt")
+{
+	<!--보관상품 개별 수정 각각 문구를 수정 관련 택스트로 변환 필요 -->
+	<div class="alert alert-block alert-success" style="max-width:1000px;">
+		<h4 class="alert-heading"><i class="fa fa-check-square-o"></i> @comm_global.Language.Resources.ESE_ProdAdd_StocProdIndividualAdd</h4>
+		<p>
+			@comm_global.Language.Resources.ESE_ProdAdd_StocProdIndividualAddExplanation
+		</p>
+	</div>
+}
+
+	<!--필수 입력 항목-->
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_ProdAdd_RequiredField </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+							{
+								@Html.HiddenFor(model => model.act_type)
+								@Html.HiddenFor(model => model.act_key)
+								@Html.HiddenFor(model => model.sortKey)
+								@Html.HiddenFor(model => model.Paging.page)
+								@Html.HiddenFor(model => model.Paging.pageNum)
+								@Html.HiddenFor(model => model.Paging.pageTotNum)
+
+								@Html.HiddenFor(model => model.cate1)
+								@Html.HiddenFor(model => model.cate2)
+								@Html.HiddenFor(model => model.cate3)
+								@Html.HiddenFor(model => model.cate4)
+
+								@Html.HiddenFor(model => model.schEdt)
+								@Html.HiddenFor(model => model.schSdt)
+								@Html.HiddenFor(model => model.schTxt2)
+								@Html.HiddenFor(model => model.schTypeTxt)
+								@Html.HiddenFor(model => model.schTxt)
+								@Html.HiddenFor(model => model.schType)
+
+								@Html.HiddenFor(model => model.Item.CATEGORY1)
+								@Html.HiddenFor(model => model.Item.CATEGORY2)
+								@Html.HiddenFor(model => model.Item.CATEGORY3)
+								@Html.HiddenFor(model => model.Item.CATEGORY4)
+								@Html.HiddenFor(model => model.Item.PRODUCT_NAME_EN)
+								@Html.HiddenFor(model => model.Item.PRODUCT_NAME_CN)
+								@Html.HiddenFor(model => model.Item.PRODUCT_NAME_KR)
+								@Html.HiddenFor(model => model.Item.SKU)
+								@Html.HiddenFor(model => model.Item.BRAND)
+								@Html.HiddenFor(model => model.Item.PRICE)
+								@Html.HiddenFor(model => model.Item.UNIT_WEIGHT)
+								@Html.HiddenFor(model => model.Item.STANDARD)
+								@Html.HiddenFor(model => model.Item.EXPIRATION)
+								@Html.HiddenFor(model => model.Item.ORIGIN)
+								@Html.HiddenFor(model => model.Item.INGREDIENT)
+								@Html.HiddenFor(model => model.Item.SPEC)
+								@Html.HiddenFor(model => model.Item.SALE_SITE_URL)
+								@Html.HiddenFor(model => model.Item.PRODUCT_IMAGE)
+								@Html.HiddenFor(model => model.Item.WEIGHT_UNIT)
+								
+								<fieldset>
+									<!--바코드-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_Barcord</label>
+										<section class="col col-10">
+											<label for="BARCODE" class="input">
+												@Html.TextBoxFor(model => model.Item.BARCODE)	
+											</label>
+										</section>
+									</div>
+
+									<!--대표 상품명-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_Comm_PRODUCT_NAME</label>
+										<section class="col col-10">
+											<label for="PRODUCT_NAME" class="input">
+												@Html.TextBoxFor(model => model.Item.PRODUCT_NAME)
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								}
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--선택 입력 항목 아랫부분-->
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_ProdAdd_SelectInputField </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" })) { 
+									
+								<fieldset>
+
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_ChooseCategory </label>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("viewCate1", new SelectList(Model.cateList1, "opt_key", "opt_value", Model.Item.CATEGORY1), @comm_global.Language.Resources.ESE_Comm_ChooseInitial, new { onchange = "javascript:callCate('2', this.value);" })<i></i>
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("viewCate2", new SelectList(Model.cateList2, "opt_key", "opt_value", Model.Item.CATEGORY2), "========", new { onchange = "javascript:callCate('3', this.value);" })<i></i>
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("viewCate3", new SelectList(Model.cateList3, "opt_key", "opt_value", Model.Item.CATEGORY3), "========", new { onchange = "javascript:callCate('4', this.value);" })<i></i>
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("viewCate4", new SelectList(Model.cateList4, "opt_key", "opt_value", Model.Item.CATEGORY4), "========")<i></i>
+											</label>
+										</section>
+									</div>
+									<!--상품명 (영어)-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_PRODUCT_NAME_EN</label>
+										<section class="col col-10">
+											<label for="PRODUCT_NAME_EN" class="input">
+												<input type="text" name="PRODUCT_NAME_EN" id="PRODUCT_NAME_EN" value="@Model.Item.PRODUCT_NAME_EN" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<!--상품명 (중국어)-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_PRODUCT_NAME_CN</label>
+										<section class="col col-10">
+											<label for="PRODUCT_NAME_CN" class="input">
+												<input type="text" name="PRODUCT_NAME_CN" id="PRODUCT_NAME_CN" value="@Model.Item.PRODUCT_NAME_CN" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<!--상품명 (한국어)-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_PRODUCT_NAME_KR</label>
+										<section class="col col-10">
+											<label for="PRODUCT_NAME_KR" class="input">
+												<input type="text" name="PRODUCT_NAME_KR" id="PRODUCT_NAME_KR" value="@Model.Item.PRODUCT_NAME_KR" placeholder="">
+											</label>
+										</section>
+									</div>
+									
+									<!--SKU-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_SKU</label>
+										<section class="col col-10">
+											<label for="SKU" class="input">
+												<input type="text" name="SKU" id="SKU" value="@Model.Item.SKU" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<!--브랜드명-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_BRAND</label>
+										<section class="col col-10">
+											<label for="BRAND" class="input">
+												<input type="text" name="BRAND" id="BRAND" value="@Model.Item.BRAND" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<!--중량/용량, 단위-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_UNIT_WEIGHT</label>
+										<section class="col col-4">
+											<label for="UNIT_WEIGHT" class="input">
+												<input type="text" name="UNIT_WEIGHT" id="UNIT_WEIGHT" value="@Model.Item.UNIT_WEIGHT" placeholder="100">
+											</label>
+										</section>
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_viewWEIGHT_UNIT</label>
+										<section class="col col-4">
+											<label class="select">
+												@Html.DropDownList("WEIGHT_UNIT", new SelectList(Model.viewWEIGHT_UNIT, "opt_key", "opt_value", Model.Item.WEIGHT_UNIT), @comm_global.Language.Resources.ESE_Comm_ChooseInitial)<i></i>
+												
+											</label>
+										</section>
+
+									</div>
+
+									<!--규격, 유통기한-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_STANDARD</label>
+										<section class="col col-4">
+											<label for="STANDARD" class="input">
+												<input type="text" name="STANDARD" id="STANDARD" value="@Model.Item.STANDARD" placeholder="@comm_global.Language.Resources.ESE_ProdAdd_STANDARDPlaceHolder">
+											</label>
+										</section>
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_EXPIRATION</label>
+										<section class="col col-4">
+											<label for="EXPIRATION" class="input">
+												<input type="text" name="EXPIRATION" id="EXPIRATION" value="@Model.Item.EXPIRATION" placeholder="@comm_global.Language.Resources.ESE_ProdAdd_EXPIRATIONPlaceHolder">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_ORIGIN</label>
+										<section class="col col-10">
+											<label for="ORIGIN" class="input">
+												<input type="text" name="ORIGIN" id="ORIGIN" value="@Model.Item.ORIGIN" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<!--성분-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_INGREDIENT</label>
+										<section class="col col-10">
+											<label for="INGREDIENT" class="input">
+												<input type="text" name="INGREDIENT" id="INGREDIENT" value="@Model.Item.INGREDIENT" placeholder="@comm_global.Language.Resources.ESE_ProdAdd_INGREDIENTPlaceHolder">
+											</label>
+										</section>
+									</div>
+
+									<!--상세스펙-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_SPEC</label>
+										<section class="col col-10">
+											<label for="SPEC" class="input">
+												<input type="text" name="SPEC" id="SPEC" value="@Model.Item.SPEC" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<!--판매사이트 URL-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_SALE_SITE_URL</label>
+										<section class="col col-10">
+											<label for="SALE_SITE_URL" class="input">
+												<input type="text" name="SALE_SITE_URL" id="SALE_SITE_URL" value="@Model.Item.SALE_SITE_URL" placeholder="">
+											</label>
+										</section>
+									</div>
+
+									<!--Image URL-->
+									<div class="row">
+										<label class="label col col-2">@comm_global.Language.Resources.ESE_ProdAdd_PRODUCT_IMAGE</label>
+										<section class="col col-10">
+											<label for="PRODUCT_IMAGE" class="input">
+												<input type="text" name="PRODUCT_IMAGE" id="PRODUCT_IMAGE" value="@Model.Item.PRODUCT_IMAGE" placeholder="">
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+
+								<footer>
+									@if (Model.act_type == "updt")
+									{
+										<button type="button" onclick="javascript:act_Submit();" class="btn btn-primary">
+											@comm_global.Language.Resources.Button_UPDATE
+										</button>
+
+										<button type="button" onclick="javascript:act_List();" class="btn btn-primary">
+											@comm_global.Language.Resources.Button_LIST
+										</button>
+									}
+									else
+									{
+										<button type="button" onclick="javascript:act_Submit();" class="btn btn-primary">
+											@comm_global.Language.Resources.Button_ProdAdd
+										</button>
+									}
+								</footer>
+								}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+</div>
+<!-- END MAIN CONTENT -->
+@section pagespecific {
+
+
+<script type="text/javascript">
+
+	var settingForm = [];
+
+
+	$(document).ready(function () {
+		formSettingValue();
+		formSetting();
+	});
+
+	function callCate(depth, parent) {
+
+		if (parent == "") {
+			parent = '0';
+		}
+
+		if (parent == "0") {
+			for (i = depth; i < 5; i++) {
+				$('#viewCate' + i).empty();
+				var option = $("<option value='0'>========</option>");
+				$('#viewCate' + i).append(option);
+			}
+		}
+
+		$.ajax({
+			type: "POST",
+			url: '/Prod/GetCategory',
+			datatype: "json",
+			data: {
+				depth: depth,
+				parent: parent
+			},
+			success: function (data) {
+				$('#viewCate' + depth).empty();
+				if (data.length >= 1) {
+					var option = $("<option value='0'>@comm_global.Language.Resources.Script_ProdAdd_CallCateChoose</option>");
+					$('#viewCate' + depth).append(option);
+					for (var i = 0; i < data.length; i++) {
+						var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+						$('#viewCate' + depth).append(option);
+					}
+				} else {
+					var option = $("<option value='0'>========</option>");
+					$('#viewCate' + depth).append(option);
+				}
+			}
+		});
+	}
+
+
+
+	// 등록/수정
+	function act_Submit() {
+
+		var chkVal = "";
+
+		if ($("#Item_BARCODE").val() == "" || $("#Item_BARCODE").val() == 0) {
+			alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_Barcode" + "]");
+			$("#Item_BARCODE").focus();
+			return false;
+		}
+
+		if ($("#Item_PRODUCT_NAME").val() == "") {
+			alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_ProductName" + "]");
+			$("#Item_PRODUCT_NAME").focus();
+			return false;
+		}
+
+		if ($('#UNIT_WEIGHT').val() > 0) {
+			if ($("#Item_WEIGHT_UNIT option:selected").val() == "") {
+				alert(" @comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.Script_ProductName" + "]");
+				$("#Item_WEIGHT_UNIT").focus();
+				return false;
+			}
+		}
+
+
+
+
+		//모든 유효성 검사 성공 시
+		for (i = 0; i < settingForm.length; i++) {
+			tmp_id = settingForm[i][0];	//id
+			chkCombo = settingForm[i][3]; //콤보박스
+
+			if (chkCombo == '0') {
+				$("#Item_" + tmp_id).val($("#" + tmp_id).val());
+			} else {
+				$("#Item_" + tmp_id).val($("#" + tmp_id + " option:selected").val());
+			}
+		}
+		$('#Item_CATEGORY1').val($('#viewCate1 option:selected').val());
+		$('#Item_CATEGORY2').val($('#viewCate2 option:selected').val());
+		$('#Item_CATEGORY3').val($('#viewCate3 option:selected').val());
+		$('#Item_CATEGORY4').val($('#viewCate4 option:selected').val());
+
+
+		$('#view_form').submit();
+	}
+
+
+	function act_List() {
+		$('#view_form').attr('action', '/Prod/ProdList');
+		$('#act_type').val('list');
+		$('#view_form').submit();
+	}
+
+
+	function formSettingValue() {
+		//id		클래스		길이		콤보박스
+		settingForm.push(['Item_BARCODE', 'etoINt', '16', '0']);
+		settingForm.push(['Item_PRODUCT_NAME', 'no', '100', '0']);
+		settingForm.push(['PRODUCT_NAME_EN', 'no', '100', '0']);
+		settingForm.push(['PRODUCT_NAME_CN', 'no', '100', '0']);
+		settingForm.push(['PRODUCT_NAME_KR', 'no', '100', '0']);
+		settingForm.push(['SKU', 'no', '50', '0']);
+		settingForm.push(['BRAND', 'no', '50', '0']);
+		settingForm.push(['PRICE', 'etoINt', '10', '0']);
+		settingForm.push(['UNIT_WEIGHT', 'etoINt', '10', '0']);
+		settingForm.push(['STANDARD', 'no', '5', '0']);
+		settingForm.push(['EXPIRATION', 'etoINt', '10', '0']);
+		settingForm.push(['ORIGIN', 'no', '15', '0']);
+		settingForm.push(['INGREDIENT', 'no', '200', '0']);
+		settingForm.push(['SPEC', 'text', 'no', '0']);
+		settingForm.push(['SALE_SITE_URL', 'no', '200', '0']);
+		settingForm.push(['PRODUCT_IMAGE', 'text', 'no', '0']);
+		settingForm.push(['WEIGHT_UNIT', 'no', 'no', '1']);
+
+	}
+
+
+	function formSetting() {
+
+		for (i = 0; i < settingForm.length; i++) {
+			tmp_id = settingForm[i][0];	//id
+			tmp_class = settingForm[i][1];	//class
+			tmp_maxLeng = settingForm[i][2]; //길이제한
+
+			if (tmp_class != 'no')
+				$('#' + tmp_id).addClass(tmp_class);
+
+			if (tmp_maxLeng != 'no')
+				$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+		}
+
+		$(".etoINt").attr("onkeyup", "if(this.value == ''){ this.value='0'; }else{  this.value=this.value.replace(/[^0-9]/g,'') * 1}");
+
+	}
+
+	function callExcel() {
+		$('#file_form').attr('method', 'POST');
+		$('#file_form').attr('action', '/Prod/DownExcelProd');
+		$('#file_form').submit();
+	}
+
+
+	function act_excel() {
+		var maxSize = 5 * 1024 * 1024;
+		//
+		var fileName = document.getElementById("Excel_File_FILE").value;
+		if (fileName.length == 0) {
+			$('#form_chk').html("첨부파일이 없습니다.");
+			return false;
+		}
+
+		var size = document.getElementById("Excel_File_FILE").files[0].size;
+		if (size > maxSize) {
+			$('#form_chk').html("파일 사이즈는 5Mb이하로 업로드해주세요.");
+			return false;
+		}
+
+		var fileExt = fileName.substring(fileName.length - 3).toLowerCase();
+		var fileExt2 = fileName.substring(fileName.length - 4).toLowerCase();
+		if (fileExt != "xls" && fileExt2 != "xlsx") {
+			$('#form_chk').html("엑셀 파일만 첨부가능합니다.");
+			return false;
+		}
+
+
+		$('#excel_act_type').val('excel');
+		$('#file_form').submit();
+	}
+
+
+
+
+</script>
+
+
+}

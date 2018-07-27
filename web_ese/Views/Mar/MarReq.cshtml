@@ -1,0 +1,295 @@
+﻿@model web_ese.Models_Act.Mar.MarReqModels
+
+<div id="content">
+	<!--페이지 이름-->
+	<div class="alert alert-block alert-success" style="max-width:1000px;">
+		<h4 class="alert-heading"><i class="fa fa-check-square-o"></i> @comm_global.Language.Resources.ESE_MarReq_Header </h4>
+	</div>
+
+
+	<section id="widget-grid" class="" style="max-width:1000px;">
+		<div class="row">
+			<!--충전 요청 시 주의 사항-->
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-pink jarviswidget-sortable" id="wid-id-9" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" role="widget" style="">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+						<h2><strong>@comm_global.Language.Resources.ESE_MarReq_Attention</strong> </h2>
+					</header>
+					<div role="content">
+
+						<div class="widget-body" style="height:381px;">
+							<p class="alert alert-warning">
+
+								@comm_global.Language.Resources.ESE_MarReq_AttentionFirst
+
+							</p>
+							<p class="alert alert-warning">
+
+								@comm_global.Language.Resources.ESE_MarReq_AttentionSecond
+
+							</p>
+
+							<p class="alert alert-warning">
+
+								@comm_global.Language.Resources.ESE_MarReq_AttentionThird
+
+							</p>
+
+						</div>
+					</div>
+				</div>
+			</article>
+			<!--송금자 정보-->
+			<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> @comm_global.Language.Resources.ESE_MarReq_SendMoneyPersonInfo </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+							{
+								@Html.AntiForgeryToken()
+								<fieldset>
+									
+									<section>
+										<div class="inline-group">
+											<label class="radio">
+												<input type="radio" name="radio-inline" onclick="javascript: HandWritingInput();">
+												<i></i>@comm_global.Language.Resources.ESE_Comm_DirectInput
+											</label>
+											<label class="radio">
+												<input type="radio" name="radio-inline" checked="checked">
+												<i></i>@comm_global.Language.Resources.ESE_Comm_LastInputInfo
+											</label>
+										</div>
+									</section>
+									
+									<!--금액-->
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarReq_DepositBankName</label>
+										<section class="col col-9">
+											<label for="MEMO" class="input">
+												@Html.TextBoxFor(model => model.Item.BANK_NAME, new { placeholder = "입금은행명" })
+												@Html.ValidationMessageFor(model => model.Item.BANK_NAME)
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarReq_AccountNum</label>
+										<section class="col col-9">
+											<label for="MEMO" class="input">
+												@Html.TextBoxFor(model => model.Item.BANK_ACCOUNT, new { placeholder = "계좌 번호" })
+												@Html.ValidationMessageFor(model => model.Item.BANK_ACCOUNT)
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarReq_DepositPersonName</label>
+										<section class="col col-9">
+											<label for="MEMO" class="input">
+												@Html.TextBoxFor(model => model.Item.DEPOSIT_NAME, new { placeholder = "입금자 명" })
+												@Html.ValidationMessageFor(model => model.Item.DEPOSIT_NAME)
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarReq_DepositAmount</label>
+										<section class="col col-9">
+											<label for="MEMO" class="input">
+												@Html.TextBoxFor(model => model.Item.DEPOSIT_AMOUNT, new { placeholder = "입금 금액" , onkeyup = "this.value=this.value.replace(/[^0-9]/g,'');" })
+												@Html.ValidationMessageFor(model => model.Item.DEPOSIT_AMOUNT)
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarReq_DepositCurrency</label>
+										<section class="col col-9">
+											<label class="select">
+												@Html.DropDownList("CURRENCY_UNIT", new SelectList(Model.currencyArray, "opt_value", "opt_key", Model.Item.DEPOSIT_CURRENCY),"선택") <i></i>
+												<element onreset="myScript">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarReq_DepositDateTime</label>
+										<section class="col col-9">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.Item.DEPOSIT_DATETIME, new { @id = "DEPOSIT_DATETIME", @placeholder = "Expected date" })
+												<element onreset="myScript">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<label class="label col col-3">@comm_global.Language.Resources.ESE_MarReq_DepositMemo</label>
+										<section class="col col-9">
+											<label for="MEMO" class="input">
+												@Html.TextBoxFor(model => model.Item.MEMO, new { placeholder = "입금 메모" })
+												@Html.ValidationMessageFor(model => model.Item.MEMO)
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer>
+									<button type="button" class="btn btn-primary" onclick="javascript: ChargeRequest();">
+										@comm_global.Language.Resources.ESE_MarReq_MarChargeReq
+									</button>
+								</footer>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+		</div>
+	</section>
+
+
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+
+
+	<script type="text/javascript">
+
+
+		var settingForm = [];
+
+		$(document).ready(function () {
+			formSettingValue();
+			formSetting();
+		});
+
+
+		function formSettingValue() {
+			//id		클래스		길이		콤보박스
+
+			settingForm.push(['Item_BANK_NAME', 'no', '50', '0']); //입금 은행명
+			settingForm.push(['Item_BANK_ACCOUNT', 'bankAccount', '50', '0']); // 계좌 번호
+			settingForm.push(['Item_DEPOSIT_NAME', 'no', '30', '0']); // 입금자 명
+			settingForm.push(['Item_DEPOSIT_AMOUNT', 'depositAmount', '22', '0']); // 입금 금액
+			settingForm.push(['CURRENCY_UNIT', 'no', '3', '0']); // 입금 화폐단위
+			settingForm.push(['Item_MEMO', 'no', '200', '0']); // 입금 메모
+		}
+
+
+		function formSetting() {
+
+			for (i = 0; i < settingForm.length; i++) {
+				tmp_id = settingForm[i][0];	//id
+				tmp_class = settingForm[i][1];	//class
+				tmp_maxLeng = settingForm[i][2]; //길이제한 max
+
+
+				if (tmp_class != 'no')
+					$('#' + tmp_id).addClass(tmp_class);
+
+				if (tmp_maxLeng != 'no')
+					$('#' + tmp_id).attr('maxlength', tmp_maxLeng);
+			}
+
+			$(".bankAccount").attr("onkeyup", "this.value=this.value.replace(/[^0-9_.-]/g,'')");
+			$(".depositAmount").attr("onkeyup", "this.value=this.value.replace(/[^0-9_.-]/g,'')");
+		}
+
+
+		//데이터 피커 생성자
+		$(function () {
+			$("#DEPOSIT_DATETIME").datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+		});
+
+
+
+		//충전 요청
+		function ChargeRequest() {
+
+
+			if ($("#Item_BANK_NAME").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_MarReq_DepositBankName" + "]");
+				$("#Item_BANK_NAME").focus();
+				return false;
+			}
+
+			if ($("#Item_BANK_ACCOUNT").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_MarReq_AccountNum" + "]");
+				$("#Item_BANK_ACCOUNT").focus();
+				return false;
+			}
+
+			if ($("#Item_DEPOSIT_NAME").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_MarReq_DepositPersonName" + "]");
+				$("#Item_DEPOSIT_NAME").focus();
+				return false;
+			}
+
+			if ($("#Item_DEPOSIT_AMOUNT").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_MarReq_DepositAmount" + "]");
+				$("#Item_DEPOSIT_AMOUNT").focus();
+				return false;
+			}
+
+			if ($("#Item_DEPOSIT_AMOUNT").val() == '0') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_MarReq_DepositAmount" + "]");
+				$("#Item_DEPOSIT_AMOUNT").focus();
+				return false;
+			}
+
+			if ($("#CURRENCY_UNIT").val() == '' || $("#CURRENCY_UNIT").val() == '선택') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_MarReq_DepositCurrency" + "]");
+				$("#CURRENCY_UNIT").focus();
+				return false;
+			}
+
+
+			if ($("#DEPOSIT_DATETIME").val() == '') {
+				alert("@comm_global.Language.Resources.Script_RequiredInput [" + "@comm_global.Language.Resources.ESE_MarReq_DepositDateTime" + "]");
+				$("#DEPOSIT_DATETIME").focus();
+				return false;
+			}
+
+
+			if (!$("#Item_DEPOSIT_AMOUNT").val().match(/^[0-9.]*$/)) {
+				alert("@comm_global.Language.Resources.Script_DepositAmountOnlyNum");
+				return false;
+			}
+			/*
+			if ($("#Item_DEPOSIT_CURRENCY").val().length > 3) {
+				alert("comm_global.Language.Resources.Script_DepositCurrencyIsThree");
+				return false;
+			}*/
+
+
+
+			$("#listForm").submit();
+
+		}
+
+
+		function HandWritingInput() {
+			$("#Item_BANK_NAME").val('');
+			$("#Item_BANK_ACCOUNT").val('');
+			$("#Item_DEPOSIT_NAME").val('');
+			$("#Item_DEPOSIT_AMOUNT").val('');
+			$("#CURRENCY_UNIT").val('');
+			$("#DEPOSIT_DATETIME").val('');
+			$("#Item_MEMO").val('');
+		}
+	</script>
+
+
+}

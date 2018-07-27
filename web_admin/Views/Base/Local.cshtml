@@ -1,0 +1,222 @@
+﻿
+<div id="content" style="max-width:1000px;">
+
+
+
+
+
+	<form id="checkout-form" class="smart-form" novalidate="novalidate">
+		<fieldset style="border:1px solid #C2C2C2">
+			<div class="row">
+				<label class="label col col-2"><b>국가별 검색</b></label>
+				<section class="col col-10">
+					<label class="select">
+						<select name="country">
+							<option value="0" selected="" disabled="">REPUBLIC KOREA (대한민국)</option>
+						</select> <i></i>
+					</label>
+				</section>
+			</div>
+		</fieldset>
+	</form>
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<div class="jarviswidget-ctrls" role="menu">
+							<a href="javascript:void(0);" class="button-icon" data-toggle="modal" data-target="#myModal">
+								<i class="fa fa-plus"></i>
+							</a>
+						</div>
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>현지 배송업체 정보</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+
+
+							<div class="table-responsive">
+
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:8%;"></th>
+											<th style="width:8%;">국가코드</th>
+											<th style="width:auto;">배송회사</th>
+											<th style="width:auto;">사이트 URL</th>
+											<th style="width:auto;">배송회사 ID</th>
+											<th style="width:auto;">메모</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</td>
+											<td>CN</td>
+											<td>邮政包裹/平邮(CHINA POST)</td>
+											<td>http://yjcx.chinapost.com.cn/</td>
+											<td>CN_POST</td>
+											<td>중국 기본 택배사</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</td>
+											<td>CN</td>
+											<td>邮政包裹/平邮(CHINA POST)</td>
+											<td>http://yjcx.chinapost.com.cn/</td>
+											<td>CN_POST</td>
+											<td>중국 기본 택배사</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</td>
+											<td>CN</td>
+											<td>邮政包裹/平邮(CHINA POST)</td>
+											<td>http://yjcx.chinapost.com.cn/</td>
+											<td>CN_POST</td>
+											<td>중국 기본 택배사</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</article>
+		</div>
+	</section>
+
+
+
+</div>
+
+
+
+
+
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:1100px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">현지 배송업체 설정</h4>
+			</div>
+			<div class="modal-body">
+
+
+				<section id="widget-grid" class="">
+					<div class="row">
+						<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+							<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+								<header role="heading">
+									<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+									<h2>현지 배송업체 추가 / 수정 </h2>
+								</header>
+								<div role="content">
+									<div class="widget-body no-padding">
+										<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+											<fieldset>
+
+												<div class="row">
+													<label class="label col col-2">국가명</label>
+													<section class="col col-10">
+														<label class="select">
+															<select name="country">
+																<option value="0" selected="" disabled="">REPUBLIC KOREA (대한민국)</option>
+															</select> <i></i>
+														</label>
+													</section>
+												</div>
+
+												<div class="row">
+													<label class="label col col-2">배송회사명</label>
+													<section class="col col-10">
+														<label for="address2" class="input">
+															<input type="text" name="address2" id="address2" placeholder="">
+														</label>
+													</section>
+												</div>
+
+												<div class="row">
+													<label class="label col col-2">사이트 URL</label>
+													<section class="col col-10">
+														<label for="address2" class="input">
+															<input type="text" name="address2" id="address2" placeholder="">
+														</label>
+													</section>
+												</div>
+
+												<div class="row">
+													<label class="label col col-2">배송회사 ID</label>
+													<section class="col col-10">
+														<label for="address2" class="input">
+															<input type="text" name="address2" id="address2" placeholder="">
+														</label>
+													</section>
+												</div>
+
+												<div class="row">
+													<label class="label col col-2">메모</label>
+													<section class="col col-10">
+														<label for="address2" class="input">
+															<input type="text" name="address2" id="address2" placeholder="">
+														</label>
+													</section>
+												</div>
+
+											</fieldset>
+
+										</form>
+
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+				</section>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default">
+					수정
+				</button>
+				<button type="button" class="btn btn-default">
+					추가
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					닫기
+				</button>
+			</div>
+
+
+		</div>
+	</div>
+</div>

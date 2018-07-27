@@ -1,0 +1,157 @@
+﻿@model web_esm.Models_Act.Ese.EseIframeInfoModels
+
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+			<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+				<header role="heading">
+					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+					<h2> ESE 기본 정보 </h2>
+				</header>
+				<div role="content">
+					<div class="widget-body no-padding">
+						@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+						{
+							@Html.HiddenFor(model => model.act_key)
+							@Html.HiddenFor(model => model.act_type)
+							@Html.HiddenFor(model => model.viewEseCode)
+							@Html.AntiForgeryToken()
+
+							<fieldset>
+								<!--SENDER 코드, STATION 코드-->
+								<div class="row">
+									<label class="label col col-2">SENDER 코드</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.ESE_CODE)
+										</label>
+									</section>
+
+									<label class="label col col-2">STATION 코드</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.EST_CODE)
+										</label>
+									</section>
+								</div>
+
+								<!--이메일주소, 비밀번호-->
+								<div class="row">
+									<label class="label col col-2">이메일주소</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.EMAIL)
+										</label>
+									</section>
+
+									<label class="label col col-2">비밀번호</label> <!--암호화-->
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.PASSWD)
+										</label>
+									</section>
+								</div>
+								<!--사용자이름-->
+								<div class="row">
+									<label class="label col col-2">사용자이름</label>
+									<section class="col col-10">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.USERNAME)
+										</label>
+									</section>
+								</div>
+								<!--사용자 전화번호-->
+								<div class="row">
+									<label class="label col col-2">사용자 전화번호</label>
+									<section class="col col-10">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.TELNO)
+										</label>
+									</section>
+								</div>
+								<!--그룹 ID, 생성날짜-->
+								<div class="row">
+									<label class="label col col-2">그룹 ID</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.GROUP_ID)
+										</label>
+									</section>									
+									<label class="label col col-2">생성날짜</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.CREATETIME)
+										</label>
+									</section>								
+								</div>
+								<!--부서-->
+								<div class="row">
+									<label class="label col col-2">부서</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.DEPARTMENT)
+										</label>
+									</section>			
+								</div>
+								<!--직급-->
+								<div class="row">
+									<label class="label col col-2">직급</label>
+									<section class="col col-10">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.POSITION)
+										</label>
+									</section>
+								</div>							
+								<!-- 상태-->
+								<div class="row">									
+									<label class="label col col-2">상태</label>
+									<section class="col col-6">
+										<div class="inline-group">
+											<label class="radio">
+												@Html.RadioButtonFor(m => m.RadioBoxPop, "0")
+												<i></i>@Html.Label("사용중")
+											</label>
+											<label class="radio">
+												@Html.RadioButtonFor(m => m.RadioBoxPop, "1")
+												<i></i>@Html.Label("삭제됨")
+											</label>
+											<label class="radio">
+												@Html.RadioButtonFor(m => m.RadioBoxPop, "2")
+												<i></i>@Html.Label("신규등록")
+											</label>
+										</div>
+									</section>
+								</div>
+								<!--메모-->
+								<div class="row">
+									<label class="label col col-12">메모</label>
+
+								</div>
+								<section>
+									@Html.TextAreaFor(model => model.Item.MEMO, new { @class = "custom-scroll", @cols = "100", @ROWS = "6" })
+								</section>
+							</fieldset>
+						}
+					</div>
+				</div>
+			</div>
+		</article>
+
+	</div>
+</section>
+
+
+
+@section pagespecific {
+	<script type="text/javascript">
+				function formSubmit() {
+					$('#view_form').submit();
+				}
+	</script>
+
+}

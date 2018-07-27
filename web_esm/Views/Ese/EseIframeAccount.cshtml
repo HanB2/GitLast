@@ -1,0 +1,92 @@
+﻿@model web_esm.Models_Act.Ese.EseAccountModels
+
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+			<article class="col-sm-12 col-md-12 col-lg-12" style="height:400px; padding:0px;">
+				<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" >
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+						<h2> ESE 계좌 정보</h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "form1", @name = "form1", @class = "smart-form" }))
+							{
+								@Html.AntiForgeryToken()
+								@Html.HiddenFor(model => model.viewEseCode)
+
+								<fieldset>
+
+									<!--SWIFT CODE 서버명-->
+									<div class="row">
+										<label class="label col col-2">SWIFT CODE</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.setting_SwiftCode)
+												@Html.ValidationMessageFor(model => model.setting_SwiftCode)
+											</label>
+										</section>
+									</div>
+
+									<!--은행 주소-->
+									<div class="row">
+										<label class="label col col-2">은행 주소</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.setting_BankAddr)
+												@Html.ValidationMessageFor(model => model.setting_BankAddr)
+											</label>
+										</section>
+									</div>
+
+									<!--당행 계좌번호-->
+									<div class="row">
+										<label class="label col col-2">당행 계좌번호</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.setting_AccountNum)
+												@Html.ValidationMessageFor(model => model.setting_AccountNum)
+											</label>
+										</section>
+									</div>
+
+									<!--영문 수취인 명-->
+									<div class="row">
+										<label class="label col col-2">영문 수취인 명</label>
+										<section class="col col-10">
+											<label class="input">
+												@Html.TextBoxFor(model => model.setting_ReceiverName_en)
+												@Html.ValidationMessageFor(model => model.setting_ReceiverName_en)
+											</label>
+										</section>
+									</div>
+
+									<!--메모-->
+									<div class="row">
+										<label class="label col col-12">메모</label>
+
+									</div>
+
+									<section>
+										<div id="collapseOne-1" class="panel-collapse collapse in">
+											@Html.TextAreaFor(model => model.setting_Memo, new { @class = "custom-scroll", @cols = "100", @ROWS = "3" })
+											@Html.ValidationMessageFor(model => model.setting_Memo)
+
+									</section>
+								</fieldset>
+							}
+						</div>
+					</div>
+				</div>
+			</article>
+
+
+
+@section pagespecific {
+
+
+
+}

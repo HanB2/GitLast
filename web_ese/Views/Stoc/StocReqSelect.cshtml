@@ -1,0 +1,327 @@
+﻿@model web_ese.Models_Act.Prod.ProdListModels
+
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+<div id="content"  style="padding:0px; background-color:white;">
+
+
+	<!--조회-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_Comm_Search </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+							{
+								<fieldset>
+									@Html.HiddenFor(model => model.act_type)
+									@Html.HiddenFor(model => model.act_key)
+									@Html.HiddenFor(model => model.sortKey)
+									@Html.HiddenFor(model => model.Paging.page)
+									@Html.HiddenFor(model => model.Paging.pageNum)
+									@Html.HiddenFor(model => model.Paging.pageTotNum)
+									@Html.HiddenFor(model => model.delChk)
+
+									<div class="row">
+										<label class="label col col-1">@comm_global.Language.Resources.ESE_Comm_Category</label>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("cate1", new SelectList(Model.cateList1, "opt_key", "opt_value", Model.cate1), @comm_global.Language.Resources.ESE_Comm_ChooseInitial, new { onchange = "javascript:callCate('2', this.value);" })<i></i>
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("cate2", new SelectList(Model.cateList2, "opt_key", "opt_value", Model.cate2), "========", new { onchange = "javascript:callCate('3', this.value);" })<i></i>
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("cate3", new SelectList(Model.cateList3, "opt_key", "opt_value", Model.cate3), "========", new { onchange = "javascript:callCate('4', this.value);" })<i></i>
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("cate4", new SelectList(Model.cateList4, "opt_key", "opt_value", Model.cate4), "========")<i></i>
+											</label>
+										</section>
+
+
+										<label class="label col col-1">@comm_global.Language.Resources.ESE_Comm_Brand</label>
+										<section class="col col-2">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.schTxt, new { placeholder = @comm_global.Language.Resources.ESE_Comm_SearchBrandPlaceHolder })
+											</label>
+										</section>
+
+									</div>
+
+									<!--검색조건, 등록일자-->
+									<div class="row">
+
+										<label class="label col col-1">@comm_global.Language.Resources.ESE_Comm_SearchCondition</label>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("schTypeTxt", new SelectList(Model.schTypeTxtArray, "opt_value", "opt_key"), @comm_global.Language.Resources.ESE_Comm_ChooseInitial) <i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.schTxt2, new { placeholder = @comm_global.Language.Resources.ESE_Comm_SearchWord })
+											</label>
+										</section>
+
+
+										<label class="label col col-1">@comm_global.Language.Resources.ESE_Comm_AddDate</label>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schSdt, new { @id = "schSdt", @placeholder = @comm_global.Language.Resources.ESE_Comm_ExpectedStartDate })
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schEdt, new { @id = "schEdt", @placeholder = @comm_global.Language.Resources.ESE_Comm_ExpectedEndDate })
+											</label>
+
+										</section>
+
+									</div>
+
+								</fieldset>
+
+								<!--Submit 부분-->
+								<footer>
+									<button type="button" class="btn btn-primary" onclick="javascript: searchAll();">
+										@comm_global.Language.Resources.Button_SearchAll
+									</button>
+
+									<button type="button" class="btn btn-primary" onclick="javascript: searchAct();">
+										@comm_global.Language.Resources.Button_SearchAct
+									</button>
+								</footer>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--중간부분-->
+	<div class="row">
+		<article class="col-sm-12">
+			<label style="float:right;" class="select">
+				@Html.DropDownList("pageNum", new SelectList(Model.pageNumArray, "opt_key", "opt_value", Model.Paging.pageNum), new { onchange = "javascript:setPageNum(this.value)" }) <i></i>
+			</label>
+			<label style="float:right;" class="select">
+				@Html.DropDownList("sortKey", new SelectList(Model.sortKeyArray, "opt_key", "opt_value", Model.sortKey), new { onchange = "javascript:sortKey(this.value)" }) <i></i>
+			</label>
+			<label style="float:right;">@comm_global.Language.Resources.ESE_Comm_Sort</label>
+
+		</article>
+	</div>
+
+
+	<!--등록 상품 조회 결과-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>@comm_global.Language.Resources.ESE_ProdList_ProdSearchResultList</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:5%;"><input type="checkbox" id="allCheck" /></th>
+											<th style="width:15%;">@comm_global.Language.Resources.ESE_Comm_Barcord</th>
+											<th style="width:10%;">@comm_global.Language.Resources.ESE_Comm_Category</th>
+											<th style="width:auto;">@comm_global.Language.Resources.ESE_Comm_PRODUCT_NAME</th>
+											<th style="width:15%;">@comm_global.Language.Resources.ESE_Comm_Brand</th>
+											<th style="width:20%;">@comm_global.Language.Resources.ESE_Comm_AddDate</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model.Items)
+										{
+											<tr>
+												<td>
+													<input type="checkbox" value="@item.BARCODE" class="etoChk" name="checkbox-inline"> <!--checkBox에 추후 추가-->
+												</td>
+												<td>@item.BARCODE</td><!--바코드-->
+												<td>@item.CATEGORY1_txt</td><!--카테고리 일단 1단계로 표시-->
+												<td>@item.PRODUCT_NAME</td><!--대표상품명-->
+												<td>@item.BRAND</td><!--브랜드-->
+												<td>@item.REG_DT</td><!--등록일자-->
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				@Html.Raw(ViewData["pageing"])
+			</article>
+		</div>
+	</section>
+
+</div>
+
+
+
+@section pagespecific {
+
+
+	<script type="text/javascript">
+
+		$(function(){ 
+			//전체선택 체크박스 클릭 
+			$("#allCheck").click(function(){ //만약 전체 선택 체크박스가 체크된상태일경우 
+				if($("#allCheck").prop("checked")) { //해당화면에 전체 checkbox들을 체크해준다 
+					$(".etoChk").prop("checked", true); // 전체선택 체크박스가 해제된 경우 
+				} else { //해당화면에 모든 checkbox들의 체크를해제시킨다. 
+					$(".etoChk").prop("checked", false);
+				}
+			})
+		})
+
+			
+
+
+
+		//상품 선택 
+		function callChkSelect() {
+			var data = "";
+
+			$(".etoChk").each(function () {
+				if ($(this).prop("checked")) {
+					var test = $(this).val();
+					data += $(this).val() + ',';
+				}
+			});
+			var leng = data.length;
+
+			if (leng == 0) {
+				alert("@comm_global.Language.Resources.Script_NoSelectedData");
+				return data;
+			} else {
+				return data;
+			}
+		}
+
+
+		function callCate(depth, parent) {
+
+			if (parent == "") {
+				for (i = depth; i < 5; i++) {
+					$('#cate' + i).empty();
+					var option = $("<option value='0'>========</option>");
+					$('#cate' + i).append(option);
+				}
+			}
+
+			$.ajax({
+				type: "POST",
+				url: '/Prod/GetCategory',
+				datatype: "json",
+				data: {
+					depth: depth,
+					parent: parent
+				},
+				success: function (data) {
+					$('#cate' + depth).empty();
+					if (data.length >= 1) {
+						var option = $("<option value=''>@comm_global.Language.Resources.Script_ProdAdd_CallCateChoose</option>");
+						$('#cate' + depth).append(option);
+						for (var i = 0; i < data.length; i++) {
+							var option = $("<option value='" + data[i].opt_key + "'>" + data[i].opt_value + "</option>");
+							$('#cate' + depth).append(option);
+						}
+					} else {
+						var option = $("<option value=''>@comm_global.Language.Resources.Script_NoData</option>");
+						$('#cate' + depth).append(option);
+					}
+				}
+			});
+		}
+
+
+		//데이터 피커 생성자
+		$(function() {
+    		$("#schSdt, #schEdt").datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+		});
+
+		//조회
+		function searchAct() {
+			$("#Paging_page").val('1');
+			$("#listForm").submit();
+		}
+
+		//전체조회
+		function searchAll() {
+			$("#schType").val('');
+			$("#schSdt").val('');
+			$("#schEdt").val('');
+			$("#schTypeTxt").val('');
+			$("#schTxt").val('');
+			$("#cate1").val('');
+			$("#cate2").val('');
+			$("#cate3").val('');
+			$("#cate4").val('');
+			$("#schTxt2").val('');
+
+
+			$("#Paging_page").val('1');
+
+			$("#listForm").submit();
+		}
+
+
+
+
+
+
+		// 정렬 페이지 수 기준
+		function setPageNum(val) {
+			$('#Paging_page').val('1');
+			$('#Paging_pageNum').val(val);
+			$('#listForm').submit();
+		}
+
+
+		//정렬 항목 기준
+		function sortKey(val) {
+			$('#Paging_page').val('1');
+			$('#sortKey').val(val);
+			$('#listForm').submit();
+		}
+
+		//페이징 공통 함수
+		function movPage(page) {
+			$('#Paging_page').val(page);
+			$('#listForm').submit();
+		}
+	</script>
+
+
+}

@@ -1,0 +1,211 @@
+﻿
+<div id="content" style="max-width:1000px;">
+
+
+
+
+	<div class="row">
+		<article class="col-sm-12">
+
+			
+			<div class="alert alert-info fade in">
+				<i class="fa-fw fa fa-info"></i>
+				<strong>기준단위 : KRW</strong>
+			</div>
+		</article>
+	</div>
+
+
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<div class="jarviswidget-ctrls" role="menu">   
+							<a href="javascript:void(0);" class="button-icon" data-toggle="modal" data-target="#myModal">
+								<i class="fa fa-plus"></i>
+							</a>
+						</div>
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>통화 설정</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+
+
+							<div class="table-responsive">
+
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:8%;"></th>
+											<th style="width:10%;">화폐단위</th>
+											<th style="width:auto;">설명</th>
+											<th style="width:10%;">기준단위</th>
+											<th style="width:9%;">환율</th>
+											<th style="width:12%;">적용날짜</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</td>
+											<td>USD</td>
+											<td>미국 달러 (US Dallor)</td>
+											<td>1</td>
+											<td>
+												<input type="text" />
+											</td>
+											<td>2018-03-01 00:00:00</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</td>
+											<td>USD</td>
+											<td>미국 달러 (US Dallor)</td>
+											<td>1</td>
+											<td>
+												<input type="text" />
+											</td>
+											<td>2018-03-01 00:00:00</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</td>
+											<td>USD</td>
+											<td>미국 달러 (US Dallor)</td>
+											<td>1</td>
+											<td>
+												<input type="text" />
+											</td>
+											<td>2018-03-01 00:00:00</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</article>
+		</div>
+		<a class="btn btn-primary btn-lg" href="javascript:void(0);" style="float:right;"> 환율 일괄저장</a>
+		<a class="btn btn-primary btn-lg" href="javascript:void(0);" > 환율 가져오기</a>
+	</section>
+
+
+
+</div>
+
+
+
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:1100px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">통화 관리</h4>
+			</div>
+			<div class="modal-body">
+
+
+
+				<section id="widget-grid" class="">
+					<div class="row">
+						<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+							<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+								<header role="heading">
+									<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+									<h2>화폐 단위 추가 / 수정 </h2>
+								</header>
+								<div role="content">
+									<div class="widget-body no-padding">
+										<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+											<fieldset>
+
+												<div class="row">
+													<label class="label col col-2">화폐단위</label>
+													<section class="col col-2">
+														<label for="address2" class="input">
+															<input type="text" name="address2" id="address2" placeholder="">
+														</label>
+													</section>
+													<label class="label col col-2">환율</label>
+													<section class="col col-2">
+														<label for="address2" class="input">
+															<input type="text" name="address2" id="address2" placeholder="">
+														</label>
+													</section>
+													<label class="label col col-2">기준단위</label>
+													<section class="col col-2">
+														<label class="select">
+															<select name="country">
+																<option value="0" selected="" disabled="">1</option>
+															</select> <i></i>
+														</label>
+													</section>
+												</div>
+
+												<div class="row">
+													<label class="label col col-2">설명</label>
+													<section class="col col-10">
+														<label for="address2" class="input">
+															<input type="text" name="address2" id="address2" placeholder="검색어">
+														</label>
+													</section>
+												</div>
+
+											</fieldset>
+
+										</form>
+
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+				</section>
+
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default">
+					수정
+				</button>
+				<button type="button" class="btn btn-default">
+					추가
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					닫기
+				</button>
+			</div>
+
+
+		</div>
+	</div>
+</div>

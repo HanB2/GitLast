@@ -1,0 +1,148 @@
+﻿    <!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    @{ Html.RenderPartial("_CurrentUser"); }
+    <nav>
+        <ul>
+			
+            <!--메인-->
+            <li class="@Html.RouteIf("index", "active")">
+                <a href="@Url.Action("Index", "Home")" title="Home"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">메인</span></a>
+            </li>
+            <!--기본정보 관리-->
+            <li class="@Html.RouteIf("base", "active")">
+                <a href="#"><i class="fa fa-lg fa-fw fa-info"></i><span class="menu-item-parent">기본 정보 관리</span></a>
+                <ul>
+                    <!--통화 관리-->
+                    <li class="@Html.RouteIf("BaseCurrency", "active")">
+                        <a href="@Url.Action("BaseCurrency", "Base")">통화 관리</a>
+                    </li>
+                    <!--배송 가능 국가 관리-->
+                    <li class="@Html.RouteIf("BaseNation", "active")">
+                        <a href="@Url.Action("BaseNation", "Base")"><i class="glyphicon glyphicon-plane"></i> 배송 가능 국가 관리</a>
+                    </li>
+                    <!--공항 관리-->
+                    <li class="@Html.RouteIf("BaseAirport", "active")">
+                        <a href="@Url.Action("BaseAirport", "Base")"><i class="fa fa-plane"></i> 공항 관리</a>
+                    </li>                                              
+                    <!--현지 배송 업체 설정-->					
+                    <li class="@Html.RouteIf("BaseLocal", "active")">                                    
+                        <a href="@Url.Action("BaseLocal", "Base" )">현지 배송 업체 설정 </a>   
+                    </li>
+                    <!--출고타입 설정-->									
+                    <li class="@Html.RouteIf("BaseOutPutType", "active")">
+                        <a href="@Url.Action("BaseOutPutType", "Base")">출고타입 설정</a>
+                    </li>                             
+                </ul>
+            </li>
+            <!--EST STATION-->
+			<li class="@Html.RouteIf("Est", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-rocket"></i> <span class="menu-item-parent">EST STATION</span></a>
+				<ul>
+					<!--EST 정보 관리-->
+					<li class="@Html.RouteIf("EstInfo", "active")">
+						<a href="@Url.Action("EstInfo", "Est")">EST 정보 관리</a>
+					</li>
+					<!--EST 출고 현황-->
+					<li class="@Html.RouteIf("EstInOutStat", "active")">
+						<a href="@Url.Action("EstInOutStat", "Est" )">EST 출고 현황 </a>
+					</li>		
+				</ul>
+			</li>
+            <!--ESE SENDER-->
+			<li class="@Html.RouteIf("Ese", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-truck"></i> <span class="menu-item-parent">ESE SENDER</span></a>
+				<ul>
+					<!--ESE 정보 관리-->
+					<li class="@Html.RouteIf("EseInfo", "active")">
+						<a href="@Url.Action("EseInfo", "Ese")">ESE 정보 관리</a>
+					</li>
+				</ul>
+			</li>
+            <!--통관 상품관리-->
+			<li class="@Html.RouteIf("ProdList", "active")">
+				<a href="@Url.Action("ProdList", "Prod")" title="Home"><i class="fa fa-lg fa-fw fa-cloud"></i> <span class="menu-item-parent">통관 상품 관리</span></a>
+			</li>
+            <!--MAR 관리-->
+			<li class="@Html.RouteIf("Mar", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-maxcdn"></i> <span class="menu-item-parent">Mar</span></a>
+				<ul>
+					<!--MAR 충전요청-->
+					<li class="@Html.RouteIf("MarinReq", "active")">
+						<a href="@Url.Action("MarinReq", "Mar")">MAR 충전요청</a>
+					</li>
+					<!--MAR 출금요청(EST)-->
+					<li class="@Html.RouteIf("MarOutEst", "active")">
+						<a href="@Url.Action("MarOutEst", "Mar")"> MAR 출금요청(EST)</a>
+					</li>
+					<!--MAR 출금요청(ESE)-->
+					<li class="@Html.RouteIf("MarOutEse", "active")">
+						<a href="@Url.Action("MarOutEse", "Mar")"> MAR 출금요청(ESE)</a>
+					</li>
+
+					<!--MAR 입출금 현황-->
+					<li class="@Html.RouteIf("MarInOut", "active")">
+						<a href="@Url.Action("MarInOut", "Mar" )">MAR 입출금 현황 </a>
+					</li>
+				</ul>
+			</li>
+
+            <!--C/S-->
+			<li class="@Html.RouteIf("Cs", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-wechat "></i> <span class="menu-item-parent">Cs</span></a>
+				<ul>
+					<!--공지사항 관리-->
+					<li class="@Html.RouteIf("CsNotice", "active")">
+						<a href="@Url.Action("CsNotice", "Cs")">CsNotice</a>
+					</li>
+					<!--문의 사항 관리-->
+					<li class="@Html.RouteIf("CsQna", "active")">
+						<a href="@Url.Action("CsQna", "Cs")"> CsQna</a>
+					</li>
+				</ul>
+			</li>
+			
+			
+            <!--설정-->
+            <li class="@Html.RouteIf("features", "active")">
+                <a href="#"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">설정</span></a>
+                <ul>
+                    <li class="@Html.RouteIf("SettingEmail", "active")">
+                        <a href="@Url.Action("SettingEmail", "Setting")">메일 서버 설정</a>
+                    </li>
+
+                </ul>
+            </li>
+           
+             <!--ESM 관리자 설정-->
+			<li class="@Html.RouteIf("Esm", "active")">
+				<a href="#"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">ESM 관리자 설정</span></a>
+				<ul>
+					<!--ESM 계정 그룹 관리-->
+					<li class="@Html.RouteIf("EsmGrade", "active")">
+						<a href="@Url.Action("EsmGrade", "Esm")">ESM 계정 그룹 관리</a>
+					</li>
+					<!--ESM 계정 관리-->
+					<li class="@Html.RouteIf("EsmAccount", "active")">
+						<a href="@Url.Action("EsmAccount", "Esm")"> ESM 계정 관리</a>
+					</li>
+					<!--로그인 이력 조회-->
+					<li class="@Html.RouteIf("EsmLoginHis", "active")">
+						<a href="@Url.Action("EsmLoginHis", "Esm")"> 로그인 이력 조회</a>
+					</li>
+
+					
+				</ul>
+			</li>
+
+        </ul>
+
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+
+</aside>
+<!-- END NAVIGATION -->

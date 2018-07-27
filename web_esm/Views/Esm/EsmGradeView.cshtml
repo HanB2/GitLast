@@ -1,0 +1,101 @@
+﻿@model web_esm.Models_Act.Esm.EsmGradeViewModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+<article class="col-sm-12 col-md-12 col-lg-6" style="height:400px; padding:0px;">
+
+	<!-- Widget ID (each widget will need unique ID)-->
+	<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+		<header role="heading">
+			<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+			<h2> 상세 정보 </h2>
+		</header>
+
+		<div role="content">
+			<!-- widget content -->
+			<div class="widget-body no-padding">
+
+				@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+				{
+					@Html.HiddenFor(model => model.act_type)
+					@Html.HiddenFor(model => model.act_key)
+					@Html.HiddenFor(model => model.Item.GROUP_ID)
+					@Html.AntiForgeryToken()
+					
+					<fieldset>
+						<div class="row">
+							<label class="label col col-2">그룹명</label>
+							<section class="col col-10">
+								<label class="input">
+									@Html.TextBoxFor(model => model.Item.GROUP_NAME)
+									@Html.ValidationMessageFor(model => model.Item.GROUP_NAME)
+								</label>
+							</section>
+						</div>
+					</fieldset>
+
+					<fieldset>
+
+
+						@for (int i = 0; i < Model.Items.Count; i++)
+						{
+							<div class="row">
+								<label class="label col col-4">
+									@Model.Items[i].MENU_NAME
+									@Html.HiddenFor(model => model.Items[i].MENU_ID)
+								</label>
+								<section class="col col-2">
+									<label class="checkbox">
+										@Html.CheckBoxFor(model => model.Items[i].CHK_PER_SELECT)
+										<i></i>조회
+									</label>
+								</section>
+								<section class="col col-2">
+									<label class="checkbox">
+										@Html.CheckBoxFor(model => model.Items[i].CHK_PER_INSERT)
+										<i></i>등록
+									</label>
+								</section>
+								<section class="col col-2">
+									<label class="checkbox">
+										@Html.CheckBoxFor(model => model.Items[i].CHK_PER_UPDATE)
+										<i></i>수정
+									</label>
+								</section>
+								<section class="col col-2">
+									<label class="checkbox">
+										@Html.CheckBoxFor(model => model.Items[i].CHK_PER_DELETE)
+										<i></i>삭제
+									</label>
+								</section>
+							</div>
+						}
+
+
+					</fieldset>
+				}
+			</div>
+		</div>
+	</div>
+</article>
+
+
+@section pagespecific {
+<script type="text/javascript">
+	function formSubmit() {
+		$('#view_form').submit();
+	}
+
+	// 등록/수정
+	function act_ifarame() {
+		var ifra = document.getElementById('viewIframe').contentWindow;
+		ifra.formSubmit();
+	}
+</script>
+}
+
+
+
+

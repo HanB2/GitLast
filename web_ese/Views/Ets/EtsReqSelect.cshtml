@@ -1,0 +1,539 @@
+﻿@model web_ese.Models_Act.Prod.ProdListModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+<div class="modal-body">
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>조회 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">카테고리</label>
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">카테고리1</option>
+												</select> <i></i>
+											</label>
+										</section>
+
+										<section class="col col-3">
+											<label class="label">&nbsp;</label>
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">카테고리2</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">&nbsp;</label>
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">카테고리3</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">&nbsp;</label>
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">카테고리4</option>
+												</select> <i></i>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-1">검색조건</label>
+										<section class="col col-2">
+											<label class="select">
+												<select name="country">
+													<option value="0" selected="" disabled="">상품명</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<section class="col col-9">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="검색어">
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+
+										<label class="label col col-1">브랜드</label>
+										<section class="col col-6">
+											<label for="address2" class="input">
+												<input type="text" name="address2" id="address2" placeholder="검색어">
+											</label>
+										</section>
+
+										<label class="label col col-1">등록일자</label>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												<input type="text" name="startdate" id="startdate" placeholder="Expected start date" class="hasDatepicker">
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												<input type="text" name="startdate" id="startdate" placeholder="Expected start date" class="hasDatepicker">
+											</label>
+										</section>
+
+									</div>
+
+								</fieldset>
+
+								<footer>
+									<button type="submit" class="btn btn-primary">
+										전체 조회
+									</button>
+
+									<button type="submit" class="btn btn-primary">
+										조회
+									</button>
+								</footer>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<div class="row">
+		<article class="col-sm-12">
+
+			<label style="float:right;" class="select">
+				<select name="country">
+					<option value="0" selected="" disabled="">100개보기</option>
+				</select> <i></i>
+			</label>
+			<label style="float:right;" class="select">
+				<select name="country">
+					<option value="0" selected="" disabled="">대표상품명</option>
+				</select> <i></i>
+			</label>
+			<label style="float:right;">정렬</label>
+
+		</article>
+	</div>
+
+
+
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>상품조회 결과</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+
+
+							<div class="table-responsive">
+
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:2%;"></th>
+											<th style="width:3%;">번호</th>
+											<th style="width:3%;"></th>
+											<th style="width:10%;">카테고리</th>
+											<th style="width:7%;">상품ID</th>
+											<th style="width:7%;">SKU</th>
+											<th style="width:7%;">바코드</th>
+											<th style="width:auto;">대표상품명</th>
+											<th style="width:10%;">브랜드</th>
+											<th style="width:8%;">가격</th>
+											<th style="width:12%;">등록일자</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1</td>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_in">
+													<i class="fa fa-edit"></i> </span>
+												</a>
+											</td>
+											<td>인스턴스 식품</td>
+											<td>0001</td>
+											<td>01240246571</td>
+											<td>01240246571</td>
+											<td>차이나 프렌차이즈 롯데리아 햄버거</td>
+											<td>No Brand</td>
+											<td>10,000</td>
+											<td>2018-03-01 00:00:00</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1</td>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_in">
+													<i class="fa fa-edit"></i> </span>
+												</a>
+											</td>
+											<td>인스턴스 식품</td>
+											<td>0001</td>
+											<td>01240246571</td>
+											<td>01240246571</td>
+											<td>차이나 프렌차이즈 롯데리아 햄버거</td>
+											<td>No Brand</td>
+											<td>10,000</td>
+											<td>2018-03-01 00:00:00</td>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox" name="checkbox-inline">
+											</td>
+											<td>1</td>
+											<td>
+												<a href="javascript:void(0);" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal_in">
+													<i class="fa fa-edit"></i> </span>
+												</a>
+											</td>
+											<td>인스턴스 식품</td>
+											<td>0001</td>
+											<td>01240246571</td>
+											<td>01240246571</td>
+											<td>차이나 프렌차이즈 롯데리아 햄버거</td>
+											<td>No Brand</td>
+											<td>10,000</td>
+											<td>2018-03-01 00:00:00</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<ul class="pagination pagination-lg">
+						<li>
+							<a href="javascript:void(0);"><i class="fa fa-chevron-left"></i></a>
+						</li>
+						<li class="active">
+							<a href="javascript:void(0);">1</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">2</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">3</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">4</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">5</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);"><i class="fa fa-chevron-right"></i></a>
+						</li>
+					</ul>
+				</div>
+
+			</article>
+		</div>
+	</section>
+
+
+
+
+</div>
+
+
+
+
+
+<div id="content">
+
+
+	<!--조회-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>조회 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+							@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm", @class = "smart-form" }))
+							{
+								<fieldset>
+									@Html.HiddenFor(model => model.act_type)
+									@Html.HiddenFor(model => model.act_key)
+									@Html.HiddenFor(model => model.sortKey)
+									@Html.HiddenFor(model => model.Paging.page)
+									@Html.HiddenFor(model => model.Paging.pageNum)
+									@Html.HiddenFor(model => model.Paging.pageTotNum)
+									@Html.AntiForgeryToken()
+
+									<div class="row">
+										<label class="label col col-1">카테고리</label>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("schType", new SelectList(Model.schTypeArray, "opt_value", "opt_key"), "선택") <i></i>
+												<i></i>
+											</label>
+										</section>
+
+										<label class="label col col-4"></label>
+
+
+										<label class="label col col-1">브랜드</label>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.schTxt, new { placeholder = "브랜드" })
+											</label>
+										</section>
+
+									</div>
+
+									<!--검색조건, 등록일자-->
+									<div class="row">
+
+										<label class="label col col-1">검색조건</label>
+										<section class="col col-2">
+											<label class="select">
+												@Html.DropDownList("schTypeTxt", new SelectList(Model.schTypeTxtArray, "opt_value", "opt_key"), "선택") <i></i>
+												<i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.schTxt2, new { placeholder = "검색어" })
+											</label>
+										</section>
+
+
+										<label class="label col col-1">등록일자</label>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schSdt, new { @id = "schSdt", @placeholder = "Expected start date" })
+											</label>
+										</section>
+										<section class="col col-2">
+											<label class="input">
+												<i class="icon-append fa fa-calendar"></i>
+												@Html.TextBoxFor(model => model.schEdt, new { @id = "schEdt", @placeholder = "Expected end date" })
+											</label>
+
+										</section>
+
+									</div>
+
+								</fieldset>
+
+								<!--Submit 부분-->
+								<footer>
+									<button type="button" class="btn btn-primary" onclick="javascript: searchAll();">
+										전체 조회
+									</button>
+
+									<button type="button" class="btn btn-primary" onclick="javascript: searchAct();">
+										조회
+									</button>
+								</footer>
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!--중간부분-->
+	<div class="row">
+		<article class="col-sm-12">
+
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-trash-o"></i> 선택 삭제</a>
+			<a class="btn btn-default" href="javascript:void(0);"><i class="fa fa-file-text"></i> 엑셀 출력</a>
+
+
+
+
+			<label style="float:right;" class="select">
+				<select name="country">
+					<option value="0" selected="" disabled="">100개보기</option>
+				</select> <i></i>
+			</label>
+			<label style="float:right;" class="select">
+				<select name="country">
+					<option value="0" selected="" disabled="">대표상품명</option>
+				</select> <i></i>
+			</label>
+			<label style="float:right;">정렬</label>
+
+		</article>
+	</div>
+
+
+	<!--등록 상품 조회 결과-->
+	<section id="widget-grid" class="">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+				<div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>상품조회 결과</h2>
+						<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+					</header>
+
+					<div role="content">
+						<div class="widget-body no-padding">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th style="width:2%;"></th>
+											<th style="width:3%;">번호</th>
+											<th style="width:6%;"></th>
+											<th style="width:7%;">바코드</th>
+											<th style="width:10%;">카테고리</th>
+											<th style="width:auto;">대표상품명</th>
+											<th style="width:10%;">브랜드</th>
+											<th style="width:8%;">가격</th>
+											<th style="width:12%;">등록일자</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model.Items)
+										{
+											<tr>
+												<td>
+													<input type="checkbox" name="checkbox-inline"> <!--checkBox에 추후 추가-->
+												</td>
+												<td>@item.SEQNO</td>
+												<td>
+
+													<a onclick="javascript:callEdit();" href="#" class="btn btn-default btn-xs">
+														<i class="fa fa-edit"></i>
+													</a>
+													<a onclick="javascript:callDelete('@item.SEQNO');" href="#" class="btn btn-default btn-xs">
+														<i class="fa fa-trash-o"></i>
+													</a>
+												</td>
+												<td>@item.BARCODE</td><!--바코드-->
+												<td>@item.CATEGORY1</td><!--카테고리 일단 1단계로 표시-->
+												<td>@item.PRODUCT_NAME</td><!--대표상품명-->
+												<td>@item.BRAND</td><!--브랜드-->
+												<td>@item.PRICE</td><!--가격-->
+												<td>@item.REG_DT</td><!--등록일자-->
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				@Html.Raw(ViewData["pageing"])
+			</article>
+		</div>
+	</section>
+
+</div>
+
+
+
+@section pagespecific {
+
+
+	<script type="text/javascript">
+		//데이터 피커 생성자
+		$(function() {
+    		$("#schSdt, #schEdt").datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+		});
+
+		//조회
+		function searchAct() {
+			$("#Paging_page").val('1');
+			$("#listForm").submit();
+		}
+
+		//전체조회
+		function searchAll() {
+			$("#schType").val('');
+			$("#schSdt").val('');
+			$("#schEdt").val('');
+			$("#schTypeTxt").val('');
+			$("#schTxt").val('');
+			$("#Paging_page").val('1');
+
+			$("#listForm").submit();
+		}
+
+		//수정 팝업창 호출
+		//function callEdit(seqno) {
+		//	$("#modal_act").html('수정');
+		//	$('#viewIframe').attr('src', '/Prod/ProdAdd?seqNo=' + seqno);
+		//}
+
+		//수정 페이지 이동 연습(msh)
+		function callEdit(){
+
+			$('#listForm').attr('action', '/Prod/ProdAdd');
+			$('#view_form').submit();
+
+		}
+
+		// 등록/수정
+		function act_MoveModif(seqno) {
+			var MoveModif = document.getElementById('view_form').contentWindow;
+			MoveModif.formSubmit();
+		}
+
+
+		//삭제
+		function callDelete(seqno) {
+			var msg = "삭제하시겠습니까?";
+			if (confirm(msg)) {
+				$('#act_type').val('del');
+				$('#act_key').val(seqno);
+				$('#listForm').submit();
+			}
+		}
+
+		//페이징 공통 함수
+		function movPage(page) {
+			$('#Paging_page').val(page);
+			$('#listForm').submit();
+		}
+	</script>
+
+
+}

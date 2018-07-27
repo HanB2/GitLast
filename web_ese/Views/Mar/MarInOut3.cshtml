@@ -1,0 +1,81 @@
+﻿@model web_ese.Models_Act.Mar.MarInOutModels
+
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+<!--MAR 환전-->
+<div class="jarviswidget jarviswidget-color-darken " id="wid-id-1" data-widget-editbutton="false" role="widget" >
+	<header role="heading">
+		<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+		<h2>@comm_global.Language.Resources.ESE_MarInOut_MarExchange</h2>
+		<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+	</header>
+
+	<div role="content">
+		<div class="widget-body no-padding">
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width:20%;">@comm_global.Language.Resources.ESE_Comm_STATUS</th>
+							<th style="width:20%;">@comm_global.Language.Resources.ESE_MarInOut_ExchangeMar</th>
+							<th style="width:20%;">@comm_global.Language.Resources.ESE_MarInOut_ExchangeAmount</th>
+							<th style="width:20%;">@comm_global.Language.Resources.ESE_Comm_MarReqDate</th>
+							<th style="width:20%;">@comm_global.Language.Resources.ESE_Comm_MarHandlingDate</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.outReqList)
+						{
+							<tr>
+								<td>@item.STATUS_TEXT</td>
+								<td>@item.REQ_AMOUNT</td>
+								<td>@item.AMOUNT</td>
+								<td>@item.CREATETIME</td>
+								<td>@item.DATETIME_UPD</td>
+							</tr>
+						}
+						@for (int i = 0; i < 10 - @Model.outReqList.Count; i++)
+						{
+							<tr>
+								<td style="width:20%;">&nbsp;</td>
+								<td style="width:20%;">&nbsp;</td> 
+								<td style="width:20%;">&nbsp;</td>
+								<th style="width:20%;">&nbsp;</th>
+								<th style="width:20%;">&nbsp;</th>
+							</tr>
+
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	@Html.Raw(ViewData["pageing"])
+</div>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "listForm", @name = "listForm" }))
+{
+	@Html.HiddenFor(model => model.Paging.page)
+	@Html.HiddenFor(model => model.Paging.pageNum)
+}
+
+@section pagespecific {
+	<script type="text/javascript">
+		//페이징 공통 함수
+		function movPage(page) {
+			$('#Paging_page').val(page);
+			$('#listForm').submit();
+		}
+	</script>
+
+    <style>
+	   #main {
+		margin-left: 0px;
+		margin-right: 0px;
+	   }
+    </style>
+
+}

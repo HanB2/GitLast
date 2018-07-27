@@ -1,0 +1,77 @@
+﻿@model web_esm.Models_Act.Base.BaseCurrencyModels
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+
+
+
+			<article class="col-sm-12 col-md-12 col-lg-6" style="height:400px; padding:0px;">
+				<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+					<header role="heading">
+						<span class="widget-icon"> <i class="fa fa-search"></i> </span>
+						<h2>화폐 단위 추가 / 수정 </h2>
+					</header>
+					<div role="content">
+						<div class="widget-body no-padding">
+
+							@using (Html.BeginForm(null,null,FormMethod.Post, new {@id = "view_form", @class= "smart-form" })) {
+							@Html.HiddenFor(model => model.act_type)
+                            @Html.HiddenFor(model => model.act_key)
+ 						    @Html.HiddenFor(model => model.Item.SEQNO)
+							@Html.AntiForgeryToken()
+
+								<fieldset>
+
+									<div class="row">
+										<label class="label col col-2">화폐단위</label>
+										<section class="col col-2">
+												<label class="input">
+													@Html.TextBoxFor(model => model.Item.CURRENCY_UNIT)
+													@Html.ValidationMessageFor(model => model.Item.CURRENCY_UNIT)
+												</label>
+										</section>
+										<label class="label col col-2">환율</label>
+										<section class="col col-2">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.AMNT)
+											</label>
+										</section>
+										<label class="label col col-2">기준단위</label>
+										<section class="col col-2">
+											<label class="input">
+												@Html.TextBoxFor(model => model.Item.BASIC_UNIT)
+												@Html.ValidationMessageFor(model => model.Item.BASIC_UNIT)
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<label class="label col col-2">설명</label>
+										<section class="col col-10">
+											<label for="address2" class="input">
+												@Html.TextBoxFor(model => model.Item.MEMO)
+											</label>
+										</section>
+									</div>
+
+								</fieldset>
+
+							}
+
+						</div>
+					</div>
+				</div>
+			</article>
+
+
+
+@section pagespecific {
+	<script type="text/javascript">
+		function formSubmit() {
+			$('#view_form').submit();
+		}
+	</script>
+
+}

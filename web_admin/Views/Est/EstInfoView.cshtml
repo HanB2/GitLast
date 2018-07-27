@@ -1,0 +1,45 @@
+﻿
+<div class="widget-body">
+	<hr class="simple">
+	<ul id="myTab1" class="nav nav-tabs bordered">
+		<li class="active">
+			<a href="#s1" data-toggle="tab" aria-expanded="true"> EST 기본정보 </a>
+		</li>
+		<li class="">
+			<a href="#s2" data-toggle="tab" aria-expanded="true"> EST 계좌정보 </a>
+		</li>
+		<li class="">
+			<a href="#s3" data-toggle="tab" aria-expanded="true"> EST 통관비용 </a>
+		</li>
+		<li class="">
+			<a href="#s4" data-toggle="tab" aria-expanded="true"> 국가별 요율표 </a>
+		</li>
+	</ul>
+
+	<div id="myTabContent1" class="tab-content padding-10">
+		<div id="myTabContent1" class="tab-content padding-10">
+			<div class="tab-pane fade active in" id="s1">
+
+				@Html.Partial("EstInfo")
+
+			</div>
+			<div class="tab-pane fade" id="s2">
+
+				@Html.Partial("EstInfoAccount")
+
+			</div>
+			<div class="tab-pane fade" id="s3">
+
+				@Html.Partial("EstInfoCost")
+
+			</div>
+			<div class="tab-pane fade" id="s4">
+
+				@Html.Partial("EstInfoNationCost")
+
+			</div>
+
+		</div>
+	</div>
+
+</div>

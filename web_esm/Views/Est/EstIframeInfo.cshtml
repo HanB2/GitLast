@@ -1,0 +1,198 @@
+﻿@model web_esm.Models_Act.Est.EstIframeInfoModels
+
+@{
+	//팝업 형식 레이아웃 별도 지정
+	Layout = "~/Views/Shared/_PopLayout.cshtml";
+}
+
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+			<div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+				<header role="heading">
+					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+					<h2> EST 기본 정보 </h2>
+				</header>
+				<div role="content">
+					<div class="widget-body no-padding">						
+						@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "view_form", @class = "smart-form" }))
+						{ 
+							@Html.HiddenFor(model => model.act_key)
+							@Html.HiddenFor(model => model.act_type)
+							@Html.HiddenFor(model => model.viewEstCode)
+							@Html.AntiForgeryToken()
+
+							<fieldset>
+								<!--업체명, 국가-->
+								<div class="row">
+									<label class="label col col-2">업체명</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.EST_NAME)
+										</label>
+									</section>
+
+									<label class="label col col-2">국가</label>
+									<section class="col col-4">
+										<label class="select">
+											@Html.DropDownList("schType", new SelectList(Model.nationArray, "opt_key", "opt_value", Model.Item.NATION_CODE)) <i></i>
+										</label>
+									</section>
+								</div>
+
+								<!--우편번호, 전화번호-->
+								<div class="row">
+									<label class="label col col-2">우편번호</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.ZIPCODE)
+										</label>
+									</section>
+
+									<label class="label col col-2">전화번호</label> 
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.TELNO)
+										</label>
+									</section>
+								</div>
+								<!--기본주소-->
+								<div class="row">
+									<label class="label col col-2">기본주소</label>
+									<section class="col col-10">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.ADDR)
+										</label>
+									</section>
+								</div>
+								<!--영문주소-->
+								<div class="row">
+									<label class="label col col-2">영문주소</label>
+									<section class="col col-10">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.ADDR_EN)
+										</label>
+									</section>
+								</div>
+								<!--생성날짜,출발공항 코드-->
+								<div class="row">
+									<label class="label col col-2">생성날짜</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.CREATETIME)
+										</label>
+									</section>
+
+									<label class="label col col-2">출발공항 코드</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.START_AIRPORT)
+										</label>
+									</section>
+								</div>
+								<!--무게단위-->
+								<div class="row">
+									<label class="label col col-2">무게단위</label>
+									<section class="col col-4">
+										<label class="select">
+											@Html.DropDownList("WEIGHT_UNIT", new SelectList(Model.weightArray, "opt_value", "opt_key", Model.Item.WEIGHT_UNIT)) <i></i>
+										</label>
+									</section>
+									<label class="label col col-6"></label>
+								</div>
+								<!--UTC 적용 시간-->
+								<div class="row">
+									<label class="label col col-2">UTC 적용 시간</label>
+									<section class="col col-10">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.UTC_HOUR)
+										</label>
+									</section>
+								</div>
+								<!--UTC 적용 분-->
+								<div class="row">
+									<label class="label col col-2">UTC 적용 분</label>
+									<section class="col col-10">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.UTC_MINUTE)
+										</label>
+									</section>
+								</div>
+
+								<!--SummerTime 적용여부, 상태-->
+								<div class="row">
+									<label class="label col col-2">SummerTime</label>
+									<section class="col col-10">
+										<div class="inline-group">
+											<label class="radio">
+												@Html.RadioButtonFor(m => m.RadioBoxSummerT, "true", new { id = "compatible" })
+												<i></i>@Html.Label("사용")
+											</label>
+											<label class="radio">
+												@Html.RadioButtonFor(m => m.RadioBoxSummerT, "false", new { id = "notcompatible" })
+												<i></i>@Html.Label("보류")
+											</label>
+										</div>
+									</section>
+
+									<label class="label col col-2">상태</label>
+									<section class="col col-4">
+										<div class="inline-group">
+											<label class="radio">
+												@Html.RadioButtonFor(m => m.RadioBoxPop, "true", new { id = "compatible" })
+												<i></i>@Html.Label("사용")
+											</label>
+											<label class="radio">
+												@Html.RadioButtonFor(m => m.RadioBoxPop, "false", new { id = "notcompatible" })
+												<i></i>@Html.Label("보류")
+											</label>
+										</div>
+									</section>
+								</div>
+
+								<!--사용자 입력 코드-->
+								<div class="row">
+									<label class="label col col-2">사용자 입력 코드</label>
+									<section class="col col-4">
+										<label class="input">
+											@Html.TextBoxFor(model => model.Item.USERINPUTCODE)
+										</label>
+									</section>
+
+									
+								</div>
+								<!--메모-->
+								<div class="row">
+									<label class="label col col-12">메모</label>
+
+								</div>
+								<section>
+									@Html.TextAreaFor(model => model.Item.MEMO, new { @class = "custom-scroll", @cols = "100", @ROWS = "3" })
+								</section>
+							</fieldset>
+							<!--Submit-->
+							<footer>
+								<p>권한이 있을 경우만 해당 영역 노출</p>
+								<button type="submit" class="btn btn-primary" onclick="submit()">
+									수정
+								</button>
+							</footer>
+						}
+					</div>
+				</div>
+			</div>
+		</article>
+
+	</div>
+</section>
+
+<!-- END MAIN CONTENT -->
+
+@section pagespecific {
+	<script type="text/javascript">
+				function formSubmit() {
+					$('#view_form').submit();
+				}
+	</script>
+
+}
